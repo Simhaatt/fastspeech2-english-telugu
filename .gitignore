@@ -1,0 +1,24 @@
+# intermediate data, features and training checkpoints (written by preprocess/train)
+work/
+# full-precision training checkpoints; only the fp16 release checkpoints are committed
+*/checkpoints/**/best.pth.tar
+*/checkpoints/**/last.pth.tar
+*/checkpoints/**/[0-9]*.pth.tar
+# HiFi-GAN weights: downloaded in Setup (README), unzipped on first use
+core/hifigan/generator_universal.pth.tar
+core/hifigan/generator_universal.pth.tar.zip
+# LaTeX build files
+Report/*.aux
+Report/*.log
+Report/*.out
+Report/*.toc
+# Python and editor clutter
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+# local inference output
+out/

@@ -1,0 +1,9 @@
+{
+ "train_utts": 2614,
+ "val_utts": 522,
+ "train_hours_trimmed": 4.138,
+ "val_hours_trimmed": 0.817,
+ "train_speakers": 1,
+ "val_speakers": 1,
+ "overlap_utts": 0
+}

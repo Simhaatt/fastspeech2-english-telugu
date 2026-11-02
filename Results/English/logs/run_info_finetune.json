@@ -1,0 +1,8 @@
+{
+ "params": 35192641,
+ "train_utts": 3464,
+ "val_utts": 742,
+ "init_from": "/kaggle/tmp/pretrained/LJSpeech/900000.pth.tar",
+ "amp": true,
+ "config": "English/config_finetune.yaml"
+}

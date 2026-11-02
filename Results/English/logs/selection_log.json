@@ -1,0 +1,21 @@
+{
+ "speaker_id_method": "metadata_tuple:gender,age-group,primary_language,native_place_state,native_place_district,highest_qualification,job_category,occupation_domain",
+ "available_utts": 6656,
+ "available_hours": 9.614,
+ "available_speakers": 115,
+ "after_duration_filter": 4838,
+ "after_text_filter": 4660,
+ "after_quality_filter": 4489,
+ "after_speaker_filter": 4354,
+ "pool_hours": 6.262,
+ "pool_speakers": 99,
+ "train_utts": 3465,
+ "train_hours": 4.991,
+ "train_speakers": 99,
+ "val_utts": 742,
+ "val_hours": 1.073,
+ "val_speakers": 99,
+ "val_speakers_unseen_in_train": 0,
+ "dictionary_words": 6535,
+ "oov_words_g2p": 1158
+}

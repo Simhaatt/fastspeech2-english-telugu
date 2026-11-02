@@ -1,0 +1,8 @@
+gender                female      male
+utts                 4043.00   4533.00
+hours                  23.92     12.79
+median_s               18.52      8.32
+hours_1to11s            1.89      6.22
+hours_1to11s_snr25      1.89      6.22
+median_snr_db          46.19     50.03
+sample_rate         16000.00  48000.00

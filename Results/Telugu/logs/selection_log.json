@@ -1,0 +1,18 @@
+{
+ "available_utts": 4533,
+ "available_hours": 12.791,
+ "after_duration_filter": 3268,
+ "after_text_filter": 3262,
+ "after_quality_filter": 3261,
+ "after_dedup": 3256,
+ "pool_hours": 6.204,
+ "train_utts": 2629,
+ "train_hours": 5.001,
+ "train_dur_mean_s": 6.85,
+ "val_utts": 526,
+ "val_hours": 0.997,
+ "val_dur_mean_s": 6.82,
+ "text_overlap_train_val": 0,
+ "lexicon_words": 12141,
+ "speaker": "te_male"
+}

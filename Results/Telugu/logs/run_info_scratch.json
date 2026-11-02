@@ -1,0 +1,8 @@
+{
+ "params": 35167297,
+ "train_utts": 2614,
+ "val_utts": 522,
+ "init_from": null,
+ "amp": true,
+ "config": "/kaggle/working/project/Telugu/config.yaml"
+}

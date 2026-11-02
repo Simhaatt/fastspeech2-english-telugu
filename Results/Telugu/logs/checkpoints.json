@@ -1,0 +1,8 @@
+{
+ "scratch": {
+  "release_ckpt": "Telugu/checkpoints/best_model_fp16.pth.tar",
+  "size_mb": 70.4,
+  "best_step": 12000,
+  "best_val_total": 2.0481232509759195
+ }
+}

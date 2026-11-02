@@ -1,0 +1,99 @@
+# FastSpeech 2 - Telugu (IndicTTS, single speaker)
+# Paths are relative to the project root.
+preprocess:
+  dataset: "IndicTTS_Telugu"
+  path:
+    corpus_path: "work/Telugu/corpus"
+    raw_path: "work/Telugu/corpus/raw_data"
+    split_path: "work/Telugu/corpus/split.tsv"
+    lexicon_path: "work/Telugu/corpus/lexicon.txt"   # rule-based G2P, written at selection
+    preprocessed_path: "work/Telugu/preprocessed"
+  selection:
+    gender: "male"            # data audit: 6.22 h of male clips in 1-11 s vs 1.89 h female
+    train_hours: 5.0
+    val_hours: 1.0
+    min_dur: 1.0
+    max_dur: 11.0
+    min_snr_db: 25.0
+  mfa:
+    acoustic_model: "train"   # no pretrained Telugu model -> train one on this corpus
+    model_out: "work/Telugu/mfa/telugu_acoustic.zip"
+  preprocessing:
+    n_jobs: 4
+    text:
+      text_cleaners: []
+      language: "te"
+    audio:
+      sampling_rate: 22050
+      max_wav_value: 32768.0
+    stft:
+      filter_length: 1024
+      hop_length: 256
+      win_length: 1024
+    mel:
+      n_mel_channels: 80
+      mel_fmin: 0
+      mel_fmax: 8000
+    pitch:
+      feature: "phoneme_level"
+      normalization: True
+      method: "dio"
+      f0_floor: 60.0          # set from the chosen (male) speaker's range
+      f0_ceil: 350.0
+    energy:
+      feature: "phoneme_level"
+      normalization: True
+
+model:
+  transformer:
+    encoder_layer: 4
+    encoder_head: 2
+    encoder_hidden: 256
+    decoder_layer: 6
+    decoder_head: 2
+    decoder_hidden: 256
+    conv_filter_size: 1024
+    conv_kernel_size: [9, 1]
+    encoder_dropout: 0.2
+    decoder_dropout: 0.2
+  variance_predictor:
+    filter_size: 256
+    kernel_size: 3
+    dropout: 0.5
+  variance_embedding:
+    pitch_quantization: "linear"
+    energy_quantization: "linear"
+    n_bins: 256
+  multi_speaker: False
+  inference_speaker: null
+  max_seq_len: 1000
+  vocoder:
+    model: "HiFi-GAN"
+    speaker: "universal"
+    path: "core/hifigan"
+
+train:
+  path:
+    ckpt_path: "Telugu/checkpoints"
+    log_path: "work/Telugu/logs"
+    result_path: "Results/Telugu"
+  seed: 1234
+  amp: True
+  num_workers: 2
+  optimizer:
+    batch_size: 16
+    betas: [0.9, 0.98]
+    eps: 0.000000001
+    weight_decay: 0.0
+    grad_clip_thresh: 1.0
+    grad_acc_step: 1
+    warm_up_step: 4000
+    anneal_steps: [40000, 50000, 55000]
+    anneal_rate: 0.3
+    lr_scale: 1.0
+  step:
+    total_step: 60000
+    max_hours: 9.0
+    log_step: 100
+    val_step: 1000
+    save_step: 10000

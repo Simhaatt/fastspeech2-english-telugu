@@ -1,0 +1,673 @@
+train 3464 utts, val 742 utts, device cuda, amp True
+FastSpeech2 parameters: 35.19 M
+step 100 | total 14.2669 mel 4.9491 mel_postnet 4.5602 pitch 1.4953 energy 1.5416 duration 1.7207 | lr 2.47e-05 | 8.0 min
+step 200 | total 9.9592 mel 4.0449 mel_postnet 3.4172 pitch 0.8797 energy 1.0687 duration 0.5488 | lr 4.94e-05 | 15.2 min
+step 300 | total 7.1289 mel 2.9036 mel_postnet 2.4026 pitch 0.6451 energy 0.7712 duration 0.4064 | lr 7.41e-05 | 16.8 min
+step 400 | total 4.8796 mel 1.8098 mel_postnet 1.5949 pitch 0.5610 energy 0.5631 duration 0.3508 | lr 9.88e-05 | 17.2 min
+step 500 | total 3.9494 mel 1.3021 mel_postnet 1.3539 pitch 0.5052 energy 0.4716 duration 0.3166 | lr 1.24e-04 | 17.5 min
+step 600 | total 3.5975 mel 1.1098 mel_postnet 1.2597 pitch 0.4961 energy 0.4359 duration 0.2961 | lr 1.48e-04 | 17.9 min
+step 700 | total 3.3588 mel 1.0144 mel_postnet 1.2123 pitch 0.4463 energy 0.4071 duration 0.2788 | lr 1.73e-04 | 18.3 min
+step 800 | total 3.1843 mel 0.9531 mel_postnet 1.1300 pitch 0.4564 energy 0.3707 duration 0.2740 | lr 1.98e-04 | 18.6 min
+step 900 | total 3.0165 mel 0.9054 mel_postnet 1.0448 pitch 0.4457 energy 0.3576 duration 0.2629 | lr 2.22e-04 | 19.0 min
+step 1000 | total 2.8886 mel 0.8789 mel_postnet 0.9920 pitch 0.4253 energy 0.3463 duration 0.2461 | lr 2.47e-04 | 19.4 min
+VAL step 1000 | total 2.7188 mel 0.8644 mel_postnet 0.8888 pitch 0.4361 energy 0.3071 duration 0.2223
+  new best val 2.7188 at step 1000
+step 1100 | total 2.8028 mel 0.8605 mel_postnet 0.9449 pitch 0.4177 energy 0.3347 duration 0.2451 | lr 2.72e-04 | 26.9 min
+step 1200 | total 2.6759 mel 0.8319 mel_postnet 0.8992 pitch 0.4024 energy 0.3038 duration 0.2387 | lr 2.96e-04 | 27.3 min
+step 1300 | total 2.6611 mel 0.8371 mel_postnet 0.8931 pitch 0.3955 energy 0.3063 duration 0.2291 | lr 3.21e-04 | 27.6 min
+step 1400 | total 2.5129 mel 0.8112 mel_postnet 0.8530 pitch 0.3526 energy 0.2700 duration 0.2261 | lr 3.46e-04 | 28.0 min
+step 1500 | total 2.5721 mel 0.8102 mel_postnet 0.8501 pitch 0.3954 energy 0.2947 duration 0.2217 | lr 3.71e-04 | 28.4 min
+step 1600 | total 2.4336 mel 0.7933 mel_postnet 0.8234 pitch 0.3506 energy 0.2567 duration 0.2096 | lr 3.95e-04 | 28.7 min
+step 1700 | total 2.4605 mel 0.8009 mel_postnet 0.8263 pitch 0.3574 energy 0.2574 duration 0.2185 | lr 4.20e-04 | 29.1 min
+step 1800 | total 2.3581 mel 0.7773 mel_postnet 0.8013 pitch 0.3442 energy 0.2312 duration 0.2041 | lr 4.45e-04 | 29.5 min
+step 1900 | total 2.3687 mel 0.7869 mel_postnet 0.8084 pitch 0.3223 energy 0.2452 duration 0.2060 | lr 4.69e-04 | 29.8 min
+step 2000 | total 2.2706 mel 0.7679 mel_postnet 0.7867 pitch 0.3049 energy 0.2173 duration 0.1938 | lr 4.94e-04 | 30.2 min
+VAL step 2000 | total 2.5523 mel 0.7973 mel_postnet 0.7980 pitch 0.4593 energy 0.2852 duration 0.2125
+  new best val 2.5523 at step 2000
+step 2100 | total 2.2757 mel 0.7700 mel_postnet 0.7850 pitch 0.3095 energy 0.2151 duration 0.1962 | lr 5.19e-04 | 30.7 min
+step 2200 | total 2.2512 mel 0.7620 mel_postnet 0.7731 pitch 0.2954 energy 0.2210 duration 0.1996 | lr 5.44e-04 | 31.1 min
+step 2300 | total 2.2114 mel 0.7578 mel_postnet 0.7706 pitch 0.2850 energy 0.2091 duration 0.1889 | lr 5.68e-04 | 31.4 min
+step 2400 | total 2.2127 mel 0.7560 mel_postnet 0.7667 pitch 0.2886 energy 0.2091 duration 0.1924 | lr 5.93e-04 | 31.8 min
+step 2500 | total 2.1077 mel 0.7401 mel_postnet 0.7479 pitch 0.2578 energy 0.1850 duration 0.1769 | lr 6.18e-04 | 32.2 min
+step 2600 | total 2.1809 mel 0.7521 mel_postnet 0.7586 pitch 0.2768 energy 0.2060 duration 0.1873 | lr 6.42e-04 | 32.5 min
+step 2700 | total 2.0699 mel 0.7372 mel_postnet 0.7428 pitch 0.2439 energy 0.1771 duration 0.1689 | lr 6.67e-04 | 32.9 min
+step 2800 | total 2.1323 mel 0.7407 mel_postnet 0.7456 pitch 0.2680 energy 0.1974 duration 0.1806 | lr 6.92e-04 | 33.2 min
+step 2900 | total 2.0475 mel 0.7333 mel_postnet 0.7384 pitch 0.2352 energy 0.1748 duration 0.1658 | lr 7.16e-04 | 33.6 min
+step 3000 | total 2.0704 mel 0.7331 mel_postnet 0.7373 pitch 0.2459 energy 0.1806 duration 0.1736 | lr 7.41e-04 | 34.0 min
+VAL step 3000 | total 2.5339 mel 0.7813 mel_postnet 0.7858 pitch 0.4512 energy 0.2858 duration 0.2298
+  new best val 2.5339 at step 3000
+step 3100 | total 2.0173 mel 0.7268 mel_postnet 0.7301 pitch 0.2300 energy 0.1679 duration 0.1626 | lr 7.66e-04 | 34.5 min
+step 3200 | total 2.0453 mel 0.7352 mel_postnet 0.7386 pitch 0.2302 energy 0.1726 duration 0.1687 | lr 7.91e-04 | 34.9 min
+step 3300 | total 2.0397 mel 0.7244 mel_postnet 0.7268 pitch 0.2355 energy 0.1893 duration 0.1638 | lr 8.15e-04 | 35.2 min
+step 3400 | total 2.0029 mel 0.7244 mel_postnet 0.7272 pitch 0.2226 energy 0.1659 duration 0.1627 | lr 8.40e-04 | 35.6 min
+step 3500 | total 2.0347 mel 0.7284 mel_postnet 0.7312 pitch 0.2419 energy 0.1739 duration 0.1592 | lr 8.65e-04 | 35.9 min
+step 3600 | total 1.9893 mel 0.7252 mel_postnet 0.7276 pitch 0.2214 energy 0.1592 duration 0.1559 | lr 8.89e-04 | 36.3 min
+step 3700 | total 2.0087 mel 0.7217 mel_postnet 0.7232 pitch 0.2221 energy 0.1781 duration 0.1636 | lr 9.14e-04 | 36.7 min
+step 3800 | total 1.9781 mel 0.7262 mel_postnet 0.7284 pitch 0.2097 energy 0.1604 duration 0.1533 | lr 9.39e-04 | 37.0 min
+step 3900 | total 1.9984 mel 0.7187 mel_postnet 0.7203 pitch 0.2232 energy 0.1742 duration 0.1620 | lr 9.64e-04 | 37.4 min
+step 4000 | total 1.9394 mel 0.7147 mel_postnet 0.7167 pitch 0.2020 energy 0.1537 duration 0.1523 | lr 9.88e-04 | 37.7 min
+VAL step 4000 | total 2.5481 mel 0.7846 mel_postnet 0.7843 pitch 0.4504 energy 0.2920 duration 0.2367
+step 4100 | total 1.9957 mel 0.7226 mel_postnet 0.7243 pitch 0.2183 energy 0.1686 duration 0.1619 | lr 9.76e-04 | 38.2 min
+step 4200 | total 1.9292 mel 0.7146 mel_postnet 0.7163 pitch 0.1972 energy 0.1516 duration 0.1495 | lr 9.64e-04 | 38.6 min
+step 4300 | total 1.9378 mel 0.7101 mel_postnet 0.7117 pitch 0.2060 energy 0.1579 duration 0.1521 | lr 9.53e-04 | 39.0 min
+step 4400 | total 1.8828 mel 0.7039 mel_postnet 0.7052 pitch 0.1839 energy 0.1460 duration 0.1438 | lr 9.42e-04 | 39.3 min
+step 4500 | total 1.8888 mel 0.7024 mel_postnet 0.7033 pitch 0.1880 energy 0.1492 duration 0.1459 | lr 9.32e-04 | 39.7 min
+step 4600 | total 1.8432 mel 0.6908 mel_postnet 0.6918 pitch 0.1880 energy 0.1363 duration 0.1362 | lr 9.22e-04 | 40.1 min
+step 4700 | total 1.8438 mel 0.6913 mel_postnet 0.6922 pitch 0.1812 energy 0.1374 duration 0.1418 | lr 9.12e-04 | 40.4 min
+step 4800 | total 1.8104 mel 0.6863 mel_postnet 0.6875 pitch 0.1678 energy 0.1320 duration 0.1368 | lr 9.02e-04 | 40.8 min
+step 4900 | total 1.7783 mel 0.6786 mel_postnet 0.6796 pitch 0.1650 energy 0.1245 duration 0.1306 | lr 8.93e-04 | 41.1 min
+step 5000 | total 1.7693 mel 0.6740 mel_postnet 0.6748 pitch 0.1606 energy 0.1306 duration 0.1293 | lr 8.84e-04 | 41.5 min
+VAL step 5000 | total 2.4775 mel 0.7612 mel_postnet 0.7613 pitch 0.4533 energy 0.2754 duration 0.2262
+  new best val 2.4775 at step 5000
+step 5100 | total 1.7402 mel 0.6698 mel_postnet 0.6704 pitch 0.1532 energy 0.1229 duration 0.1239 | lr 8.75e-04 | 42.0 min
+step 5200 | total 1.7542 mel 0.6729 mel_postnet 0.6738 pitch 0.1585 energy 0.1241 duration 0.1250 | lr 8.67e-04 | 42.4 min
+step 5300 | total 1.6948 mel 0.6593 mel_postnet 0.6598 pitch 0.1452 energy 0.1139 duration 0.1166 | lr 8.59e-04 | 42.7 min
+step 5400 | total 1.7248 mel 0.6677 mel_postnet 0.6685 pitch 0.1508 energy 0.1166 duration 0.1211 | lr 8.51e-04 | 43.1 min
+step 5500 | total 1.6664 mel 0.6560 mel_postnet 0.6565 pitch 0.1332 energy 0.1110 duration 0.1097 | lr 8.43e-04 | 43.4 min
+step 5600 | total 1.6705 mel 0.6530 mel_postnet 0.6535 pitch 0.1419 energy 0.1066 duration 0.1154 | lr 8.35e-04 | 43.8 min
+step 5700 | total 1.6299 mel 0.6439 mel_postnet 0.6442 pitch 0.1324 energy 0.1020 duration 0.1074 | lr 8.28e-04 | 44.2 min
+step 5800 | total 1.6318 mel 0.6431 mel_postnet 0.6436 pitch 0.1290 energy 0.1068 duration 0.1093 | lr 8.21e-04 | 44.5 min
+step 5900 | total 1.6180 mel 0.6426 mel_postnet 0.6430 pitch 0.1286 energy 0.1001 duration 0.1038 | lr 8.14e-04 | 44.9 min
+step 6000 | total 1.6033 mel 0.6391 mel_postnet 0.6396 pitch 0.1236 energy 0.0984 duration 0.1026 | lr 8.07e-04 | 45.2 min
+VAL step 6000 | total 2.4376 mel 0.7489 mel_postnet 0.7485 pitch 0.4337 energy 0.2737 duration 0.2328
+  new best val 2.4376 at step 6000
+step 6100 | total 1.5822 mel 0.6339 mel_postnet 0.6343 pitch 0.1189 energy 0.0956 duration 0.0995 | lr 8.00e-04 | 45.8 min
+step 6200 | total 1.5707 mel 0.6308 mel_postnet 0.6312 pitch 0.1172 energy 0.0930 duration 0.0985 | lr 7.94e-04 | 46.1 min
+step 6300 | total 1.5710 mel 0.6291 mel_postnet 0.6293 pitch 0.1166 energy 0.0980 duration 0.0981 | lr 7.87e-04 | 46.5 min
+step 6400 | total 1.5377 mel 0.6236 mel_postnet 0.6240 pitch 0.1109 energy 0.0870 duration 0.0922 | lr 7.81e-04 | 46.9 min
+step 6500 | total 1.5462 mel 0.6249 mel_postnet 0.6252 pitch 0.1128 energy 0.0895 duration 0.0938 | lr 7.75e-04 | 47.2 min
+step 6600 | total 1.5138 mel 0.6173 mel_postnet 0.6176 pitch 0.1072 energy 0.0820 duration 0.0898 | lr 7.69e-04 | 47.6 min
+step 6700 | total 1.5302 mel 0.6201 mel_postnet 0.6203 pitch 0.1095 energy 0.0882 duration 0.0921 | lr 7.64e-04 | 47.9 min
+step 6800 | total 1.4969 mel 0.6141 mel_postnet 0.6144 pitch 0.1014 energy 0.0822 duration 0.0849 | lr 7.58e-04 | 48.3 min
+step 6900 | total 1.5055 mel 0.6146 mel_postnet 0.6148 pitch 0.1044 energy 0.0828 duration 0.0888 | lr 7.52e-04 | 48.7 min
+step 7000 | total 1.4779 mel 0.6081 mel_postnet 0.6083 pitch 0.0986 energy 0.0805 duration 0.0824 | lr 7.47e-04 | 49.0 min
+VAL step 7000 | total 2.4159 mel 0.7371 mel_postnet 0.7370 pitch 0.4393 energy 0.2730 duration 0.2295
+  new best val 2.4159 at step 7000
+step 7100 | total 1.4878 mel 0.6113 mel_postnet 0.6114 pitch 0.1009 energy 0.0805 duration 0.0837 | lr 7.42e-04 | 49.5 min
+step 7200 | total 1.4516 mel 0.6011 mel_postnet 0.6014 pitch 0.0945 energy 0.0766 duration 0.0780 | lr 7.37e-04 | 49.9 min
+step 7300 | total 1.4527 mel 0.6015 mel_postnet 0.6017 pitch 0.0914 energy 0.0777 duration 0.0804 | lr 7.32e-04 | 50.3 min
+step 7400 | total 1.4422 mel 0.6012 mel_postnet 0.6014 pitch 0.0897 energy 0.0738 duration 0.0761 | lr 7.27e-04 | 50.6 min
+step 7500 | total 1.4371 mel 0.5972 mel_postnet 0.5973 pitch 0.0907 energy 0.0752 duration 0.0767 | lr 7.22e-04 | 51.0 min
+step 7600 | total 1.4305 mel 0.5965 mel_postnet 0.5966 pitch 0.0866 energy 0.0744 duration 0.0764 | lr 7.17e-04 | 51.4 min
+step 7700 | total 1.4130 mel 0.5917 mel_postnet 0.5917 pitch 0.0868 energy 0.0708 duration 0.0720 | lr 7.12e-04 | 51.7 min
+step 7800 | total 1.4201 mel 0.5934 mel_postnet 0.5935 pitch 0.0893 energy 0.0704 duration 0.0735 | lr 7.08e-04 | 52.1 min
+step 7900 | total 1.3973 mel 0.5859 mel_postnet 0.5860 pitch 0.0834 energy 0.0710 duration 0.0710 | lr 7.03e-04 | 52.4 min
+step 8000 | total 1.3957 mel 0.5873 mel_postnet 0.5874 pitch 0.0831 energy 0.0668 duration 0.0711 | lr 6.99e-04 | 52.8 min
+VAL step 8000 | total 2.3856 mel 0.7298 mel_postnet 0.7298 pitch 0.4299 energy 0.2631 duration 0.2330
+  new best val 2.3856 at step 8000
+step 8100 | total 1.3834 mel 0.5846 mel_postnet 0.5847 pitch 0.0794 energy 0.0673 duration 0.0675 | lr 6.94e-04 | 53.3 min
+step 8200 | total 1.3828 mel 0.5819 mel_postnet 0.5820 pitch 0.0821 energy 0.0678 duration 0.0689 | lr 6.90e-04 | 53.7 min
+step 8300 | total 1.3667 mel 0.5789 mel_postnet 0.5789 pitch 0.0774 energy 0.0668 duration 0.0648 | lr 6.86e-04 | 54.0 min
+step 8400 | total 1.3671 mel 0.5785 mel_postnet 0.5785 pitch 0.0772 energy 0.0661 duration 0.0668 | lr 6.82e-04 | 54.4 min
+step 8500 | total 1.3517 mel 0.5750 mel_postnet 0.5750 pitch 0.0759 energy 0.0618 duration 0.0639 | lr 6.78e-04 | 54.7 min
+step 8600 | total 1.3541 mel 0.5753 mel_postnet 0.5753 pitch 0.0746 energy 0.0646 duration 0.0643 | lr 6.74e-04 | 55.1 min
+step 8700 | total 1.3453 mel 0.5738 mel_postnet 0.5739 pitch 0.0730 energy 0.0626 duration 0.0620 | lr 6.70e-04 | 55.4 min
+step 8800 | total 1.3254 mel 0.5661 mel_postnet 0.5661 pitch 0.0698 energy 0.0620 duration 0.0613 | lr 6.66e-04 | 55.8 min
+step 8900 | total 1.3430 mel 0.5730 mel_postnet 0.5730 pitch 0.0721 energy 0.0632 duration 0.0616 | lr 6.62e-04 | 56.2 min
+step 9000 | total 1.3204 mel 0.5661 mel_postnet 0.5662 pitch 0.0698 energy 0.0595 duration 0.0589 | lr 6.59e-04 | 56.5 min
+VAL step 9000 | total 2.3674 mel 0.7254 mel_postnet 0.7251 pitch 0.4288 energy 0.2617 duration 0.2263
+  new best val 2.3674 at step 9000
+step 9100 | total 1.3212 mel 0.5657 mel_postnet 0.5657 pitch 0.0689 energy 0.0608 duration 0.0601 | lr 6.55e-04 | 57.0 min
+step 9200 | total 1.3081 mel 0.5616 mel_postnet 0.5617 pitch 0.0696 energy 0.0578 duration 0.0574 | lr 6.52e-04 | 57.4 min
+step 9300 | total 1.3161 mel 0.5654 mel_postnet 0.5654 pitch 0.0677 energy 0.0597 duration 0.0579 | lr 6.48e-04 | 57.8 min
+step 9400 | total 1.2947 mel 0.5586 mel_postnet 0.5586 pitch 0.0655 energy 0.0566 duration 0.0555 | lr 6.45e-04 | 58.1 min
+step 9500 | total 1.3098 mel 0.5640 mel_postnet 0.5640 pitch 0.0679 energy 0.0576 duration 0.0564 | lr 6.41e-04 | 58.5 min
+step 9600 | total 1.2818 mel 0.5538 mel_postnet 0.5538 pitch 0.0645 energy 0.0557 duration 0.0539 | lr 6.38e-04 | 58.8 min
+step 9700 | total 1.2928 mel 0.5587 mel_postnet 0.5587 pitch 0.0638 energy 0.0566 duration 0.0549 | lr 6.35e-04 | 59.2 min
+step 9800 | total 1.2746 mel 0.5523 mel_postnet 0.5523 pitch 0.0627 energy 0.0549 duration 0.0524 | lr 6.31e-04 | 59.6 min
+step 9900 | total 1.2875 mel 0.5577 mel_postnet 0.5577 pitch 0.0641 energy 0.0557 duration 0.0524 | lr 6.28e-04 | 59.9 min
+step 10000 | total 1.2688 mel 0.5519 mel_postnet 0.5519 pitch 0.0598 energy 0.0536 duration 0.0516 | lr 6.25e-04 | 60.3 min
+VAL step 10000 | total 2.3702 mel 0.7316 mel_postnet 0.7315 pitch 0.4237 energy 0.2593 duration 0.2241
+step 10100 | total 1.2658 mel 0.5496 mel_postnet 0.5496 pitch 0.0613 energy 0.0541 duration 0.0513 | lr 6.22e-04 | 60.8 min
+step 10200 | total 1.2639 mel 0.5497 mel_postnet 0.5496 pitch 0.0600 energy 0.0542 duration 0.0505 | lr 6.19e-04 | 61.2 min
+step 10300 | total 1.2553 mel 0.5469 mel_postnet 0.5469 pitch 0.0601 energy 0.0516 duration 0.0498 | lr 6.16e-04 | 61.5 min
+step 10400 | total 1.2519 mel 0.5454 mel_postnet 0.5454 pitch 0.0579 energy 0.0534 duration 0.0499 | lr 6.13e-04 | 61.9 min
+step 10500 | total 1.2460 mel 0.5450 mel_postnet 0.5450 pitch 0.0559 energy 0.0518 duration 0.0482 | lr 6.10e-04 | 62.3 min
+step 10600 | total 1.2546 mel 0.5478 mel_postnet 0.5478 pitch 0.0589 energy 0.0506 duration 0.0494 | lr 6.07e-04 | 62.6 min
+step 10700 | total 1.2390 mel 0.5420 mel_postnet 0.5419 pitch 0.0566 energy 0.0516 duration 0.0468 | lr 6.04e-04 | 63.0 min
+step 10800 | total 1.2428 mel 0.5435 mel_postnet 0.5435 pitch 0.0577 energy 0.0503 duration 0.0478 | lr 6.01e-04 | 63.3 min
+step 10900 | total 1.2286 mel 0.5397 mel_postnet 0.5397 pitch 0.0543 energy 0.0497 duration 0.0452 | lr 5.99e-04 | 63.7 min
+step 11000 | total 1.2342 mel 0.5402 mel_postnet 0.5401 pitch 0.0569 energy 0.0498 duration 0.0471 | lr 5.96e-04 | 64.1 min
+VAL step 11000 | total 2.3754 mel 0.7282 mel_postnet 0.7279 pitch 0.4297 energy 0.2651 duration 0.2245
+step 11100 | total 1.2190 mel 0.5360 mel_postnet 0.5360 pitch 0.0548 energy 0.0476 duration 0.0446 | lr 5.93e-04 | 64.6 min
+step 11200 | total 1.2233 mel 0.5369 mel_postnet 0.5368 pitch 0.0543 energy 0.0493 duration 0.0460 | lr 5.91e-04 | 64.9 min
+step 11300 | total 1.2191 mel 0.5365 mel_postnet 0.5364 pitch 0.0541 energy 0.0481 duration 0.0440 | lr 5.88e-04 | 65.3 min
+step 11400 | total 1.2151 mel 0.5347 mel_postnet 0.5346 pitch 0.0531 energy 0.0485 duration 0.0443 | lr 5.85e-04 | 65.6 min
+step 11500 | total 1.2063 mel 0.5324 mel_postnet 0.5323 pitch 0.0509 energy 0.0471 duration 0.0435 | lr 5.83e-04 | 66.0 min
+step 11600 | total 1.2067 mel 0.5326 mel_postnet 0.5325 pitch 0.0526 energy 0.0463 duration 0.0426 | lr 5.80e-04 | 66.4 min
+step 11700 | total 1.2070 mel 0.5323 mel_postnet 0.5323 pitch 0.0523 energy 0.0470 duration 0.0432 | lr 5.78e-04 | 66.7 min
+step 11800 | total 1.1913 mel 0.5274 mel_postnet 0.5274 pitch 0.0496 energy 0.0456 duration 0.0413 | lr 5.75e-04 | 67.1 min
+step 11900 | total 1.2018 mel 0.5295 mel_postnet 0.5294 pitch 0.0530 energy 0.0472 duration 0.0426 | lr 5.73e-04 | 67.5 min
+step 12000 | total 1.1827 mel 0.5248 mel_postnet 0.5247 pitch 0.0491 energy 0.0441 duration 0.0400 | lr 5.71e-04 | 67.8 min
+VAL step 12000 | total 2.3774 mel 0.7284 mel_postnet 0.7283 pitch 0.4273 energy 0.2651 duration 0.2282
+step 12100 | total 1.1940 mel 0.5289 mel_postnet 0.5288 pitch 0.0495 energy 0.0454 duration 0.0413 | lr 5.68e-04 | 68.3 min
+step 12200 | total 1.1804 mel 0.5248 mel_postnet 0.5247 pitch 0.0474 energy 0.0441 duration 0.0394 | lr 5.66e-04 | 68.7 min
+step 12300 | total 1.1846 mel 0.5245 mel_postnet 0.5244 pitch 0.0506 energy 0.0447 duration 0.0405 | lr 5.64e-04 | 69.0 min
+step 12400 | total 1.1739 mel 0.5208 mel_postnet 0.5206 pitch 0.0489 energy 0.0446 duration 0.0390 | lr 5.61e-04 | 69.4 min
+step 12500 | total 1.1787 mel 0.5236 mel_postnet 0.5235 pitch 0.0481 energy 0.0436 duration 0.0398 | lr 5.59e-04 | 69.7 min
+step 12600 | total 1.1737 mel 0.5216 mel_postnet 0.5215 pitch 0.0479 energy 0.0441 duration 0.0387 | lr 5.57e-04 | 70.1 min
+step 12700 | total 1.1695 mel 0.5204 mel_postnet 0.5203 pitch 0.0481 energy 0.0424 duration 0.0384 | lr 5.55e-04 | 70.5 min
+step 12800 | total 1.1603 mel 0.5164 mel_postnet 0.5162 pitch 0.0466 energy 0.0437 duration 0.0374 | lr 5.52e-04 | 70.8 min
+step 12900 | total 1.1650 mel 0.5187 mel_postnet 0.5186 pitch 0.0464 energy 0.0435 duration 0.0378 | lr 5.50e-04 | 71.2 min
+step 13000 | total 1.1656 mel 0.5201 mel_postnet 0.5200 pitch 0.0468 energy 0.0413 duration 0.0373 | lr 5.48e-04 | 71.5 min
+VAL step 13000 | total 2.3541 mel 0.7241 mel_postnet 0.7239 pitch 0.4223 energy 0.2593 duration 0.2244
+  new best val 2.3541 at step 13000
+step 13100 | total 1.1575 mel 0.5163 mel_postnet 0.5162 pitch 0.0458 energy 0.0420 duration 0.0371 | lr 5.46e-04 | 72.0 min
+step 13200 | total 1.1504 mel 0.5133 mel_postnet 0.5132 pitch 0.0449 energy 0.0425 duration 0.0365 | lr 5.44e-04 | 72.4 min
+step 13300 | total 1.1526 mel 0.5152 mel_postnet 0.5151 pitch 0.0447 energy 0.0418 duration 0.0358 | lr 5.42e-04 | 72.8 min
+step 13400 | total 1.1552 mel 0.5153 mel_postnet 0.5151 pitch 0.0461 energy 0.0421 duration 0.0367 | lr 5.40e-04 | 73.1 min
+step 13500 | total 1.1423 mel 0.5115 mel_postnet 0.5114 pitch 0.0431 energy 0.0410 duration 0.0353 | lr 5.38e-04 | 73.5 min
+step 13600 | total 1.1492 mel 0.5135 mel_postnet 0.5134 pitch 0.0451 energy 0.0417 duration 0.0356 | lr 5.36e-04 | 73.9 min
+step 13700 | total 1.1380 mel 0.5103 mel_postnet 0.5102 pitch 0.0430 energy 0.0399 duration 0.0345 | lr 5.34e-04 | 74.2 min
+step 13800 | total 1.1397 mel 0.5102 mel_postnet 0.5100 pitch 0.0443 energy 0.0405 duration 0.0347 | lr 5.32e-04 | 74.6 min
+step 13900 | total 1.1376 mel 0.5100 mel_postnet 0.5099 pitch 0.0430 energy 0.0406 duration 0.0342 | lr 5.30e-04 | 74.9 min
+step 14000 | total 1.1338 mel 0.5082 mel_postnet 0.5080 pitch 0.0434 energy 0.0401 duration 0.0340 | lr 5.28e-04 | 75.3 min
+VAL step 14000 | total 2.3540 mel 0.7265 mel_postnet 0.7263 pitch 0.4181 energy 0.2587 duration 0.2244
+  new best val 2.3540 at step 14000
+step 14100 | total 1.1292 mel 0.5061 mel_postnet 0.5060 pitch 0.0433 energy 0.0397 duration 0.0341 | lr 5.26e-04 | 75.8 min
+step 14200 | total 1.1319 mel 0.5079 mel_postnet 0.5078 pitch 0.0434 energy 0.0390 duration 0.0338 | lr 5.24e-04 | 76.2 min
+step 14300 | total 1.1304 mel 0.5084 mel_postnet 0.5082 pitch 0.0416 energy 0.0389 duration 0.0333 | lr 5.23e-04 | 76.5 min
+step 14400 | total 1.1236 mel 0.5057 mel_postnet 0.5055 pitch 0.0418 energy 0.0381 duration 0.0325 | lr 5.21e-04 | 76.9 min
+step 14500 | total 1.1224 mel 0.5039 mel_postnet 0.5038 pitch 0.0418 energy 0.0395 duration 0.0335 | lr 5.19e-04 | 77.2 min
+step 14600 | total 1.1190 mel 0.5030 mel_postnet 0.5029 pitch 0.0430 energy 0.0377 duration 0.0323 | lr 5.17e-04 | 77.6 min
+step 14700 | total 1.1198 mel 0.5046 mel_postnet 0.5044 pitch 0.0404 energy 0.0381 duration 0.0323 | lr 5.15e-04 | 78.0 min
+step 14800 | total 1.1093 mel 0.4997 mel_postnet 0.4995 pitch 0.0413 energy 0.0376 duration 0.0312 | lr 5.14e-04 | 78.3 min
+step 14900 | total 1.1189 mel 0.5034 mel_postnet 0.5033 pitch 0.0401 energy 0.0395 duration 0.0326 | lr 5.12e-04 | 78.7 min
+step 15000 | total 1.1121 mel 0.5011 mel_postnet 0.5009 pitch 0.0408 energy 0.0386 duration 0.0308 | lr 5.10e-04 | 79.1 min
+VAL step 15000 | total 2.3764 mel 0.7338 mel_postnet 0.7337 pitch 0.4240 energy 0.2622 duration 0.2227
+step 15100 | total 1.1075 mel 0.4992 mel_postnet 0.4990 pitch 0.0401 energy 0.0369 duration 0.0323 | lr 5.09e-04 | 79.5 min
+step 15200 | total 1.1055 mel 0.4989 mel_postnet 0.4987 pitch 0.0400 energy 0.0373 duration 0.0306 | lr 5.07e-04 | 79.9 min
+step 15300 | total 1.1042 mel 0.4983 mel_postnet 0.4981 pitch 0.0400 energy 0.0366 duration 0.0312 | lr 5.05e-04 | 80.3 min
+step 15400 | total 1.1036 mel 0.4984 mel_postnet 0.4983 pitch 0.0393 energy 0.0374 duration 0.0302 | lr 5.04e-04 | 80.6 min
+step 15500 | total 1.1008 mel 0.4966 mel_postnet 0.4964 pitch 0.0399 energy 0.0371 duration 0.0307 | lr 5.02e-04 | 81.0 min
+step 15600 | total 1.0946 mel 0.4953 mel_postnet 0.4952 pitch 0.0385 energy 0.0359 duration 0.0297 | lr 5.00e-04 | 81.4 min
+step 15700 | total 1.1000 mel 0.4970 mel_postnet 0.4969 pitch 0.0388 energy 0.0378 duration 0.0296 | lr 4.99e-04 | 81.7 min
+step 15800 | total 1.0940 mel 0.4946 mel_postnet 0.4945 pitch 0.0387 energy 0.0365 duration 0.0297 | lr 4.97e-04 | 82.1 min
+step 15900 | total 1.0934 mel 0.4943 mel_postnet 0.4941 pitch 0.0392 energy 0.0368 duration 0.0291 | lr 4.96e-04 | 82.4 min
+step 16000 | total 1.0893 mel 0.4939 mel_postnet 0.4937 pitch 0.0375 energy 0.0349 duration 0.0293 | lr 4.94e-04 | 82.8 min
+VAL step 16000 | total 2.3674 mel 0.7290 mel_postnet 0.7289 pitch 0.4223 energy 0.2560 duration 0.2311
+step 16100 | total 1.0870 mel 0.4920 mel_postnet 0.4918 pitch 0.0389 energy 0.0356 duration 0.0286 | lr 4.93e-04 | 83.3 min
+step 16200 | total 1.0904 mel 0.4942 mel_postnet 0.4940 pitch 0.0374 energy 0.0360 duration 0.0289 | lr 4.91e-04 | 83.7 min
+step 16300 | total 1.0855 mel 0.4921 mel_postnet 0.4920 pitch 0.0381 energy 0.0352 duration 0.0281 | lr 4.90e-04 | 84.0 min
+step 16400 | total 1.0834 mel 0.4916 mel_postnet 0.4914 pitch 0.0372 energy 0.0348 duration 0.0285 | lr 4.88e-04 | 84.4 min
+step 16500 | total 1.0823 mel 0.4917 mel_postnet 0.4915 pitch 0.0372 energy 0.0341 duration 0.0278 | lr 4.87e-04 | 84.7 min
+step 16600 | total 1.0818 mel 0.4906 mel_postnet 0.4904 pitch 0.0372 energy 0.0354 duration 0.0283 | lr 4.85e-04 | 85.1 min
+step 16700 | total 1.0762 mel 0.4883 mel_postnet 0.4881 pitch 0.0377 energy 0.0347 duration 0.0275 | lr 4.84e-04 | 85.4 min
+step 16800 | total 1.0756 mel 0.4884 mel_postnet 0.4882 pitch 0.0367 energy 0.0347 duration 0.0277 | lr 4.82e-04 | 85.8 min
+step 16900 | total 1.0736 mel 0.4867 mel_postnet 0.4865 pitch 0.0379 energy 0.0347 duration 0.0277 | lr 4.81e-04 | 86.2 min
+step 17000 | total 1.0757 mel 0.4884 mel_postnet 0.4882 pitch 0.0375 energy 0.0340 duration 0.0276 | lr 4.79e-04 | 86.5 min
+VAL step 17000 | total 2.3690 mel 0.7313 mel_postnet 0.7312 pitch 0.4218 energy 0.2586 duration 0.2261
+step 17100 | total 1.0689 mel 0.4863 mel_postnet 0.4861 pitch 0.0366 energy 0.0328 duration 0.0271 | lr 4.78e-04 | 87.0 min
+step 17200 | total 1.0635 mel 0.4843 mel_postnet 0.4841 pitch 0.0354 energy 0.0328 duration 0.0269 | lr 4.77e-04 | 87.4 min
+step 17300 | total 1.0717 mel 0.4871 mel_postnet 0.4869 pitch 0.0361 energy 0.0344 duration 0.0271 | lr 4.75e-04 | 87.8 min
+step 17400 | total 1.0669 mel 0.4853 mel_postnet 0.4851 pitch 0.0364 energy 0.0334 duration 0.0268 | lr 4.74e-04 | 88.1 min
+step 17500 | total 1.0689 mel 0.4863 mel_postnet 0.4860 pitch 0.0354 energy 0.0340 duration 0.0272 | lr 4.72e-04 | 88.5 min
+step 17600 | total 1.0627 mel 0.4836 mel_postnet 0.4834 pitch 0.0363 energy 0.0332 duration 0.0262 | lr 4.71e-04 | 88.8 min
+step 17700 | total 1.0612 mel 0.4830 mel_postnet 0.4828 pitch 0.0357 energy 0.0331 duration 0.0267 | lr 4.70e-04 | 89.2 min
+step 17800 | total 1.0572 mel 0.4822 mel_postnet 0.4820 pitch 0.0356 energy 0.0319 duration 0.0255 | lr 4.68e-04 | 89.5 min
+step 17900 | total 1.0587 mel 0.4821 mel_postnet 0.4819 pitch 0.0352 energy 0.0335 duration 0.0259 | lr 4.67e-04 | 89.9 min
+step 18000 | total 1.0530 mel 0.4806 mel_postnet 0.4804 pitch 0.0337 energy 0.0327 duration 0.0256 | lr 4.66e-04 | 90.3 min
+VAL step 18000 | total 2.3552 mel 0.7297 mel_postnet 0.7295 pitch 0.4172 energy 0.2566 duration 0.2221
+step 18100 | total 1.0595 mel 0.4830 mel_postnet 0.4827 pitch 0.0349 energy 0.0330 duration 0.0259 | lr 4.65e-04 | 90.8 min
+step 18200 | total 1.0527 mel 0.4794 mel_postnet 0.4791 pitch 0.0356 energy 0.0332 duration 0.0253 | lr 4.63e-04 | 91.1 min
+step 18300 | total 1.0531 mel 0.4807 mel_postnet 0.4804 pitch 0.0345 energy 0.0321 duration 0.0254 | lr 4.62e-04 | 91.5 min
+step 18400 | total 1.0499 mel 0.4800 mel_postnet 0.4798 pitch 0.0331 energy 0.0315 duration 0.0254 | lr 4.61e-04 | 91.9 min
+step 18500 | total 1.0481 mel 0.4793 mel_postnet 0.4790 pitch 0.0335 energy 0.0316 duration 0.0247 | lr 4.60e-04 | 92.2 min
+step 18600 | total 1.0496 mel 0.4788 mel_postnet 0.4786 pitch 0.0340 energy 0.0329 duration 0.0252 | lr 4.58e-04 | 92.6 min
+step 18700 | total 1.0432 mel 0.4766 mel_postnet 0.4764 pitch 0.0340 energy 0.0315 duration 0.0246 | lr 4.57e-04 | 92.9 min
+step 18800 | total 1.0467 mel 0.4782 mel_postnet 0.4780 pitch 0.0339 energy 0.0311 duration 0.0256 | lr 4.56e-04 | 93.3 min
+step 18900 | total 1.0448 mel 0.4780 mel_postnet 0.4778 pitch 0.0330 energy 0.0316 duration 0.0244 | lr 4.55e-04 | 93.7 min
+step 19000 | total 1.0425 mel 0.4764 mel_postnet 0.4761 pitch 0.0340 energy 0.0312 duration 0.0249 | lr 4.53e-04 | 94.0 min
+VAL step 19000 | total 2.3695 mel 0.7292 mel_postnet 0.7290 pitch 0.4193 energy 0.2630 duration 0.2290
+step 19100 | total 1.0347 mel 0.4734 mel_postnet 0.4732 pitch 0.0338 energy 0.0305 duration 0.0238 | lr 4.52e-04 | 94.5 min
+step 19200 | total 1.0436 mel 0.4776 mel_postnet 0.4774 pitch 0.0326 energy 0.0315 duration 0.0244 | lr 4.51e-04 | 94.9 min
+step 19300 | total 1.0346 mel 0.4737 mel_postnet 0.4734 pitch 0.0322 energy 0.0313 duration 0.0239 | lr 4.50e-04 | 95.3 min
+step 19400 | total 1.0384 mel 0.4749 mel_postnet 0.4747 pitch 0.0336 energy 0.0312 duration 0.0240 | lr 4.49e-04 | 95.6 min
+step 19500 | total 1.0364 mel 0.4749 mel_postnet 0.4747 pitch 0.0320 energy 0.0311 duration 0.0237 | lr 4.48e-04 | 96.0 min
+step 19600 | total 1.0346 mel 0.4742 mel_postnet 0.4740 pitch 0.0325 energy 0.0303 duration 0.0236 | lr 4.46e-04 | 96.3 min
+step 19700 | total 1.0305 mel 0.4722 mel_postnet 0.4720 pitch 0.0322 energy 0.0309 duration 0.0233 | lr 4.45e-04 | 96.7 min
+step 19800 | total 1.0284 mel 0.4716 mel_postnet 0.4714 pitch 0.0313 energy 0.0307 duration 0.0233 | lr 4.44e-04 | 97.1 min
+step 19900 | total 1.0354 mel 0.4741 mel_postnet 0.4739 pitch 0.0336 energy 0.0302 duration 0.0235 | lr 4.43e-04 | 97.4 min
+step 20000 | total 1.0295 mel 0.4720 mel_postnet 0.4718 pitch 0.0318 energy 0.0308 duration 0.0231 | lr 4.42e-04 | 97.8 min
+VAL step 20000 | total 2.3625 mel 0.7308 mel_postnet 0.7306 pitch 0.4174 energy 0.2601 duration 0.2237
+step 20100 | total 1.0296 mel 0.4721 mel_postnet 0.4719 pitch 0.0324 energy 0.0300 duration 0.0232 | lr 4.41e-04 | 98.3 min
+step 20200 | total 1.0264 mel 0.4708 mel_postnet 0.4706 pitch 0.0314 energy 0.0306 duration 0.0230 | lr 4.40e-04 | 98.7 min
+step 20300 | total 1.0292 mel 0.4716 mel_postnet 0.4714 pitch 0.0324 energy 0.0306 duration 0.0232 | lr 4.39e-04 | 99.0 min
+step 20400 | total 1.0210 mel 0.4688 mel_postnet 0.4685 pitch 0.0309 energy 0.0300 duration 0.0227 | lr 4.38e-04 | 99.4 min
+step 20500 | total 1.0268 mel 0.4708 mel_postnet 0.4705 pitch 0.0326 energy 0.0300 duration 0.0229 | lr 4.37e-04 | 99.7 min
+step 20600 | total 1.0186 mel 0.4677 mel_postnet 0.4675 pitch 0.0318 energy 0.0291 duration 0.0225 | lr 4.35e-04 | 100.1 min
+step 20700 | total 1.0221 mel 0.4690 mel_postnet 0.4687 pitch 0.0317 energy 0.0300 duration 0.0228 | lr 4.34e-04 | 100.5 min
+step 20800 | total 1.0186 mel 0.4687 mel_postnet 0.4684 pitch 0.0306 energy 0.0290 duration 0.0221 | lr 4.33e-04 | 100.8 min
+step 20900 | total 1.0221 mel 0.4696 mel_postnet 0.4693 pitch 0.0314 energy 0.0292 duration 0.0227 | lr 4.32e-04 | 101.2 min
+step 21000 | total 1.0133 mel 0.4661 mel_postnet 0.4658 pitch 0.0302 energy 0.0293 duration 0.0219 | lr 4.31e-04 | 101.5 min
+VAL step 21000 | total 2.3610 mel 0.7272 mel_postnet 0.7270 pitch 0.4188 energy 0.2590 duration 0.2289
+step 21100 | total 1.0175 mel 0.4674 mel_postnet 0.4671 pitch 0.0312 energy 0.0295 duration 0.0223 | lr 4.30e-04 | 102.0 min
+step 21200 | total 1.0158 mel 0.4671 mel_postnet 0.4668 pitch 0.0310 energy 0.0290 duration 0.0220 | lr 4.29e-04 | 102.4 min
+step 21300 | total 1.0106 mel 0.4648 mel_postnet 0.4646 pitch 0.0305 energy 0.0291 duration 0.0217 | lr 4.28e-04 | 102.8 min
+step 21400 | total 1.0126 mel 0.4655 mel_postnet 0.4652 pitch 0.0314 energy 0.0285 duration 0.0221 | lr 4.27e-04 | 103.1 min
+step 21500 | total 1.0054 mel 0.4635 mel_postnet 0.4632 pitch 0.0297 energy 0.0282 duration 0.0208 | lr 4.26e-04 | 103.5 min
+step 21600 | total 1.0195 mel 0.4682 mel_postnet 0.4679 pitch 0.0319 energy 0.0292 duration 0.0224 | lr 4.25e-04 | 103.9 min
+step 21700 | total 1.0037 mel 0.4619 mel_postnet 0.4616 pitch 0.0305 energy 0.0285 duration 0.0212 | lr 4.24e-04 | 104.2 min
+step 21800 | total 1.0138 mel 0.4665 mel_postnet 0.4662 pitch 0.0301 energy 0.0295 duration 0.0215 | lr 4.23e-04 | 104.6 min
+step 21900 | total 1.0062 mel 0.4635 mel_postnet 0.4633 pitch 0.0299 energy 0.0284 duration 0.0211 | lr 4.22e-04 | 104.9 min
+step 22000 | total 1.0071 mel 0.4642 mel_postnet 0.4639 pitch 0.0289 energy 0.0286 duration 0.0214 | lr 4.21e-04 | 105.3 min
+VAL step 22000 | total 2.3764 mel 0.7339 mel_postnet 0.7338 pitch 0.4221 energy 0.2595 duration 0.2272
+step 22100 | total 1.0045 mel 0.4619 mel_postnet 0.4616 pitch 0.0312 energy 0.0286 duration 0.0211 | lr 4.20e-04 | 105.8 min
+step 22200 | total 1.0011 mel 0.4614 mel_postnet 0.4612 pitch 0.0290 energy 0.0285 duration 0.0211 | lr 4.19e-04 | 106.2 min
+step 22300 | total 1.0059 mel 0.4632 mel_postnet 0.4629 pitch 0.0310 energy 0.0276 duration 0.0213 | lr 4.19e-04 | 106.5 min
+step 22400 | total 1.0042 mel 0.4629 mel_postnet 0.4626 pitch 0.0294 energy 0.0286 duration 0.0208 | lr 4.18e-04 | 106.9 min
+step 22500 | total 0.9983 mel 0.4603 mel_postnet 0.4600 pitch 0.0288 energy 0.0282 duration 0.0211 | lr 4.17e-04 | 107.3 min
+step 22600 | total 0.9978 mel 0.4601 mel_postnet 0.4598 pitch 0.0297 energy 0.0273 duration 0.0209 | lr 4.16e-04 | 107.6 min
+step 22700 | total 1.0052 mel 0.4635 mel_postnet 0.4632 pitch 0.0295 energy 0.0280 duration 0.0209 | lr 4.15e-04 | 108.0 min
+step 22800 | total 0.9966 mel 0.4599 mel_postnet 0.4596 pitch 0.0293 energy 0.0273 duration 0.0204 | lr 4.14e-04 | 108.3 min
+step 22900 | total 0.9970 mel 0.4599 mel_postnet 0.4596 pitch 0.0287 energy 0.0281 duration 0.0207 | lr 4.13e-04 | 108.7 min
+step 23000 | total 0.9973 mel 0.4599 mel_postnet 0.4596 pitch 0.0295 energy 0.0280 duration 0.0204 | lr 4.12e-04 | 109.1 min
+VAL step 23000 | total 2.3678 mel 0.7313 mel_postnet 0.7310 pitch 0.4164 energy 0.2599 duration 0.2292
+step 23100 | total 0.9969 mel 0.4604 mel_postnet 0.4601 pitch 0.0289 energy 0.0272 duration 0.0203 | lr 4.11e-04 | 109.6 min
+step 23200 | total 0.9937 mel 0.4584 mel_postnet 0.4581 pitch 0.0295 energy 0.0275 duration 0.0202 | lr 4.10e-04 | 109.9 min
+step 23300 | total 0.9955 mel 0.4594 mel_postnet 0.4591 pitch 0.0292 energy 0.0276 duration 0.0203 | lr 4.09e-04 | 110.3 min
+step 23400 | total 0.9925 mel 0.4585 mel_postnet 0.4582 pitch 0.0281 energy 0.0277 duration 0.0199 | lr 4.09e-04 | 110.6 min
+step 23500 | total 0.9940 mel 0.4588 mel_postnet 0.4585 pitch 0.0292 energy 0.0273 duration 0.0203 | lr 4.08e-04 | 111.0 min
+step 23600 | total 0.9886 mel 0.4572 mel_postnet 0.4569 pitch 0.0282 energy 0.0267 duration 0.0197 | lr 4.07e-04 | 111.4 min
+step 23700 | total 0.9888 mel 0.4563 mel_postnet 0.4559 pitch 0.0286 energy 0.0280 duration 0.0199 | lr 4.06e-04 | 111.7 min
+step 23800 | total 0.9917 mel 0.4582 mel_postnet 0.4579 pitch 0.0288 energy 0.0270 duration 0.0198 | lr 4.05e-04 | 112.1 min
+step 23900 | total 0.9891 mel 0.4570 mel_postnet 0.4567 pitch 0.0287 energy 0.0271 duration 0.0196 | lr 4.04e-04 | 112.5 min
+step 24000 | total 0.9880 mel 0.4568 mel_postnet 0.4565 pitch 0.0286 energy 0.0261 duration 0.0200 | lr 4.03e-04 | 112.8 min
+VAL step 24000 | total 2.3599 mel 0.7299 mel_postnet 0.7296 pitch 0.4181 energy 0.2565 duration 0.2257
+step 24100 | total 0.9854 mel 0.4558 mel_postnet 0.4555 pitch 0.0283 energy 0.0265 duration 0.0192 | lr 4.03e-04 | 113.3 min
+step 24200 | total 0.9856 mel 0.4557 mel_postnet 0.4554 pitch 0.0277 energy 0.0270 duration 0.0198 | lr 4.02e-04 | 113.7 min
+step 24300 | total 0.9824 mel 0.4540 mel_postnet 0.4536 pitch 0.0282 energy 0.0268 duration 0.0198 | lr 4.01e-04 | 114.0 min
+step 24400 | total 0.9855 mel 0.4555 mel_postnet 0.4552 pitch 0.0287 energy 0.0266 duration 0.0194 | lr 4.00e-04 | 114.4 min
+step 24500 | total 0.9795 mel 0.4532 mel_postnet 0.4529 pitch 0.0273 energy 0.0266 duration 0.0194 | lr 3.99e-04 | 114.8 min
+step 24600 | total 0.9843 mel 0.4549 mel_postnet 0.4546 pitch 0.0288 energy 0.0263 duration 0.0196 | lr 3.98e-04 | 115.1 min
+step 24700 | total 0.9783 mel 0.4528 mel_postnet 0.4525 pitch 0.0277 energy 0.0263 duration 0.0191 | lr 3.98e-04 | 115.5 min
+step 24800 | total 0.9814 mel 0.4545 mel_postnet 0.4541 pitch 0.0273 energy 0.0263 duration 0.0193 | lr 3.97e-04 | 115.8 min
+step 24900 | total 0.9790 mel 0.4531 mel_postnet 0.4527 pitch 0.0279 energy 0.0263 duration 0.0191 | lr 3.96e-04 | 116.2 min
+step 25000 | total 0.9779 mel 0.4531 mel_postnet 0.4527 pitch 0.0277 energy 0.0255 duration 0.0189 | lr 3.95e-04 | 116.6 min
+VAL step 25000 | total 2.3663 mel 0.7301 mel_postnet 0.7298 pitch 0.4198 energy 0.2595 duration 0.2271
+step 25100 | total 0.9807 mel 0.4532 mel_postnet 0.4529 pitch 0.0286 energy 0.0266 duration 0.0194 | lr 3.94e-04 | 117.1 min
+step 25200 | total 0.9771 mel 0.4526 mel_postnet 0.4522 pitch 0.0272 energy 0.0261 duration 0.0190 | lr 3.94e-04 | 117.4 min
+step 25300 | total 0.9765 mel 0.4525 mel_postnet 0.4521 pitch 0.0275 energy 0.0257 duration 0.0187 | lr 3.93e-04 | 117.8 min
+step 25400 | total 0.9765 mel 0.4519 mel_postnet 0.4516 pitch 0.0286 energy 0.0258 duration 0.0186 | lr 3.92e-04 | 118.2 min
+step 25500 | total 0.9743 mel 0.4518 mel_postnet 0.4515 pitch 0.0265 energy 0.0259 duration 0.0186 | lr 3.91e-04 | 118.5 min
+step 25600 | total 0.9720 mel 0.4509 mel_postnet 0.4506 pitch 0.0262 energy 0.0255 duration 0.0187 | lr 3.91e-04 | 118.9 min
+step 25700 | total 0.9750 mel 0.4519 mel_postnet 0.4515 pitch 0.0270 energy 0.0260 duration 0.0186 | lr 3.90e-04 | 119.2 min
+step 25800 | total 0.9699 mel 0.4497 mel_postnet 0.4494 pitch 0.0269 energy 0.0254 duration 0.0185 | lr 3.89e-04 | 119.6 min
+step 25900 | total 0.9732 mel 0.4506 mel_postnet 0.4502 pitch 0.0279 energy 0.0255 duration 0.0189 | lr 3.88e-04 | 120.0 min
+step 26000 | total 0.9700 mel 0.4498 mel_postnet 0.4494 pitch 0.0267 energy 0.0257 duration 0.0184 | lr 3.88e-04 | 120.3 min
+VAL step 26000 | total 2.3732 mel 0.7320 mel_postnet 0.7317 pitch 0.4228 energy 0.2609 duration 0.2258
+step 26100 | total 0.9708 mel 0.4496 mel_postnet 0.4492 pitch 0.0275 energy 0.0260 duration 0.0184 | lr 3.87e-04 | 120.8 min
+step 26200 | total 0.9662 mel 0.4485 mel_postnet 0.4482 pitch 0.0261 energy 0.0251 duration 0.0184 | lr 3.86e-04 | 121.2 min
+step 26300 | total 0.9723 mel 0.4511 mel_postnet 0.4507 pitch 0.0267 energy 0.0254 duration 0.0184 | lr 3.85e-04 | 121.6 min
+step 26400 | total 0.9678 mel 0.4485 mel_postnet 0.4482 pitch 0.0268 energy 0.0262 duration 0.0180 | lr 3.85e-04 | 121.9 min
+step 26500 | total 0.9720 mel 0.4505 mel_postnet 0.4502 pitch 0.0274 energy 0.0257 duration 0.0182 | lr 3.84e-04 | 122.3 min
+step 26600 | total 0.9652 mel 0.4482 mel_postnet 0.4479 pitch 0.0262 energy 0.0247 duration 0.0182 | lr 3.83e-04 | 122.7 min
+step 26700 | total 0.9657 mel 0.4481 mel_postnet 0.4478 pitch 0.0262 energy 0.0254 duration 0.0181 | lr 3.82e-04 | 123.0 min
+step 26800 | total 0.9642 mel 0.4470 mel_postnet 0.4466 pitch 0.0267 energy 0.0258 duration 0.0182 | lr 3.82e-04 | 123.4 min
+step 26900 | total 0.9670 mel 0.4482 mel_postnet 0.4479 pitch 0.0277 energy 0.0253 duration 0.0179 | lr 3.81e-04 | 123.7 min
+step 27000 | total 0.9635 mel 0.4475 mel_postnet 0.4472 pitch 0.0254 energy 0.0253 duration 0.0181 | lr 3.80e-04 | 124.1 min
+VAL step 27000 | total 2.3706 mel 0.7339 mel_postnet 0.7336 pitch 0.4191 energy 0.2577 duration 0.2263
+step 27100 | total 0.9630 mel 0.4468 mel_postnet 0.4465 pitch 0.0268 energy 0.0252 duration 0.0177 | lr 3.80e-04 | 124.6 min
+step 27200 | total 0.9632 mel 0.4468 mel_postnet 0.4464 pitch 0.0266 energy 0.0253 duration 0.0181 | lr 3.79e-04 | 125.0 min
+step 27300 | total 0.9566 mel 0.4445 mel_postnet 0.4441 pitch 0.0260 energy 0.0247 duration 0.0174 | lr 3.78e-04 | 125.3 min
+step 27400 | total 0.9671 mel 0.4489 mel_postnet 0.4486 pitch 0.0263 energy 0.0254 duration 0.0179 | lr 3.78e-04 | 125.7 min
+step 27500 | total 0.9559 mel 0.4438 mel_postnet 0.4435 pitch 0.0266 energy 0.0243 duration 0.0176 | lr 3.77e-04 | 126.1 min
+step 27600 | total 0.9592 mel 0.4454 mel_postnet 0.4450 pitch 0.0258 energy 0.0251 duration 0.0179 | lr 3.76e-04 | 126.4 min
+step 27700 | total 0.9600 mel 0.4465 mel_postnet 0.4461 pitch 0.0248 energy 0.0251 duration 0.0174 | lr 3.76e-04 | 126.8 min
+step 27800 | total 0.9579 mel 0.4453 mel_postnet 0.4450 pitch 0.0258 energy 0.0244 duration 0.0174 | lr 3.75e-04 | 127.1 min
+step 27900 | total 0.9572 mel 0.4448 mel_postnet 0.4444 pitch 0.0259 energy 0.0246 duration 0.0175 | lr 3.74e-04 | 127.5 min
+step 28000 | total 0.9521 mel 0.4423 mel_postnet 0.4419 pitch 0.0260 energy 0.0244 duration 0.0175 | lr 3.74e-04 | 127.9 min
+VAL step 28000 | total 2.3647 mel 0.7315 mel_postnet 0.7312 pitch 0.4163 energy 0.2589 duration 0.2267
+step 28100 | total 0.9552 mel 0.4439 mel_postnet 0.4435 pitch 0.0253 energy 0.0247 duration 0.0177 | lr 3.73e-04 | 128.4 min
+step 28200 | total 0.9511 mel 0.4427 mel_postnet 0.4424 pitch 0.0253 energy 0.0237 duration 0.0170 | lr 3.72e-04 | 128.7 min
+step 28300 | total 0.9593 mel 0.4454 mel_postnet 0.4450 pitch 0.0269 energy 0.0244 duration 0.0176 | lr 3.72e-04 | 129.1 min
+step 28400 | total 0.9490 mel 0.4415 mel_postnet 0.4412 pitch 0.0250 energy 0.0243 duration 0.0170 | lr 3.71e-04 | 129.5 min
+step 28500 | total 0.9553 mel 0.4442 mel_postnet 0.4438 pitch 0.0263 energy 0.0237 duration 0.0173 | lr 3.70e-04 | 129.8 min
+step 28600 | total 0.9547 mel 0.4440 mel_postnet 0.4437 pitch 0.0255 energy 0.0244 duration 0.0172 | lr 3.70e-04 | 130.2 min
+step 28700 | total 0.9524 mel 0.4431 mel_postnet 0.4427 pitch 0.0255 energy 0.0238 duration 0.0174 | lr 3.69e-04 | 130.5 min
+step 28800 | total 0.9492 mel 0.4421 mel_postnet 0.4417 pitch 0.0247 energy 0.0240 duration 0.0167 | lr 3.68e-04 | 130.9 min
+step 28900 | total 0.9522 mel 0.4430 mel_postnet 0.4426 pitch 0.0254 energy 0.0241 duration 0.0172 | lr 3.68e-04 | 131.2 min
+step 29000 | total 0.9492 mel 0.4414 mel_postnet 0.4411 pitch 0.0259 energy 0.0237 duration 0.0171 | lr 3.67e-04 | 131.6 min
+VAL step 29000 | total 2.3554 mel 0.7270 mel_postnet 0.7267 pitch 0.4182 energy 0.2589 duration 0.2246
+step 29100 | total 0.9486 mel 0.4415 mel_postnet 0.4412 pitch 0.0253 energy 0.0236 duration 0.0170 | lr 3.66e-04 | 132.1 min
+step 29200 | total 0.9467 mel 0.4404 mel_postnet 0.4400 pitch 0.0248 energy 0.0247 duration 0.0168 | lr 3.66e-04 | 132.5 min
+step 29300 | total 0.9480 mel 0.4418 mel_postnet 0.4414 pitch 0.0243 energy 0.0238 duration 0.0168 | lr 3.65e-04 | 132.8 min
+step 29400 | total 0.9479 mel 0.4417 mel_postnet 0.4413 pitch 0.0251 energy 0.0231 duration 0.0167 | lr 3.65e-04 | 133.2 min
+step 29500 | total 0.9474 mel 0.4411 mel_postnet 0.4408 pitch 0.0252 energy 0.0234 duration 0.0168 | lr 3.64e-04 | 133.6 min
+step 29600 | total 0.9455 mel 0.4403 mel_postnet 0.4399 pitch 0.0246 energy 0.0240 duration 0.0167 | lr 3.63e-04 | 133.9 min
+step 29700 | total 0.9447 mel 0.4397 mel_postnet 0.4394 pitch 0.0251 energy 0.0240 duration 0.0165 | lr 3.63e-04 | 134.3 min
+step 29800 | total 0.9447 mel 0.4403 mel_postnet 0.4399 pitch 0.0246 energy 0.0231 duration 0.0167 | lr 3.62e-04 | 134.6 min
+step 29900 | total 0.9416 mel 0.4391 mel_postnet 0.4387 pitch 0.0236 energy 0.0234 duration 0.0168 | lr 3.61e-04 | 135.0 min
+step 30000 | total 0.9474 mel 0.4407 mel_postnet 0.4404 pitch 0.0259 energy 0.0238 duration 0.0166 | lr 3.61e-04 | 135.4 min
+VAL step 30000 | total 2.3698 mel 0.7325 mel_postnet 0.7323 pitch 0.4185 energy 0.2600 duration 0.2265
+step 30100 | total 0.9423 mel 0.4392 mel_postnet 0.4388 pitch 0.0246 energy 0.0232 duration 0.0165 | lr 3.60e-04 | 135.8 min
+step 30200 | total 0.9419 mel 0.4390 mel_postnet 0.4387 pitch 0.0240 energy 0.0238 duration 0.0164 | lr 3.60e-04 | 136.2 min
+step 30300 | total 0.9420 mel 0.4393 mel_postnet 0.4390 pitch 0.0236 energy 0.0234 duration 0.0166 | lr 3.59e-04 | 136.5 min
+step 30400 | total 0.9405 mel 0.4382 mel_postnet 0.4378 pitch 0.0251 energy 0.0228 duration 0.0166 | lr 3.58e-04 | 136.9 min
+step 30500 | total 0.9419 mel 0.4387 mel_postnet 0.4384 pitch 0.0250 energy 0.0234 duration 0.0164 | lr 3.58e-04 | 137.3 min
+step 30600 | total 0.9380 mel 0.4371 mel_postnet 0.4367 pitch 0.0248 energy 0.0230 duration 0.0164 | lr 3.57e-04 | 137.6 min
+step 30700 | total 0.9435 mel 0.4398 mel_postnet 0.4394 pitch 0.0245 energy 0.0235 duration 0.0163 | lr 3.57e-04 | 138.0 min
+step 30800 | total 0.9374 mel 0.4374 mel_postnet 0.4370 pitch 0.0243 energy 0.0226 duration 0.0160 | lr 3.56e-04 | 138.3 min
+step 30900 | total 0.9373 mel 0.4367 mel_postnet 0.4364 pitch 0.0246 energy 0.0233 duration 0.0163 | lr 3.56e-04 | 138.7 min
+step 31000 | total 0.9360 mel 0.4371 mel_postnet 0.4367 pitch 0.0233 energy 0.0228 duration 0.0161 | lr 3.55e-04 | 139.0 min
+VAL step 31000 | total 2.3709 mel 0.7319 mel_postnet 0.7317 pitch 0.4163 energy 0.2625 duration 0.2285
+step 31100 | total 0.9394 mel 0.4376 mel_postnet 0.4373 pitch 0.0251 energy 0.0233 duration 0.0161 | lr 3.54e-04 | 139.5 min
+step 31200 | total 0.9376 mel 0.4367 mel_postnet 0.4363 pitch 0.0252 energy 0.0231 duration 0.0163 | lr 3.54e-04 | 139.9 min
+step 31300 | total 0.9368 mel 0.4370 mel_postnet 0.4366 pitch 0.0243 energy 0.0228 duration 0.0161 | lr 3.53e-04 | 140.2 min
+step 31400 | total 0.9322 mel 0.4354 mel_postnet 0.4350 pitch 0.0235 energy 0.0222 duration 0.0162 | lr 3.53e-04 | 140.6 min
+step 31500 | total 0.9374 mel 0.4368 mel_postnet 0.4364 pitch 0.0249 energy 0.0233 duration 0.0160 | lr 3.52e-04 | 140.9 min
+step 31600 | total 0.9330 mel 0.4358 mel_postnet 0.4354 pitch 0.0234 energy 0.0225 duration 0.0159 | lr 3.52e-04 | 141.3 min
+step 31700 | total 0.9360 mel 0.4368 mel_postnet 0.4364 pitch 0.0237 energy 0.0230 duration 0.0162 | lr 3.51e-04 | 141.6 min
+step 31800 | total 0.9311 mel 0.4346 mel_postnet 0.4342 pitch 0.0240 energy 0.0224 duration 0.0159 | lr 3.50e-04 | 142.0 min
+step 31900 | total 0.9333 mel 0.4352 mel_postnet 0.4348 pitch 0.0249 energy 0.0223 duration 0.0161 | lr 3.50e-04 | 142.3 min
+step 32000 | total 0.9319 mel 0.4349 mel_postnet 0.4346 pitch 0.0238 energy 0.0229 duration 0.0157 | lr 3.49e-04 | 142.7 min
+VAL step 32000 | total 2.3603 mel 0.7314 mel_postnet 0.7311 pitch 0.4163 energy 0.2587 duration 0.2228
+step 32100 | total 0.9314 mel 0.4349 mel_postnet 0.4345 pitch 0.0232 energy 0.0230 duration 0.0158 | lr 3.49e-04 | 143.2 min
+step 32200 | total 0.9331 mel 0.4355 mel_postnet 0.4351 pitch 0.0242 energy 0.0224 duration 0.0159 | lr 3.48e-04 | 143.5 min
+step 32300 | total 0.9335 mel 0.4357 mel_postnet 0.4353 pitch 0.0244 energy 0.0226 duration 0.0156 | lr 3.48e-04 | 143.9 min
+step 32400 | total 0.9316 mel 0.4350 mel_postnet 0.4346 pitch 0.0236 energy 0.0225 duration 0.0159 | lr 3.47e-04 | 144.2 min
+step 32500 | total 0.9280 mel 0.4334 mel_postnet 0.4330 pitch 0.0240 energy 0.0221 duration 0.0155 | lr 3.47e-04 | 144.6 min
+step 32600 | total 0.9312 mel 0.4342 mel_postnet 0.4338 pitch 0.0244 energy 0.0227 duration 0.0160 | lr 3.46e-04 | 144.9 min
+step 32700 | total 0.9266 mel 0.4329 mel_postnet 0.4325 pitch 0.0236 energy 0.0221 duration 0.0155 | lr 3.46e-04 | 145.3 min
+step 32800 | total 0.9283 mel 0.4337 mel_postnet 0.4333 pitch 0.0231 energy 0.0228 duration 0.0154 | lr 3.45e-04 | 145.6 min
+step 32900 | total 0.9295 mel 0.4341 mel_postnet 0.4337 pitch 0.0238 energy 0.0224 duration 0.0155 | lr 3.45e-04 | 146.0 min
+step 33000 | total 0.9285 mel 0.4342 mel_postnet 0.4339 pitch 0.0229 energy 0.0220 duration 0.0155 | lr 3.44e-04 | 146.3 min
+VAL step 33000 | total 2.3745 mel 0.7376 mel_postnet 0.7374 pitch 0.4146 energy 0.2582 duration 0.2266
+step 33100 | total 0.9272 mel 0.4334 mel_postnet 0.4330 pitch 0.0233 energy 0.0220 duration 0.0154 | lr 3.44e-04 | 146.8 min
+step 33200 | total 0.9255 mel 0.4324 mel_postnet 0.4320 pitch 0.0237 energy 0.0221 duration 0.0153 | lr 3.43e-04 | 147.2 min
+step 33300 | total 0.9283 mel 0.4339 mel_postnet 0.4335 pitch 0.0226 energy 0.0228 duration 0.0154 | lr 3.42e-04 | 147.5 min
+step 33400 | total 0.9275 mel 0.4333 mel_postnet 0.4330 pitch 0.0237 energy 0.0222 duration 0.0153 | lr 3.42e-04 | 147.9 min
+step 33500 | total 0.9240 mel 0.4315 mel_postnet 0.4311 pitch 0.0235 energy 0.0223 duration 0.0155 | lr 3.41e-04 | 148.2 min
+step 33600 | total 0.9229 mel 0.4318 mel_postnet 0.4314 pitch 0.0230 energy 0.0217 duration 0.0151 | lr 3.41e-04 | 148.6 min
+step 33700 | total 0.9282 mel 0.4335 mel_postnet 0.4331 pitch 0.0236 energy 0.0227 duration 0.0155 | lr 3.40e-04 | 148.9 min
+step 33800 | total 0.9215 mel 0.4313 mel_postnet 0.4309 pitch 0.0226 energy 0.0218 duration 0.0151 | lr 3.40e-04 | 149.3 min
+step 33900 | total 0.9234 mel 0.4316 mel_postnet 0.4312 pitch 0.0234 energy 0.0221 duration 0.0151 | lr 3.39e-04 | 149.6 min
+step 34000 | total 0.9205 mel 0.4302 mel_postnet 0.4298 pitch 0.0226 energy 0.0227 duration 0.0153 | lr 3.39e-04 | 150.0 min
+VAL step 34000 | total 2.3682 mel 0.7338 mel_postnet 0.7336 pitch 0.4161 energy 0.2604 duration 0.2243
+step 34100 | total 0.9220 mel 0.4311 mel_postnet 0.4307 pitch 0.0235 energy 0.0214 duration 0.0153 | lr 3.38e-04 | 150.5 min
+step 34200 | total 0.9207 mel 0.4302 mel_postnet 0.4298 pitch 0.0235 energy 0.0220 duration 0.0151 | lr 3.38e-04 | 150.8 min
+step 34300 | total 0.9243 mel 0.4324 mel_postnet 0.4320 pitch 0.0235 energy 0.0214 duration 0.0151 | lr 3.37e-04 | 151.2 min
+step 34400 | total 0.9202 mel 0.4311 mel_postnet 0.4307 pitch 0.0218 energy 0.0217 duration 0.0150 | lr 3.37e-04 | 151.5 min
+step 34500 | total 0.9220 mel 0.4311 mel_postnet 0.4307 pitch 0.0236 energy 0.0217 duration 0.0148 | lr 3.36e-04 | 151.9 min
+step 34600 | total 0.9176 mel 0.4290 mel_postnet 0.4286 pitch 0.0230 energy 0.0221 duration 0.0150 | lr 3.36e-04 | 152.3 min
+step 34700 | total 0.9193 mel 0.4302 mel_postnet 0.4298 pitch 0.0230 energy 0.0213 duration 0.0149 | lr 3.36e-04 | 152.6 min
+step 34800 | total 0.9216 mel 0.4313 mel_postnet 0.4309 pitch 0.0228 energy 0.0217 duration 0.0150 | lr 3.35e-04 | 153.0 min
+step 34900 | total 0.9172 mel 0.4294 mel_postnet 0.4290 pitch 0.0223 energy 0.0217 duration 0.0148 | lr 3.35e-04 | 153.3 min
+step 35000 | total 0.9192 mel 0.4301 mel_postnet 0.4297 pitch 0.0229 energy 0.0214 duration 0.0152 | lr 3.34e-04 | 153.7 min
+VAL step 35000 | total 2.3625 mel 0.7343 mel_postnet 0.7341 pitch 0.4129 energy 0.2593 duration 0.2217
+step 35100 | total 0.9136 mel 0.4278 mel_postnet 0.4274 pitch 0.0224 energy 0.0213 duration 0.0147 | lr 3.34e-04 | 154.2 min
+step 35200 | total 0.9202 mel 0.4307 mel_postnet 0.4302 pitch 0.0229 energy 0.0215 duration 0.0149 | lr 3.33e-04 | 154.5 min
+step 35300 | total 0.9189 mel 0.4300 mel_postnet 0.4296 pitch 0.0234 energy 0.0212 duration 0.0147 | lr 3.33e-04 | 154.9 min
+step 35400 | total 0.9142 mel 0.4280 mel_postnet 0.4276 pitch 0.0222 energy 0.0215 duration 0.0149 | lr 3.32e-04 | 155.2 min
+step 35500 | total 0.9108 mel 0.4267 mel_postnet 0.4262 pitch 0.0219 energy 0.0211 duration 0.0148 | lr 3.32e-04 | 155.6 min
+step 35600 | total 0.9184 mel 0.4300 mel_postnet 0.4296 pitch 0.0230 energy 0.0211 duration 0.0147 | lr 3.31e-04 | 155.9 min
+step 35700 | total 0.9148 mel 0.4285 mel_postnet 0.4280 pitch 0.0223 energy 0.0214 duration 0.0145 | lr 3.31e-04 | 156.3 min
+step 35800 | total 0.9151 mel 0.4287 mel_postnet 0.4283 pitch 0.0224 energy 0.0210 duration 0.0146 | lr 3.30e-04 | 156.6 min
+step 35900 | total 0.9152 mel 0.4287 mel_postnet 0.4283 pitch 0.0225 energy 0.0210 duration 0.0147 | lr 3.30e-04 | 157.0 min
+step 36000 | total 0.9134 mel 0.4281 mel_postnet 0.4277 pitch 0.0220 energy 0.0211 duration 0.0145 | lr 3.29e-04 | 157.3 min
+VAL step 36000 | total 2.3745 mel 0.7368 mel_postnet 0.7365 pitch 0.4146 energy 0.2594 duration 0.2272
+step 36100 | total 0.9148 mel 0.4276 mel_postnet 0.4272 pitch 0.0233 energy 0.0220 duration 0.0148 | lr 3.29e-04 | 157.8 min
+step 36200 | total 0.9109 mel 0.4271 mel_postnet 0.4267 pitch 0.0216 energy 0.0210 duration 0.0145 | lr 3.28e-04 | 158.2 min
+step 36300 | total 0.9162 mel 0.4287 mel_postnet 0.4283 pitch 0.0234 energy 0.0213 duration 0.0145 | lr 3.28e-04 | 158.5 min
+step 36400 | total 0.9074 mel 0.4253 mel_postnet 0.4248 pitch 0.0219 energy 0.0209 duration 0.0145 | lr 3.28e-04 | 158.9 min
+step 36500 | total 0.9135 mel 0.4283 mel_postnet 0.4279 pitch 0.0214 energy 0.0213 duration 0.0146 | lr 3.27e-04 | 159.2 min
+step 36600 | total 0.9132 mel 0.4278 mel_postnet 0.4273 pitch 0.0226 energy 0.0214 duration 0.0141 | lr 3.27e-04 | 159.6 min
+step 36700 | total 0.9063 mel 0.4248 mel_postnet 0.4244 pitch 0.0220 energy 0.0205 duration 0.0146 | lr 3.26e-04 | 159.9 min
+step 36800 | total 0.9084 mel 0.4260 mel_postnet 0.4256 pitch 0.0213 energy 0.0212 duration 0.0143 | lr 3.26e-04 | 160.3 min
+step 36900 | total 0.9133 mel 0.4274 mel_postnet 0.4270 pitch 0.0234 energy 0.0211 duration 0.0145 | lr 3.25e-04 | 160.6 min
+step 37000 | total 0.9093 mel 0.4265 mel_postnet 0.4261 pitch 0.0218 energy 0.0208 duration 0.0141 | lr 3.25e-04 | 161.0 min
+VAL step 37000 | total 2.3735 mel 0.7375 mel_postnet 0.7372 pitch 0.4146 energy 0.2593 duration 0.2248
+step 37100 | total 0.9081 mel 0.4254 mel_postnet 0.4250 pitch 0.0229 energy 0.0205 duration 0.0144 | lr 3.24e-04 | 161.5 min
+step 37200 | total 0.9112 mel 0.4266 mel_postnet 0.4262 pitch 0.0225 energy 0.0213 duration 0.0147 | lr 3.24e-04 | 161.8 min
+step 37300 | total 0.9066 mel 0.4250 mel_postnet 0.4246 pitch 0.0219 energy 0.0210 duration 0.0142 | lr 3.24e-04 | 162.2 min
+step 37400 | total 0.9087 mel 0.4265 mel_postnet 0.4261 pitch 0.0213 energy 0.0208 duration 0.0141 | lr 3.23e-04 | 162.5 min
+step 37500 | total 0.9033 mel 0.4238 mel_postnet 0.4233 pitch 0.0214 energy 0.0210 duration 0.0139 | lr 3.23e-04 | 162.9 min
+step 37600 | total 0.9090 mel 0.4260 mel_postnet 0.4256 pitch 0.0227 energy 0.0205 duration 0.0143 | lr 3.22e-04 | 163.2 min
+step 37700 | total 0.9074 mel 0.4257 mel_postnet 0.4253 pitch 0.0217 energy 0.0205 duration 0.0142 | lr 3.22e-04 | 163.6 min
+step 37800 | total 0.9042 mel 0.4243 mel_postnet 0.4238 pitch 0.0213 energy 0.0206 duration 0.0141 | lr 3.21e-04 | 163.9 min
+step 37900 | total 0.9032 mel 0.4239 mel_postnet 0.4235 pitch 0.0212 energy 0.0205 duration 0.0140 | lr 3.21e-04 | 164.3 min
+step 38000 | total 0.9077 mel 0.4254 mel_postnet 0.4250 pitch 0.0226 energy 0.0205 duration 0.0143 | lr 3.21e-04 | 164.6 min
+VAL step 38000 | total 2.3718 mel 0.7366 mel_postnet 0.7363 pitch 0.4152 energy 0.2585 duration 0.2251
+step 38100 | total 0.9050 mel 0.4248 mel_postnet 0.4244 pitch 0.0219 energy 0.0200 duration 0.0137 | lr 3.20e-04 | 165.1 min
+step 38200 | total 0.9033 mel 0.4238 mel_postnet 0.4234 pitch 0.0212 energy 0.0210 duration 0.0140 | lr 3.20e-04 | 165.5 min
+step 38300 | total 0.9058 mel 0.4245 mel_postnet 0.4241 pitch 0.0223 energy 0.0207 duration 0.0141 | lr 3.19e-04 | 165.8 min
+step 38400 | total 0.9014 mel 0.4229 mel_postnet 0.4224 pitch 0.0220 energy 0.0201 duration 0.0140 | lr 3.19e-04 | 166.2 min
+step 38500 | total 0.9056 mel 0.4247 mel_postnet 0.4243 pitch 0.0216 energy 0.0211 duration 0.0139 | lr 3.19e-04 | 166.5 min
+step 38600 | total 0.9005 mel 0.4230 mel_postnet 0.4225 pitch 0.0209 energy 0.0203 duration 0.0137 | lr 3.18e-04 | 166.9 min
+step 38700 | total 0.9035 mel 0.4237 mel_postnet 0.4232 pitch 0.0219 energy 0.0207 duration 0.0140 | lr 3.18e-04 | 167.2 min
+step 38800 | total 0.9039 mel 0.4240 mel_postnet 0.4236 pitch 0.0212 energy 0.0211 duration 0.0140 | lr 3.17e-04 | 167.6 min
+step 38900 | total 0.9002 mel 0.4223 mel_postnet 0.4219 pitch 0.0219 energy 0.0201 duration 0.0140 | lr 3.17e-04 | 167.9 min
+step 39000 | total 0.8982 mel 0.4216 mel_postnet 0.4211 pitch 0.0216 energy 0.0203 duration 0.0137 | lr 3.16e-04 | 168.3 min
+VAL step 39000 | total 2.3719 mel 0.7374 mel_postnet 0.7372 pitch 0.4156 energy 0.2590 duration 0.2227
+step 39100 | total 0.9052 mel 0.4250 mel_postnet 0.4246 pitch 0.0212 energy 0.0206 duration 0.0137 | lr 3.16e-04 | 168.8 min
+step 39200 | total 0.9011 mel 0.4225 mel_postnet 0.4221 pitch 0.0218 energy 0.0208 duration 0.0139 | lr 3.16e-04 | 169.1 min
+step 39300 | total 0.9001 mel 0.4228 mel_postnet 0.4224 pitch 0.0210 energy 0.0200 duration 0.0139 | lr 3.15e-04 | 169.5 min
+step 39400 | total 0.8966 mel 0.4216 mel_postnet 0.4212 pitch 0.0204 energy 0.0199 duration 0.0135 | lr 3.15e-04 | 169.8 min
+step 39500 | total 0.9020 mel 0.4229 mel_postnet 0.4225 pitch 0.0223 energy 0.0203 duration 0.0141 | lr 3.14e-04 | 170.2 min
+step 39600 | total 0.8984 mel 0.4223 mel_postnet 0.4218 pitch 0.0209 energy 0.0200 duration 0.0134 | lr 3.14e-04 | 170.5 min
+step 39700 | total 0.8971 mel 0.4213 mel_postnet 0.4209 pitch 0.0213 energy 0.0200 duration 0.0135 | lr 3.14e-04 | 170.9 min
+step 39800 | total 0.9014 mel 0.4234 mel_postnet 0.4230 pitch 0.0209 energy 0.0203 duration 0.0138 | lr 3.13e-04 | 171.2 min
+step 39900 | total 0.8992 mel 0.4222 mel_postnet 0.4218 pitch 0.0215 energy 0.0200 duration 0.0138 | lr 3.13e-04 | 171.6 min
+step 40000 | total 0.8962 mel 0.4208 mel_postnet 0.4204 pitch 0.0213 energy 0.0202 duration 0.0135 | lr 3.13e-04 | 171.9 min
+VAL step 40000 | total 2.3743 mel 0.7372 mel_postnet 0.7371 pitch 0.4146 energy 0.2602 duration 0.2252
+step 40100 | total 0.8893 mel 0.4180 mel_postnet 0.4176 pitch 0.0210 energy 0.0196 duration 0.0131 | lr 9.36e-05 | 172.4 min
+step 40200 | total 0.8722 mel 0.4111 mel_postnet 0.4107 pitch 0.0195 energy 0.0188 duration 0.0121 | lr 9.35e-05 | 172.8 min
+step 40300 | total 0.8690 mel 0.4096 mel_postnet 0.4092 pitch 0.0196 energy 0.0183 duration 0.0122 | lr 9.34e-05 | 173.1 min
+step 40400 | total 0.8673 mel 0.4096 mel_postnet 0.4091 pitch 0.0186 energy 0.0181 duration 0.0119 | lr 9.33e-05 | 173.5 min
+step 40500 | total 0.8624 mel 0.4075 mel_postnet 0.4071 pitch 0.0189 energy 0.0173 duration 0.0116 | lr 9.32e-05 | 173.9 min
+step 40600 | total 0.8631 mel 0.4073 mel_postnet 0.4069 pitch 0.0188 energy 0.0183 duration 0.0118 | lr 9.31e-05 | 174.2 min
+step 40700 | total 0.8590 mel 0.4060 mel_postnet 0.4055 pitch 0.0187 energy 0.0174 duration 0.0113 | lr 9.29e-05 | 174.6 min
+step 40800 | total 0.8605 mel 0.4072 mel_postnet 0.4067 pitch 0.0179 energy 0.0174 duration 0.0113 | lr 9.28e-05 | 174.9 min
+step 40900 | total 0.8551 mel 0.4045 mel_postnet 0.4040 pitch 0.0184 energy 0.0169 duration 0.0113 | lr 9.27e-05 | 175.3 min
+step 41000 | total 0.8579 mel 0.4059 mel_postnet 0.4055 pitch 0.0177 energy 0.0176 duration 0.0111 | lr 9.26e-05 | 175.6 min
+VAL step 41000 | total 2.3607 mel 0.7332 mel_postnet 0.7330 pitch 0.4126 energy 0.2575 duration 0.2244
+step 41100 | total 0.8557 mel 0.4055 mel_postnet 0.4050 pitch 0.0175 energy 0.0169 duration 0.0109 | lr 9.25e-05 | 176.1 min
+step 41200 | total 0.8584 mel 0.4058 mel_postnet 0.4054 pitch 0.0189 energy 0.0170 duration 0.0113 | lr 9.24e-05 | 176.4 min
+step 41300 | total 0.8520 mel 0.4037 mel_postnet 0.4032 pitch 0.0175 energy 0.0167 duration 0.0109 | lr 9.23e-05 | 176.8 min
+step 41400 | total 0.8555 mel 0.4048 mel_postnet 0.4044 pitch 0.0177 energy 0.0175 duration 0.0111 | lr 9.22e-05 | 177.1 min
+step 41500 | total 0.8525 mel 0.4037 mel_postnet 0.4032 pitch 0.0183 energy 0.0162 duration 0.0111 | lr 9.20e-05 | 177.5 min
+step 41600 | total 0.8545 mel 0.4046 mel_postnet 0.4041 pitch 0.0176 energy 0.0173 duration 0.0109 | lr 9.19e-05 | 177.8 min
+step 41700 | total 0.8508 mel 0.4030 mel_postnet 0.4025 pitch 0.0179 energy 0.0167 duration 0.0107 | lr 9.18e-05 | 178.2 min
+step 41800 | total 0.8523 mel 0.4036 mel_postnet 0.4031 pitch 0.0181 energy 0.0167 duration 0.0109 | lr 9.17e-05 | 178.6 min
+step 41900 | total 0.8529 mel 0.4041 mel_postnet 0.4037 pitch 0.0173 energy 0.0171 duration 0.0107 | lr 9.16e-05 | 178.9 min
+step 42000 | total 0.8515 mel 0.4027 mel_postnet 0.4022 pitch 0.0187 energy 0.0172 duration 0.0107 | lr 9.15e-05 | 179.3 min
+VAL step 42000 | total 2.3617 mel 0.7337 mel_postnet 0.7335 pitch 0.4126 energy 0.2570 duration 0.2249
+step 42100 | total 0.8518 mel 0.4042 mel_postnet 0.4038 pitch 0.0168 energy 0.0163 duration 0.0107 | lr 9.14e-05 | 179.7 min
+step 42200 | total 0.8504 mel 0.4033 mel_postnet 0.4029 pitch 0.0171 energy 0.0165 duration 0.0106 | lr 9.13e-05 | 180.1 min
+step 42300 | total 0.8504 mel 0.4032 mel_postnet 0.4027 pitch 0.0173 energy 0.0167 duration 0.0105 | lr 9.12e-05 | 180.4 min
+step 42400 | total 0.8511 mel 0.4032 mel_postnet 0.4028 pitch 0.0183 energy 0.0162 duration 0.0106 | lr 9.11e-05 | 180.8 min
+step 42500 | total 0.8501 mel 0.4029 mel_postnet 0.4024 pitch 0.0173 energy 0.0168 duration 0.0107 | lr 9.10e-05 | 181.2 min
+step 42600 | total 0.8485 mel 0.4027 mel_postnet 0.4022 pitch 0.0167 energy 0.0164 duration 0.0104 | lr 9.08e-05 | 181.5 min
+step 42700 | total 0.8460 mel 0.4016 mel_postnet 0.4011 pitch 0.0167 energy 0.0163 duration 0.0104 | lr 9.07e-05 | 181.9 min
+step 42800 | total 0.8511 mel 0.4034 mel_postnet 0.4029 pitch 0.0181 energy 0.0163 duration 0.0105 | lr 9.06e-05 | 182.2 min
+step 42900 | total 0.8498 mel 0.4030 mel_postnet 0.4025 pitch 0.0171 energy 0.0169 duration 0.0103 | lr 9.05e-05 | 182.6 min
+step 43000 | total 0.8491 mel 0.4025 mel_postnet 0.4020 pitch 0.0176 energy 0.0164 duration 0.0106 | lr 9.04e-05 | 182.9 min
+VAL step 43000 | total 2.3639 mel 0.7354 mel_postnet 0.7351 pitch 0.4121 energy 0.2577 duration 0.2236
+step 43100 | total 0.8479 mel 0.4022 mel_postnet 0.4017 pitch 0.0171 energy 0.0166 duration 0.0103 | lr 9.03e-05 | 183.4 min
+step 43200 | total 0.8467 mel 0.4015 mel_postnet 0.4010 pitch 0.0175 energy 0.0164 duration 0.0104 | lr 9.02e-05 | 183.7 min
+step 43300 | total 0.8492 mel 0.4028 mel_postnet 0.4024 pitch 0.0171 energy 0.0164 duration 0.0105 | lr 9.01e-05 | 184.1 min
+step 43400 | total 0.8465 mel 0.4018 mel_postnet 0.4013 pitch 0.0169 energy 0.0162 duration 0.0103 | lr 9.00e-05 | 184.5 min
+step 43500 | total 0.8448 mel 0.4008 mel_postnet 0.4003 pitch 0.0171 energy 0.0163 duration 0.0104 | lr 8.99e-05 | 184.8 min
+step 43600 | total 0.8467 mel 0.4017 mel_postnet 0.4012 pitch 0.0175 energy 0.0160 duration 0.0103 | lr 8.98e-05 | 185.2 min
+step 43700 | total 0.8473 mel 0.4022 mel_postnet 0.4017 pitch 0.0172 energy 0.0159 duration 0.0103 | lr 8.97e-05 | 185.5 min
+step 43800 | total 0.8479 mel 0.4017 mel_postnet 0.4012 pitch 0.0180 energy 0.0167 duration 0.0103 | lr 8.96e-05 | 185.9 min
+step 43900 | total 0.8448 mel 0.4010 mel_postnet 0.4006 pitch 0.0167 energy 0.0161 duration 0.0104 | lr 8.95e-05 | 186.2 min
+step 44000 | total 0.8439 mel 0.4004 mel_postnet 0.3999 pitch 0.0169 energy 0.0163 duration 0.0104 | lr 8.94e-05 | 186.6 min
+VAL step 44000 | total 2.3666 mel 0.7354 mel_postnet 0.7351 pitch 0.4142 energy 0.2578 duration 0.2241
+step 44100 | total 0.8467 mel 0.4016 mel_postnet 0.4012 pitch 0.0172 energy 0.0165 duration 0.0101 | lr 8.93e-05 | 187.1 min
+step 44200 | total 0.8472 mel 0.4020 mel_postnet 0.4016 pitch 0.0173 energy 0.0159 duration 0.0104 | lr 8.92e-05 | 187.4 min
+step 44300 | total 0.8469 mel 0.4017 mel_postnet 0.4013 pitch 0.0173 energy 0.0163 duration 0.0102 | lr 8.91e-05 | 187.8 min
+step 44400 | total 0.8454 mel 0.4010 mel_postnet 0.4005 pitch 0.0174 energy 0.0162 duration 0.0103 | lr 8.90e-05 | 188.1 min
+step 44500 | total 0.8431 mel 0.4001 mel_postnet 0.3997 pitch 0.0168 energy 0.0162 duration 0.0102 | lr 8.89e-05 | 188.5 min
+step 44600 | total 0.8445 mel 0.4010 mel_postnet 0.4005 pitch 0.0166 energy 0.0162 duration 0.0101 | lr 8.88e-05 | 188.8 min
+step 44700 | total 0.8448 mel 0.4007 mel_postnet 0.4002 pitch 0.0176 energy 0.0159 duration 0.0103 | lr 8.87e-05 | 189.2 min
+step 44800 | total 0.8425 mel 0.4001 mel_postnet 0.3997 pitch 0.0166 energy 0.0158 duration 0.0103 | lr 8.86e-05 | 189.5 min
+step 44900 | total 0.8470 mel 0.4014 mel_postnet 0.4010 pitch 0.0180 energy 0.0164 duration 0.0102 | lr 8.85e-05 | 189.9 min
+step 45000 | total 0.8432 mel 0.4002 mel_postnet 0.3997 pitch 0.0170 energy 0.0162 duration 0.0101 | lr 8.84e-05 | 190.2 min
+VAL step 45000 | total 2.3638 mel 0.7344 mel_postnet 0.7342 pitch 0.4141 energy 0.2575 duration 0.2237
+step 45100 | total 0.8436 mel 0.4006 mel_postnet 0.4002 pitch 0.0166 energy 0.0160 duration 0.0101 | lr 8.83e-05 | 190.7 min
+step 45200 | total 0.8452 mel 0.4010 mel_postnet 0.4005 pitch 0.0169 energy 0.0167 duration 0.0101 | lr 8.82e-05 | 191.0 min
+step 45300 | total 0.8418 mel 0.3997 mel_postnet 0.3992 pitch 0.0170 energy 0.0159 duration 0.0101 | lr 8.81e-05 | 191.4 min
+step 45400 | total 0.8407 mel 0.3994 mel_postnet 0.3989 pitch 0.0164 energy 0.0161 duration 0.0100 | lr 8.80e-05 | 191.7 min
+step 45500 | total 0.8432 mel 0.4000 mel_postnet 0.3996 pitch 0.0173 energy 0.0162 duration 0.0101 | lr 8.79e-05 | 192.1 min
+step 45600 | total 0.8444 mel 0.4012 mel_postnet 0.4007 pitch 0.0163 energy 0.0160 duration 0.0102 | lr 8.78e-05 | 192.5 min
+step 45700 | total 0.8436 mel 0.4002 mel_postnet 0.3997 pitch 0.0178 energy 0.0157 duration 0.0102 | lr 8.77e-05 | 192.8 min
+step 45800 | total 0.8427 mel 0.4000 mel_postnet 0.3995 pitch 0.0169 energy 0.0161 duration 0.0101 | lr 8.76e-05 | 193.2 min
+step 45900 | total 0.8450 mel 0.4008 mel_postnet 0.4003 pitch 0.0172 energy 0.0166 duration 0.0101 | lr 8.75e-05 | 193.5 min
+step 46000 | total 0.8390 mel 0.3987 mel_postnet 0.3983 pitch 0.0165 energy 0.0155 duration 0.0101 | lr 8.74e-05 | 193.9 min
+VAL step 46000 | total 2.3615 mel 0.7343 mel_postnet 0.7341 pitch 0.4120 energy 0.2571 duration 0.2240
+step 46100 | total 0.8403 mel 0.3989 mel_postnet 0.3984 pitch 0.0172 energy 0.0159 duration 0.0101 | lr 8.73e-05 | 194.4 min
+step 46200 | total 0.8439 mel 0.4008 mel_postnet 0.4003 pitch 0.0167 energy 0.0162 duration 0.0100 | lr 8.72e-05 | 194.7 min
+step 46300 | total 0.8415 mel 0.4001 mel_postnet 0.3996 pitch 0.0160 energy 0.0157 duration 0.0100 | lr 8.71e-05 | 195.1 min
+step 46400 | total 0.8400 mel 0.3986 mel_postnet 0.3982 pitch 0.0170 energy 0.0162 duration 0.0100 | lr 8.70e-05 | 195.4 min
+step 46500 | total 0.8407 mel 0.3990 mel_postnet 0.3986 pitch 0.0173 energy 0.0157 duration 0.0101 | lr 8.70e-05 | 195.8 min
+step 46600 | total 0.8411 mel 0.3998 mel_postnet 0.3993 pitch 0.0161 energy 0.0160 duration 0.0100 | lr 8.69e-05 | 196.1 min
+step 46700 | total 0.8416 mel 0.3993 mel_postnet 0.3988 pitch 0.0176 energy 0.0160 duration 0.0099 | lr 8.68e-05 | 196.5 min
+step 46800 | total 0.8385 mel 0.3983 mel_postnet 0.3978 pitch 0.0167 energy 0.0157 duration 0.0100 | lr 8.67e-05 | 196.8 min
+step 46900 | total 0.8417 mel 0.3999 mel_postnet 0.3994 pitch 0.0165 energy 0.0159 duration 0.0100 | lr 8.66e-05 | 197.2 min
+step 47000 | total 0.8400 mel 0.3990 mel_postnet 0.3985 pitch 0.0166 energy 0.0160 duration 0.0100 | lr 8.65e-05 | 197.5 min
+VAL step 47000 | total 2.3659 mel 0.7355 mel_postnet 0.7353 pitch 0.4137 energy 0.2570 duration 0.2244
+step 47100 | total 0.8416 mel 0.3997 mel_postnet 0.3992 pitch 0.0172 energy 0.0156 duration 0.0099 | lr 8.64e-05 | 198.0 min
+step 47200 | total 0.8372 mel 0.3976 mel_postnet 0.3972 pitch 0.0170 energy 0.0155 duration 0.0098 | lr 8.63e-05 | 198.4 min
+step 47300 | total 0.8422 mel 0.4000 mel_postnet 0.3995 pitch 0.0165 energy 0.0161 duration 0.0100 | lr 8.62e-05 | 198.7 min
+step 47400 | total 0.8369 mel 0.3975 mel_postnet 0.3971 pitch 0.0166 energy 0.0158 duration 0.0099 | lr 8.61e-05 | 199.1 min
+step 47500 | total 0.8408 mel 0.3994 mel_postnet 0.3989 pitch 0.0168 energy 0.0157 duration 0.0100 | lr 8.60e-05 | 199.4 min
+step 47600 | total 0.8404 mel 0.3992 mel_postnet 0.3987 pitch 0.0169 energy 0.0157 duration 0.0099 | lr 8.59e-05 | 199.8 min
+step 47700 | total 0.8398 mel 0.3989 mel_postnet 0.3984 pitch 0.0166 energy 0.0161 duration 0.0098 | lr 8.59e-05 | 200.1 min
+step 47800 | total 0.8364 mel 0.3975 mel_postnet 0.3971 pitch 0.0163 energy 0.0157 duration 0.0098 | lr 8.58e-05 | 200.5 min
+step 47900 | total 0.8384 mel 0.3983 mel_postnet 0.3979 pitch 0.0167 energy 0.0156 duration 0.0099 | lr 8.57e-05 | 200.8 min
+step 48000 | total 0.8380 mel 0.3982 mel_postnet 0.3977 pitch 0.0169 energy 0.0156 duration 0.0096 | lr 8.56e-05 | 201.2 min
+VAL step 48000 | total 2.3682 mel 0.7365 mel_postnet 0.7363 pitch 0.4126 energy 0.2585 duration 0.2243
+step 48100 | total 0.8388 mel 0.3986 mel_postnet 0.3982 pitch 0.0160 energy 0.0162 duration 0.0098 | lr 8.55e-05 | 201.7 min
+step 48200 | total 0.8387 mel 0.3983 mel_postnet 0.3979 pitch 0.0170 energy 0.0157 duration 0.0099 | lr 8.54e-05 | 202.0 min
+step 48300 | total 0.8354 mel 0.3969 mel_postnet 0.3964 pitch 0.0168 energy 0.0156 duration 0.0097 | lr 8.53e-05 | 202.4 min
+step 48400 | total 0.8402 mel 0.3991 mel_postnet 0.3986 pitch 0.0164 energy 0.0163 duration 0.0099 | lr 8.52e-05 | 202.7 min
+step 48500 | total 0.8381 mel 0.3980 mel_postnet 0.3976 pitch 0.0168 energy 0.0161 duration 0.0097 | lr 8.51e-05 | 203.1 min
+step 48600 | total 0.8379 mel 0.3982 mel_postnet 0.3977 pitch 0.0166 energy 0.0154 duration 0.0099 | lr 8.51e-05 | 203.4 min
+step 48700 | total 0.8346 mel 0.3967 mel_postnet 0.3963 pitch 0.0164 energy 0.0156 duration 0.0096 | lr 8.50e-05 | 203.8 min
+step 48800 | total 0.8409 mel 0.3992 mel_postnet 0.3987 pitch 0.0172 energy 0.0159 duration 0.0099 | lr 8.49e-05 | 204.1 min
+step 48900 | total 0.8365 mel 0.3973 mel_postnet 0.3968 pitch 0.0170 energy 0.0156 duration 0.0097 | lr 8.48e-05 | 204.5 min
+step 49000 | total 0.8374 mel 0.3982 mel_postnet 0.3978 pitch 0.0158 energy 0.0157 duration 0.0098 | lr 8.47e-05 | 204.9 min
+VAL step 49000 | total 2.3669 mel 0.7362 mel_postnet 0.7359 pitch 0.4133 energy 0.2572 duration 0.2242
+step 49100 | total 0.8373 mel 0.3978 mel_postnet 0.3974 pitch 0.0166 energy 0.0156 duration 0.0097 | lr 8.46e-05 | 205.3 min
+step 49200 | total 0.8368 mel 0.3975 mel_postnet 0.3970 pitch 0.0168 energy 0.0157 duration 0.0098 | lr 8.45e-05 | 205.7 min
+step 49300 | total 0.8362 mel 0.3976 mel_postnet 0.3972 pitch 0.0161 energy 0.0158 duration 0.0095 | lr 8.44e-05 | 206.0 min
+step 49400 | total 0.8371 mel 0.3976 mel_postnet 0.3971 pitch 0.0169 energy 0.0157 duration 0.0098 | lr 8.44e-05 | 206.4 min
+step 49500 | total 0.8367 mel 0.3978 mel_postnet 0.3974 pitch 0.0163 energy 0.0153 duration 0.0100 | lr 8.43e-05 | 206.7 min
+step 49600 | total 0.8390 mel 0.3988 mel_postnet 0.3984 pitch 0.0166 energy 0.0155 duration 0.0096 | lr 8.42e-05 | 207.1 min
+step 49700 | total 0.8334 mel 0.3961 mel_postnet 0.3956 pitch 0.0162 energy 0.0159 duration 0.0097 | lr 8.41e-05 | 207.4 min
+step 49800 | total 0.8365 mel 0.3978 mel_postnet 0.3974 pitch 0.0162 energy 0.0154 duration 0.0097 | lr 8.40e-05 | 207.8 min
+step 49900 | total 0.8358 mel 0.3969 mel_postnet 0.3964 pitch 0.0172 energy 0.0155 duration 0.0098 | lr 8.39e-05 | 208.1 min
+step 50000 | total 0.8328 mel 0.3964 mel_postnet 0.3959 pitch 0.0158 energy 0.0154 duration 0.0094 | lr 8.39e-05 | 208.5 min
+VAL step 50000 | total 2.3711 mel 0.7382 mel_postnet 0.7380 pitch 0.4127 energy 0.2579 duration 0.2244
+step 50100 | total 0.8354 mel 0.3965 mel_postnet 0.3961 pitch 0.0174 energy 0.0157 duration 0.0097 | lr 2.51e-05 | 209.0 min
+step 50200 | total 0.8325 mel 0.3957 mel_postnet 0.3953 pitch 0.0167 energy 0.0153 duration 0.0095 | lr 2.51e-05 | 209.3 min
+step 50300 | total 0.8298 mel 0.3948 mel_postnet 0.3943 pitch 0.0159 energy 0.0155 duration 0.0093 | lr 2.51e-05 | 209.7 min
+step 50400 | total 0.8304 mel 0.3949 mel_postnet 0.3944 pitch 0.0166 energy 0.0151 duration 0.0094 | lr 2.51e-05 | 210.0 min
+step 50500 | total 0.8292 mel 0.3944 mel_postnet 0.3939 pitch 0.0161 energy 0.0153 duration 0.0095 | lr 2.50e-05 | 210.4 min
+step 50600 | total 0.8257 mel 0.3935 mel_postnet 0.3930 pitch 0.0148 energy 0.0151 duration 0.0093 | lr 2.50e-05 | 210.8 min
+step 50700 | total 0.8305 mel 0.3945 mel_postnet 0.3940 pitch 0.0171 energy 0.0154 duration 0.0095 | lr 2.50e-05 | 211.1 min
+step 50800 | total 0.8314 mel 0.3959 mel_postnet 0.3955 pitch 0.0156 energy 0.0151 duration 0.0093 | lr 2.50e-05 | 211.5 min
+step 50900 | total 0.8264 mel 0.3934 mel_postnet 0.3929 pitch 0.0156 energy 0.0151 duration 0.0093 | lr 2.49e-05 | 211.8 min
+step 51000 | total 0.8273 mel 0.3933 mel_postnet 0.3929 pitch 0.0165 energy 0.0152 duration 0.0094 | lr 2.49e-05 | 212.2 min
+VAL step 51000 | total 2.3683 mel 0.7371 mel_postnet 0.7369 pitch 0.4136 energy 0.2574 duration 0.2233
+step 51100 | total 0.8264 mel 0.3933 mel_postnet 0.3928 pitch 0.0159 energy 0.0150 duration 0.0094 | lr 2.49e-05 | 212.6 min
+step 51200 | total 0.8318 mel 0.3960 mel_postnet 0.3956 pitch 0.0156 energy 0.0153 duration 0.0093 | lr 2.49e-05 | 213.0 min
+step 51300 | total 0.8261 mel 0.3933 mel_postnet 0.3928 pitch 0.0159 energy 0.0149 duration 0.0092 | lr 2.48e-05 | 213.3 min
+step 51400 | total 0.8275 mel 0.3940 mel_postnet 0.3935 pitch 0.0157 energy 0.0150 duration 0.0094 | lr 2.48e-05 | 213.7 min
+step 51500 | total 0.8280 mel 0.3945 mel_postnet 0.3940 pitch 0.0153 energy 0.0150 duration 0.0092 | lr 2.48e-05 | 214.1 min
+step 51600 | total 0.8270 mel 0.3935 mel_postnet 0.3930 pitch 0.0163 energy 0.0150 duration 0.0092 | lr 2.48e-05 | 214.4 min
+step 51700 | total 0.8242 mel 0.3927 mel_postnet 0.3922 pitch 0.0151 energy 0.0150 duration 0.0091 | lr 2.47e-05 | 214.8 min
+step 51800 | total 0.8270 mel 0.3935 mel_postnet 0.3930 pitch 0.0162 energy 0.0150 duration 0.0093 | lr 2.47e-05 | 215.1 min
+step 51900 | total 0.8282 mel 0.3945 mel_postnet 0.3940 pitch 0.0159 energy 0.0148 duration 0.0090 | lr 2.47e-05 | 215.5 min
+step 52000 | total 0.8271 mel 0.3935 mel_postnet 0.3931 pitch 0.0161 energy 0.0150 duration 0.0093 | lr 2.47e-05 | 215.8 min
+VAL step 52000 | total 2.3665 mel 0.7367 mel_postnet 0.7365 pitch 0.4127 energy 0.2567 duration 0.2240
+step 52100 | total 0.8272 mel 0.3938 mel_postnet 0.3933 pitch 0.0163 energy 0.0146 duration 0.0091 | lr 2.46e-05 | 216.3 min
+step 52200 | total 0.8232 mel 0.3921 mel_postnet 0.3917 pitch 0.0152 energy 0.0150 duration 0.0092 | lr 2.46e-05 | 216.7 min
+step 52300 | total 0.8296 mel 0.3950 mel_postnet 0.3945 pitch 0.0156 energy 0.0154 duration 0.0092 | lr 2.46e-05 | 217.0 min
+step 52400 | total 0.8269 mel 0.3938 mel_postnet 0.3933 pitch 0.0158 energy 0.0148 duration 0.0092 | lr 2.46e-05 | 217.4 min
+step 52500 | total 0.8223 mel 0.3917 mel_postnet 0.3912 pitch 0.0153 energy 0.0150 duration 0.0091 | lr 2.45e-05 | 217.7 min
+step 52600 | total 0.8253 mel 0.3931 mel_postnet 0.3926 pitch 0.0156 energy 0.0147 duration 0.0092 | lr 2.45e-05 | 218.1 min
+step 52700 | total 0.8295 mel 0.3947 mel_postnet 0.3942 pitch 0.0165 energy 0.0150 duration 0.0092 | lr 2.45e-05 | 218.4 min
+step 52800 | total 0.8265 mel 0.3935 mel_postnet 0.3931 pitch 0.0158 energy 0.0150 duration 0.0091 | lr 2.45e-05 | 218.8 min
+step 52900 | total 0.8238 mel 0.3923 mel_postnet 0.3918 pitch 0.0159 energy 0.0147 duration 0.0091 | lr 2.45e-05 | 219.1 min
+step 53000 | total 0.8273 mel 0.3940 mel_postnet 0.3936 pitch 0.0156 energy 0.0151 duration 0.0091 | lr 2.44e-05 | 219.5 min
+VAL step 53000 | total 2.3673 mel 0.7368 mel_postnet 0.7366 pitch 0.4128 energy 0.2574 duration 0.2237
+step 53100 | total 0.8243 mel 0.3928 mel_postnet 0.3923 pitch 0.0156 energy 0.0145 duration 0.0091 | lr 2.44e-05 | 220.0 min
+step 53200 | total 0.8239 mel 0.3922 mel_postnet 0.3918 pitch 0.0157 energy 0.0151 duration 0.0090 | lr 2.44e-05 | 220.3 min
+step 53300 | total 0.8270 mel 0.3938 mel_postnet 0.3933 pitch 0.0159 energy 0.0148 duration 0.0091 | lr 2.44e-05 | 220.7 min
+step 53400 | total 0.8236 mel 0.3926 mel_postnet 0.3921 pitch 0.0153 energy 0.0146 duration 0.0091 | lr 2.43e-05 | 221.0 min
+step 53500 | total 0.8264 mel 0.3936 mel_postnet 0.3931 pitch 0.0160 energy 0.0148 duration 0.0090 | lr 2.43e-05 | 221.3 min
+step 53600 | total 0.8257 mel 0.3932 mel_postnet 0.3927 pitch 0.0155 energy 0.0151 duration 0.0093 | lr 2.43e-05 | 221.7 min
+step 53700 | total 0.8243 mel 0.3922 mel_postnet 0.3918 pitch 0.0165 energy 0.0147 duration 0.0091 | lr 2.43e-05 | 222.1 min
+step 53800 | total 0.8264 mel 0.3940 mel_postnet 0.3935 pitch 0.0152 energy 0.0148 duration 0.0090 | lr 2.43e-05 | 222.4 min
+step 53900 | total 0.8245 mel 0.3923 mel_postnet 0.3918 pitch 0.0162 energy 0.0151 duration 0.0092 | lr 2.42e-05 | 222.8 min
+step 54000 | total 0.8248 mel 0.3932 mel_postnet 0.3927 pitch 0.0152 energy 0.0148 duration 0.0090 | lr 2.42e-05 | 223.1 min
+VAL step 54000 | total 2.3676 mel 0.7365 mel_postnet 0.7362 pitch 0.4135 energy 0.2573 duration 0.2241
+step 54100 | total 0.8259 mel 0.3935 mel_postnet 0.3931 pitch 0.0157 energy 0.0146 duration 0.0090 | lr 2.42e-05 | 223.6 min
+step 54200 | total 0.8247 mel 0.3926 mel_postnet 0.3922 pitch 0.0159 energy 0.0148 duration 0.0091 | lr 2.42e-05 | 223.9 min
+step 54300 | total 0.8245 mel 0.3928 mel_postnet 0.3924 pitch 0.0157 energy 0.0146 duration 0.0090 | lr 2.41e-05 | 224.3 min
+step 54400 | total 0.8225 mel 0.3919 mel_postnet 0.3915 pitch 0.0153 energy 0.0148 duration 0.0090 | lr 2.41e-05 | 224.6 min
+step 54500 | total 0.8281 mel 0.3945 mel_postnet 0.3940 pitch 0.0160 energy 0.0146 duration 0.0090 | lr 2.41e-05 | 225.0 min
+step 54600 | total 0.8203 mel 0.3909 mel_postnet 0.3905 pitch 0.0155 energy 0.0144 duration 0.0090 | lr 2.41e-05 | 225.3 min
+step 54700 | total 0.8244 mel 0.3928 mel_postnet 0.3923 pitch 0.0155 energy 0.0147 duration 0.0090 | lr 2.41e-05 | 225.7 min
+step 54800 | total 0.8250 mel 0.3928 mel_postnet 0.3923 pitch 0.0157 energy 0.0150 duration 0.0091 | lr 2.40e-05 | 226.1 min
+step 54900 | total 0.8244 mel 0.3927 mel_postnet 0.3922 pitch 0.0158 energy 0.0149 duration 0.0090 | lr 2.40e-05 | 226.4 min
+step 55000 | total 0.8244 mel 0.3932 mel_postnet 0.3927 pitch 0.0149 energy 0.0146 duration 0.0090 | lr 2.40e-05 | 226.8 min
+VAL step 55000 | total 2.3694 mel 0.7375 mel_postnet 0.7373 pitch 0.4127 energy 0.2573 duration 0.2245
+step 55100 | total 0.8226 mel 0.3919 mel_postnet 0.3914 pitch 0.0160 energy 0.0143 duration 0.0090 | lr 7.19e-06 | 227.2 min
+step 55200 | total 0.8230 mel 0.3922 mel_postnet 0.3917 pitch 0.0152 energy 0.0149 duration 0.0089 | lr 7.18e-06 | 227.6 min
+step 55300 | total 0.8229 mel 0.3920 mel_postnet 0.3916 pitch 0.0157 energy 0.0145 duration 0.0091 | lr 7.18e-06 | 227.9 min
+step 55400 | total 0.8234 mel 0.3918 mel_postnet 0.3914 pitch 0.0163 energy 0.0149 duration 0.0090 | lr 7.17e-06 | 228.3 min
+step 55500 | total 0.8257 mel 0.3934 mel_postnet 0.3930 pitch 0.0154 energy 0.0149 duration 0.0090 | lr 7.16e-06 | 228.7 min
+step 55600 | total 0.8202 mel 0.3911 mel_postnet 0.3906 pitch 0.0151 energy 0.0144 duration 0.0090 | lr 7.16e-06 | 229.0 min
+step 55700 | total 0.8225 mel 0.3917 mel_postnet 0.3912 pitch 0.0158 energy 0.0148 duration 0.0090 | lr 7.15e-06 | 229.4 min
+step 55800 | total 0.8243 mel 0.3925 mel_postnet 0.3920 pitch 0.0158 energy 0.0151 duration 0.0089 | lr 7.14e-06 | 229.7 min
+step 55900 | total 0.8211 mel 0.3915 mel_postnet 0.3910 pitch 0.0152 energy 0.0145 duration 0.0089 | lr 7.14e-06 | 230.1 min
+step 56000 | total 0.8220 mel 0.3917 mel_postnet 0.3912 pitch 0.0153 energy 0.0150 duration 0.0089 | lr 7.13e-06 | 230.4 min
+VAL step 56000 | total 2.3672 mel 0.7366 mel_postnet 0.7363 pitch 0.4130 energy 0.2575 duration 0.2238
+step 56100 | total 0.8242 mel 0.3926 mel_postnet 0.3922 pitch 0.0157 energy 0.0148 duration 0.0088 | lr 7.12e-06 | 230.9 min
+step 56200 | total 0.8221 mel 0.3918 mel_postnet 0.3913 pitch 0.0155 energy 0.0146 duration 0.0089 | lr 7.12e-06 | 231.3 min
+step 56300 | total 0.8241 mel 0.3932 mel_postnet 0.3927 pitch 0.0147 energy 0.0146 duration 0.0090 | lr 7.11e-06 | 231.6 min
+step 56400 | total 0.8205 mel 0.3902 mel_postnet 0.3897 pitch 0.0166 energy 0.0151 duration 0.0089 | lr 7.11e-06 | 232.0 min
+step 56500 | total 0.8217 mel 0.3917 mel_postnet 0.3912 pitch 0.0155 energy 0.0143 duration 0.0090 | lr 7.10e-06 | 232.3 min
+step 56600 | total 0.8219 mel 0.3918 mel_postnet 0.3914 pitch 0.0148 energy 0.0150 duration 0.0089 | lr 7.09e-06 | 232.7 min
+step 56700 | total 0.8232 mel 0.3925 mel_postnet 0.3921 pitch 0.0152 energy 0.0144 duration 0.0090 | lr 7.09e-06 | 233.0 min
+step 56800 | total 0.8206 mel 0.3909 mel_postnet 0.3904 pitch 0.0157 energy 0.0147 duration 0.0088 | lr 7.08e-06 | 233.4 min
+step 56900 | total 0.8213 mel 0.3915 mel_postnet 0.3910 pitch 0.0151 energy 0.0150 duration 0.0088 | lr 7.07e-06 | 233.7 min
+step 57000 | total 0.8214 mel 0.3918 mel_postnet 0.3913 pitch 0.0152 energy 0.0142 duration 0.0089 | lr 7.07e-06 | 234.1 min
+VAL step 57000 | total 2.3684 mel 0.7372 mel_postnet 0.7369 pitch 0.4131 energy 0.2574 duration 0.2238
+step 57100 | total 0.8218 mel 0.3911 mel_postnet 0.3907 pitch 0.0159 energy 0.0149 duration 0.0092 | lr 7.06e-06 | 234.5 min
+step 57200 | total 0.8228 mel 0.3922 mel_postnet 0.3918 pitch 0.0156 energy 0.0144 duration 0.0088 | lr 7.06e-06 | 234.9 min
+step 57300 | total 0.8216 mel 0.3916 mel_postnet 0.3911 pitch 0.0154 energy 0.0146 duration 0.0089 | lr 7.05e-06 | 235.3 min
+step 57400 | total 0.8204 mel 0.3912 mel_postnet 0.3907 pitch 0.0152 energy 0.0144 duration 0.0089 | lr 7.04e-06 | 235.6 min
+step 57500 | total 0.8230 mel 0.3922 mel_postnet 0.3917 pitch 0.0159 energy 0.0144 duration 0.0089 | lr 7.04e-06 | 235.9 min
+step 57600 | total 0.8230 mel 0.3921 mel_postnet 0.3916 pitch 0.0158 energy 0.0145 duration 0.0090 | lr 7.03e-06 | 236.3 min
+step 57700 | total 0.8210 mel 0.3914 mel_postnet 0.3909 pitch 0.0151 energy 0.0148 duration 0.0088 | lr 7.03e-06 | 236.6 min
+step 57800 | total 0.8202 mel 0.3910 mel_postnet 0.3905 pitch 0.0154 energy 0.0145 duration 0.0088 | lr 7.02e-06 | 237.0 min
+step 57900 | total 0.8214 mel 0.3916 mel_postnet 0.3911 pitch 0.0153 energy 0.0146 duration 0.0088 | lr 7.01e-06 | 237.4 min
+step 58000 | total 0.8210 mel 0.3911 mel_postnet 0.3906 pitch 0.0157 energy 0.0147 duration 0.0088 | lr 7.01e-06 | 237.7 min
+VAL step 58000 | total 2.3681 mel 0.7370 mel_postnet 0.7368 pitch 0.4127 energy 0.2576 duration 0.2240
+step 58100 | total 0.8237 mel 0.3926 mel_postnet 0.3921 pitch 0.0154 energy 0.0146 duration 0.0089 | lr 7.00e-06 | 238.2 min
+step 58200 | total 0.8217 mel 0.3919 mel_postnet 0.3914 pitch 0.0149 energy 0.0144 duration 0.0090 | lr 6.99e-06 | 238.5 min
+step 58300 | total 0.8215 mel 0.3914 mel_postnet 0.3909 pitch 0.0156 energy 0.0146 duration 0.0089 | lr 6.99e-06 | 238.9 min
+step 58400 | total 0.8216 mel 0.3916 mel_postnet 0.3912 pitch 0.0154 energy 0.0148 duration 0.0087 | lr 6.98e-06 | 239.2 min
+step 58500 | total 0.8221 mel 0.3913 mel_postnet 0.3909 pitch 0.0163 energy 0.0146 duration 0.0090 | lr 6.98e-06 | 239.6 min
+step 58600 | total 0.8197 mel 0.3913 mel_postnet 0.3908 pitch 0.0149 energy 0.0140 duration 0.0088 | lr 6.97e-06 | 240.0 min
+step 58700 | total 0.8216 mel 0.3912 mel_postnet 0.3907 pitch 0.0157 energy 0.0150 duration 0.0089 | lr 6.97e-06 | 240.3 min
+step 58800 | total 0.8220 mel 0.3917 mel_postnet 0.3912 pitch 0.0151 energy 0.0150 duration 0.0090 | lr 6.96e-06 | 240.7 min
+step 58900 | total 0.8222 mel 0.3919 mel_postnet 0.3915 pitch 0.0157 energy 0.0142 duration 0.0089 | lr 6.95e-06 | 241.0 min
+step 59000 | total 0.8218 mel 0.3914 mel_postnet 0.3909 pitch 0.0159 energy 0.0148 duration 0.0088 | lr 6.95e-06 | 241.4 min
+VAL step 59000 | total 2.3673 mel 0.7369 mel_postnet 0.7367 pitch 0.4126 energy 0.2574 duration 0.2237
+step 59100 | total 0.8203 mel 0.3910 mel_postnet 0.3906 pitch 0.0154 energy 0.0145 duration 0.0088 | lr 6.94e-06 | 241.8 min
+step 59200 | total 0.8219 mel 0.3920 mel_postnet 0.3915 pitch 0.0149 energy 0.0145 duration 0.0089 | lr 6.94e-06 | 242.2 min
+step 59300 | total 0.8167 mel 0.3894 mel_postnet 0.3890 pitch 0.0150 energy 0.0145 duration 0.0088 | lr 6.93e-06 | 242.5 min
+step 59400 | total 0.8258 mel 0.3932 mel_postnet 0.3928 pitch 0.0160 energy 0.0149 duration 0.0089 | lr 6.92e-06 | 242.9 min
+step 59500 | total 0.8236 mel 0.3927 mel_postnet 0.3922 pitch 0.0154 energy 0.0144 duration 0.0089 | lr 6.92e-06 | 243.2 min
+step 59600 | total 0.8193 mel 0.3906 mel_postnet 0.3901 pitch 0.0150 energy 0.0146 duration 0.0090 | lr 6.91e-06 | 243.6 min
+step 59700 | total 0.8188 mel 0.3904 mel_postnet 0.3899 pitch 0.0154 energy 0.0144 duration 0.0087 | lr 6.91e-06 | 244.0 min
+step 59800 | total 0.8238 mel 0.3924 mel_postnet 0.3919 pitch 0.0158 energy 0.0149 duration 0.0089 | lr 6.90e-06 | 244.3 min
+step 59900 | total 0.8176 mel 0.3900 mel_postnet 0.3895 pitch 0.0154 energy 0.0139 duration 0.0087 | lr 6.89e-06 | 244.7 min
+step 60000 | total 0.8207 mel 0.3913 mel_postnet 0.3908 pitch 0.0155 energy 0.0142 duration 0.0088 | lr 6.89e-06 | 245.0 min
+VAL step 60000 | total 2.3686 mel 0.7374 mel_postnet 0.7372 pitch 0.4125 energy 0.2573 duration 0.2241
+finished at step 60000, best val 2.3540

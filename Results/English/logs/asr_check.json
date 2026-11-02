@@ -1,0 +1,198 @@
+{
+ "asr": "openai/whisper-base.en",
+ "summary": {
+  "real_vocoded": {
+   "cer": 0.06407097092163627,
+   "wer": 0.1444141689373297,
+   "n": 30
+  },
+  "synthesized": {
+   "cer": 0.09955643173977329,
+   "wer": 0.2098092643051771,
+   "n": 30
+  },
+  "test_sentences": {
+   "cer": 0.26376146788990823,
+   "wer": 0.5692307692307692,
+   "n": 6
+  }
+ },
+ "tests": [
+  {
+   "id": "E1",
+   "ref": "The antidisestablishmentarianism movement gained considerable momentum during the parliamentary proceedings.",
+   "hyp": "The untetish establishment, the Zionism movement, then considerable movement during the parliament-y proceedings.",
+   "cer": 0.21495327102803738,
+   "wer": 0.8
+  },
+  {
+   "id": "E2a",
+   "ref": "The orchestra's conduct during the ceremony was praised by the audience.",
+   "hyp": "The orchestra's conduct during the ceremony was praised by the Indians.",
+   "cer": 0.06944444444444445,
+   "wer": 0.08333333333333333
+  },
+  {
+   "id": "E2b",
+   "ref": "The researchers will conduct an experiment to evaluate the proposed method.",
+   "hyp": "Please suggest welcome the pen experiment and evaluate the proposed method.",
+   "cer": 0.35135135135135137,
+   "wer": 0.5454545454545454
+  },
+  {
+   "id": "E3",
+   "ref": "The rhythm of the orchestra changed unexpectedly.",
+   "hyp": "I don't know if the orchestra changed and expected it.",
+   "cer": 0.3958333333333333,
+   "wer": 1.1428571428571428
+  },
+  {
+   "id": "E3_no_repair",
+   "ref": "The rhythm of the orchestra changed unexpectedly.",
+   "hyp": "The item of the orchestra changed on expected E.",
+   "cer": 0.16666666666666666,
+   "wer": 0.5714285714285714
+  },
+  {
+   "id": "E4",
+   "ref": "The meeting will start at 10:45 AM on 12 November 2026, so andaroo should arrive on time.",
+   "hyp": "The meeting will start at 10.45, 11.12, 11.26, the one that I should buy on time.",
+   "cer": 0.39080459770114945,
+   "wer": 0.5555555555555556
+  }
+ ],
+ "val": {
+  "real_vocoded": {
+   "ref": [
+    "what to consider before investing in recurring deposits savings scheme",
+    "are there any esic centres in the locality with pincode seven hundred seventy three thousand ninety six and offering biochemistry services",
+    "apart from this",
+    "cultures and religions that are there in the state",
+    "so yes i would like to tell that education system in my state",
+    "many industrialized nations",
+    "i lived in kanimpung district state of west bengal",
+    "to make chinese",
+    "there's an exclamation the sentence changes if there's a question mark the sentence changes if there's a full stop the question changes even if it's the same sentence",
+    "does not always remains the same it has some change every time maybe there are different kind of flowers or some",
+    "i don't travel with large group of people",
+    "and the satyagraha ashram on the banks of the sabarmati in nineteen seventeen",
+    "makes tikka on the plates or the paper plate which we call duna",
+    "we have taken road trips to many places of south india till now and each trip has been equally",
+    "government services in northern ireland operate as normal on good friday substituting easter tuesday for the holiday",
+    "so fish production is quite high in north bihar",
+    "otherwise it will lead this state to a very desperate condition",
+    "kannada is spoken as a native language by about seventy four percent of the people of karnataka",
+    "a sixty five year old woman",
+    "technology is changing the way we travel beyond our imagination",
+    "and it has become a global language",
+    "yes i have used a virtual reality headset for watching a small film and also for playing",
+    "and i encountered a few difficulties in speaking english but not in writing in english",
+    "the most interesting place i have visited would have to be a trek to the place called pindhari",
+    "dibrugarh and taspur town",
+    "show the list of restaurants i paid through freecharge last month",
+    "give five starts to dp laundry basket and four stars to the delivery service",
+    "one example of lack of education lack of coordination among different levels of education is",
+    "one of the major issues faced by the agriculture sector today is the depletion of land quality due to the rise in number of factories and industries",
+    "one hundred twenty three five thousand six hundred seven thousand seven hundred fourteen three thousand eight hundred two thousand two hundred sixty two"
+   ],
+   "hyp": [
+    "What to consider before investing in recurring deposits savings schemes?",
+    "Are there any ESIC centres in the locality with Pincot 373096 and offering biochemistry services?",
+    "Apart from this.",
+    "and religions that are there in the state.",
+    "So, yes, I would like to tell that education system in my state.",
+    "many industrialized nations.",
+    "I lived in Kanhimpundistik, state of West Bengal.",
+    "to make Chinese",
+    "There's an exclamation that sentence changes if there's a question mark, the sentence changes. If there's a full stop, the question changes even if it's the same sentence.",
+    "does not always remains the same it has some change every time maybe there are different kind of flowers or some",
+    "I don't travel with large groups of people.",
+    "and the Satyagra ashram on the banks of the Sabarmati in 1917.",
+    "mixed tikka on the plate or the paper plate which we call duna.",
+    "We have taken road trips to many places of South India then now and each trip has been equally",
+    "The government services in Northern Ireland operate as normal on Good Friday, substituting Easter Tuesday for the holiday.",
+    "So, fish production is quite high in North Bihar.",
+    "Otherwise it will lead this state to a very desperate condition.",
+    "The Buddha is spoken as a native language by about 44% of the people of Karnataka.",
+    "A 65 year old woman",
+    "Technology is changing the way we travel beyond our imagination.",
+    "and it has become a global language.",
+    "Yes I have user virtual reality, except for watching a small film and also for playing a",
+    "and I encountered a few difficulties in speaking English but not in writing in English.",
+    "The most interesting place I have visited would have to be a trek to the place called Pintari.",
+    "De Bruggar and Tespur town.",
+    "Show me the list of restaurants I paid through free charge last month.",
+    "Give 5 stars to DP Lautry Pascal and 4 stars to the delivery service.",
+    "One example of lack of coordination among different levels of adhesion is",
+    "One of the major issues faced by the agriculture sector today is the depletion of land quality due to the rise in number of factories and industries.",
+    "1 2 3 5 6 0 0 7 7 1 4 3 8 0 0 2 2 6 2"
+   ]
+  },
+  "synthesized": {
+   "ref": [
+    "what to consider before investing in recurring deposits savings scheme",
+    "are there any esic centres in the locality with pincode seven hundred seventy three thousand ninety six and offering biochemistry services",
+    "apart from this",
+    "cultures and religions that are there in the state",
+    "so yes i would like to tell that education system in my state",
+    "many industrialized nations",
+    "i lived in kanimpung district state of west bengal",
+    "to make chinese",
+    "there's an exclamation the sentence changes if there's a question mark the sentence changes if there's a full stop the question changes even if it's the same sentence",
+    "does not always remains the same it has some change every time maybe there are different kind of flowers or some",
+    "i don't travel with large group of people",
+    "and the satyagraha ashram on the banks of the sabarmati in nineteen seventeen",
+    "makes tikka on the plates or the paper plate which we call duna",
+    "we have taken road trips to many places of south india till now and each trip has been equally",
+    "government services in northern ireland operate as normal on good friday substituting easter tuesday for the holiday",
+    "so fish production is quite high in north bihar",
+    "otherwise it will lead this state to a very desperate condition",
+    "kannada is spoken as a native language by about seventy four percent of the people of karnataka",
+    "a sixty five year old woman",
+    "technology is changing the way we travel beyond our imagination",
+    "and it has become a global language",
+    "yes i have used a virtual reality headset for watching a small film and also for playing",
+    "and i encountered a few difficulties in speaking english but not in writing in english",
+    "the most interesting place i have visited would have to be a trek to the place called pindhari",
+    "dibrugarh and taspur town",
+    "show the list of restaurants i paid through freecharge last month",
+    "give five starts to dp laundry basket and four stars to the delivery service",
+    "one example of lack of education lack of coordination among different levels of education is",
+    "one of the major issues faced by the agriculture sector today is the depletion of land quality due to the rise in number of factories and industries",
+    "one hundred twenty three five thousand six hundred seven thousand seven hundred fourteen three thousand eight hundred two thousand two hundred sixty two"
+   ],
+   "hyp": [
+    "work to consider before investing in recurring deposits, savings, schemes.",
+    "Are there any essays, centres and devocality with Pinco, 773196 and offering biochemistry services?",
+    "Apart from this.",
+    "cultures and religions that are there in the state.",
+    "So, yes I would like to tell that education system in my state.",
+    "many industrialized nations.",
+    "I live in Cannon Point State of West Bengal.",
+    "to make Chinese.",
+    "Then the next question, the sentence changes. If there is a question mark, the sentence changes. If there is a first stop, the question changes. Even if it's the same sentence.",
+    "does not always remain the same. It has some change every time. Maybe there are different kind of flowers or some",
+    "I don't travel with large group of people.",
+    "and this satya raha ashram on deep banks of the suburb, see in 1917.",
+    "make sticker on the plates or the paper plate which we call do now.",
+    "We have taken root roots to many places of South India till now and each trip has been equally",
+    "Government services in all the Nile and operators, normal on good Friday, substituting Easter user for the holiday",
+    "So fish production is quite high in North Bihar.",
+    "Otherwise, it will lead this state to a very desperate condition.",
+    "Canada is spoken as an native language by about 74% of the people of Karnataka.",
+    "65 V R O L DUMENT.",
+    "Technology is changing the way we travel beyond our imagination.",
+    "and it has become a global language.",
+    "Yes, I have used a virtual reality headset for watching a small film and also for playing.",
+    "and I encountered a few difficulties in speaking English but not in writing in English.",
+    "The most interesting place I have visited would have to be at Raktu, the place called Dinhadi.",
+    "debris current as per job.",
+    "Show the list of restaurants I paid through free church last month.",
+    "Give 5 stars to it, pay along free basket and 4 stars to the television service.",
+    "One example of lack of education like co-ordination among different levels of education is",
+    "One of the major issues faced by the agriculture sector today is the depletion of land quality due to the rising number of factories and industries.",
+    "120, 3566 107 7 and 14 3 to the level 2 36"
+   ]
+  }
+ }
+}

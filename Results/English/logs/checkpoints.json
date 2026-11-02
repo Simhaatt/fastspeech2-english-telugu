@@ -1,0 +1,14 @@
+{
+ "scratch": {
+  "release_ckpt": "English/checkpoints/best_model_fp16.pth.tar",
+  "size_mb": 70.5,
+  "best_step": 14000,
+  "best_val_total": 2.35402690336068
+ },
+ "finetune": {
+  "release_ckpt": "English/checkpoints/finetune/best_model_fp16.pth.tar",
+  "size_mb": 70.5,
+  "best_step": 11000,
+  "best_val_total": 2.368546354160155
+ }
+}
