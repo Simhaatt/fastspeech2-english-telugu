@@ -27,7 +27,10 @@ including the Telugu support, are listed in [Report/Technical_Report.pdf](Report
 Telugu (one speaker, read speech) comes out close to real speech. English (99 speakers, about 3 minutes
 each, partly spontaneous) is understandable but sounds mumbled: its spectrograms change only 63 % as fast
 between frames as real speech. The fine-tuned-from-LJSpeech ablation reached 2.369, no better than training
-from scratch. Details and plots: [the report](Report/Technical_Report.pdf).
+from scratch. Giving the models the real pitch and energy instead of their predictions brings the
+spectrograms 9 % (English) and 20 % (Telugu) closer to real speech; real durations change almost nothing.
+With all prosody taken from the recording, English still stays further from real speech than Telugu, so the
+mumbling comes from the decoder, not from the timing. Details and plots: [the report](Report/Technical_Report.pdf).
 
 ## Repository layout
 
@@ -37,10 +40,11 @@ Telugu/   train.py  preprocess.py  inference.py  config.yaml  checkpoints/  mfa_
 core/            model, training, inference, text front-ends, data preparation (ming024 code + changes)
 data/            test_sentences.tsv (the 10 test sentences, text as given)
 kaggle/          notebook builder + the notebooks used for training on Kaggle
-tools/           evaluation: speech-recognition check, predicted-vs-real prosody, sanity checks
+tools/           evaluation: speech-recognition check, predicted-vs-real prosody, ablation, sanity checks
 Results/<Lang>/  training_loss.png  validation_loss.png  train_vs_val.png  test_generated_audios/
                  variance_adaptor_plots/{duration,pitch,energy,overview,json}/
-                 logs/  (loss CSVs, training logs, data selection, split, asr_check.json)
+                 ablation_samples/  (3 validation clips with real vs predicted prosody)
+                 logs/  (loss CSVs, training logs, data selection, split, asr_check.json, ablation.json)
 Report/          Technical_Report.pdf (+ LaTeX source)
 requirements.txt
 ```
@@ -136,6 +140,9 @@ python tools/asr_eval.py . te Telugu/checkpoints/best_model_fp16.pth.tar Telugu/
   work/Telugu/preprocessed vasista22/whisper-telugu-base Results/Telugu/test_generated_audios \
   tools/asr_refs_te.tsv asr_te.json 30
 python tools/asr_rescore.py asr_te.json      # script-safe scoring for Telugu
+# real vs predicted duration / pitch+energy: Whisper CER, MCD and F0 error on the same 30 clips
+python tools/ablation_eval.py . te Telugu/checkpoints/best_model_fp16.pth.tar Telugu/config.yaml   work/Telugu/preprocessed vasista22/whisper-telugu-base ablation_te.json 30 ablation_samples_te
+python tools/ablation_ci.py ablation_te.json  # paired bootstrap intervals for the differences
 ```
 
 ## How the models were actually trained (Kaggle)

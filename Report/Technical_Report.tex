@@ -39,7 +39,10 @@ speech, while the English recogniser made 10.0\% against 6.4\%. The Telugu model
 on every measure I took. On 80 validation sentences, the Telugu model's predicted durations correlate with the real
 ones at $r = 0.85$ (English: 0.61) and its pitch at $r = 0.75$ (English: 0.43). The English spectrograms change
 only 63\% as fast from frame to frame as real speech, against 88\% for Telugu. This over-smoothing matches what
-the English audio sounds like: the words come out mumbled, as if swallowed. Validation loss stopped improving early
+the English audio sounds like: the words come out mumbled, as if swallowed. Giving the models the real pitch and
+energy brought their spectrograms 9\% (English) and 20\% (Telugu) closer to real speech, while the real durations
+changed almost nothing. With all prosody taken from the recording, English still stays further from real speech
+than Telugu, so the mumbling comes from the decoder, not from the timing. Validation loss stopped improving early
 in both languages, at step 14,000 for English and 12,000 for Telugu out of 60,000. Fine-tuning from LJSpeech gave
 slightly better English spectrograms but worse pitch and energy, and no gain overall.
 
@@ -452,8 +455,8 @@ recordings of the same sentences.
 
 \subsection{Speech recognition check}
 \label{sec:asr}
-Whisper base (74\,M parameters) transcribed the audio: \code{openai/whisper-base.en} for English, and
-\code{vasista22/whisper-telugu-base}, a Whisper base fine-tuned on Telugu at IIT Madras, for Telugu. A recogniser
+Whisper base (74\,M parameters) transcribed the audio. English used \code{openai/whisper-base.en}; Telugu used
+\code{vasista22/whisper-telugu-base}, a Whisper base model that IIT Madras fine-tuned on Telugu. A recogniser
 makes its own errors, so I measured a ceiling first. I took 30 random validation clips per language and turned
 their \emph{real} mel spectrograms into audio with the same HiFi-GAN vocoder. The released models then synthesised
 the same 30 sentences from their phones, and the difference between the two error rates is what the acoustic model
@@ -486,7 +489,7 @@ back as \tel{అడవిలోని శబ్దంగా}. The recogniser hea
 \emph{ś}, or the recogniser preferred a more common word split; the data here cannot tell which.
 
 \paragraph{Synthesised English loses more:} 10.0\% CER against 6.4\% for real speech, 3.6 points, and 21.0\%
-against 14.4\% WER. The larger gap matches the flux measurement in Section~\ref{sec:var} and the mumbled sound.
+against 14.4\% WER. On 30 clips this gap only approaches significance (Section~\ref{sec:ablation}). The larger gap matches the flux measurement in Section~\ref{sec:var} and the mumbled sound.
 The test sentences fare far worse (26.4\% CER), because they are built from rare words that a 74\,M recogniser
 struggles with even when spoken clearly. I have no real recordings of them, so the table cannot separate the two
 causes. E2a came back almost perfectly, with only ``audience'' heard as ``Indians''. E1 became ``the untetish
@@ -567,6 +570,72 @@ which phone is spoken: vowels are loud and stops quiet.
 \paragraph{Both models speak slightly fast.} Given the same phones, they produce 3--4\% less time than the real
 speaker took. The duration correlation repeats the loss curves: 0.85 for Telugu, 0.61 for English.
 
+\subsection{Which prediction costs the most?}
+\label{sec:ablation}
+Table~\ref{tab:var} shows how the predictions differ from real speech, not what each difference costs. To measure
+that, I gave the released models the real values from the recording in place of their own predictions, one part
+at a time, on the same 30 validation clips as Section~\ref{sec:asr}. Every version went through the same HiFi-GAN
+and the same recogniser. Two further measures compare each version with the real recording: mel-cepstral
+distortion (MCD), the distance between the generated and the real spectrogram, and the root-mean-square F0 error
+in cents (100 cents make a semitone).
+
+\begin{table}[H]\centering\small
+\caption{Real values in place of predictions, on 30 validation clips per language (means). ``Real, vocoded'' is
+the recording's own spectrogram through the vocoder; MCD and F0 error use it as the reference.}
+\label{tab:ablation}
+\begin{tabular}{@{}lrrrrrr@{}}
+\toprule
+ & \multicolumn{3}{c}{English} & \multicolumn{3}{c}{Telugu} \\
+\cmidrule(lr){2-4}\cmidrule(l){5-7}
+Duration / pitch and energy & CER \% & MCD dB & F0 cents & CER \% & MCD dB & F0 cents \\
+\midrule
+Predicted / predicted (normal) & 10.0 & 3.05 & 310 & 4.7 & 2.55 & 316 \\
+Real / predicted & 12.3 & 3.05 & 302 & 3.8 & 2.50 & 298 \\
+Predicted / real & 10.0 & 2.78 & 202 & 3.7 & 2.04 & 119 \\
+Real / real & 11.5 & 2.81 & 180 & 4.2 & 1.98 & 116 \\
+\midrule
+Real, vocoded & 6.4 & -- & -- & 3.4 & -- & -- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Pitch and energy cost the most; durations cost almost nothing.} Real pitch and energy cut MCD by
+0.27\,dB in English (9\%) and 0.51\,dB in Telugu (20\%), and the F0 error by 108 and 198 cents. Real durations
+moved MCD by 0.00 and 0.05\,dB and the F0 error by 8 and 18 cents. A paired bootstrap over the 30 clips (5,000
+resamples) puts the pitch-and-energy gains far from zero: the 95\% interval for the English MCD gain runs from
+0.18 to 0.36\,dB. The duration gains stay within 0.1\,dB of zero in both languages. The English duration
+predictor's weak correlation ($r = 0.61$) therefore costs little: with the real timing, the decoder makes
+spectrograms of the same quality.
+
+\paragraph{The English decoder sets the floor.} With every prosody value taken from the recording, English still
+reaches only 2.81\,dB, against 1.98\,dB for Telugu. What remains comes from the decoder, the part that turns phones
+and prosody into a spectrogram. Real prosody does not close the gap between the languages; it widens it, from
+0.50\,dB with predictions to 0.83\,dB with real values, because Telugu gains more from real pitch than English
+does. The mumbled English sound therefore comes from the decoder, not from the timing, and real durations do not
+remove it. The first two improvements in Section~\ref{sec:cmp} target exactly this part.
+
+\paragraph{Pitch stays off even when it is real.} With the real pitch, the F0 error still comes to 180 cents in
+English and 116 in Telugu. The model receives one pitch value per phone, so it cannot reproduce the rise or fall
+inside a phone. English adds noisier recordings, which make F0 harder to extract on both sides: even with
+everything real, the generated and the real audio disagree on whether a frame is voiced in 22\% of English frames
+against 13\% of Telugu frames.
+
+\paragraph{The recogniser cannot separate the versions.} No English version differs from the normal system by
+more than the noise: every 95\% interval spans zero and covers 6 to 7 points. In Telugu, real pitch and energy
+lowered CER by 1.1 points (interval 0.2 to 2.0), but with real durations added the gain shrank to 0.5 and lost
+significance, so I read no pattern into it. Thirty clips can resolve a difference of about 1 point in Telugu and
+only about 3 in English. The same caution applies to Table~\ref{tab:asr}. Telugu's 1.3-point gap between real and
+synthesised speech holds (interval 0.3 to 2.5), but English's 3.5-point gap does not quite (interval $-0.4$ to 7.3).
+
+\paragraph{Method details.} MCD uses cepstral coefficients 1 to 24 of the 80-band log-mel spectrogram, averaged
+over DTW-aligned frames, silences included. It compares the model's spectrogram before the vocoder. Other papers
+usually compute MCD from WORLD or SPTK spectral envelopes, so these absolute values compare versions within this
+report, not with published numbers. I aligned every version with DTW, even when the lengths matched, so the
+versions with real durations face the same alignment as the rest. F0 comes from WORLD (DIO with StoneMask) on the
+vocoded audio, scored against the vocoded real spectrogram so that the vocoder affects both sides equally, over
+frames voiced in both. \code{Results/<Language>/ablation\_samples/} holds three of the clips in all five versions
+for listening, and \code{logs/ablation.json} holds every number and transcript.
+
 \subsection{In the test sentences}
 \begin{itemize}
 \item \textbf{Declination.} F0 falls through every sentence, as it does in natural statements. The mean F0 of the
@@ -599,7 +668,8 @@ English needed g2p\_en guesses for 1,158 words of its training dictionary and fo
 
 \paragraph{Limitations.}
 \begin{itemize}
-\item \textbf{Over-smoothed English spectrograms} (flux ratio 0.63) make the speech sound mumbled.
+\item \textbf{Over-smoothed English spectrograms} (flux ratio 0.63) make the speech sound mumbled. The decoder
+causes this, not the prosody predictions (Section~\ref{sec:ablation}).
 \item \textbf{Flat English intonation} (pitch spread ratio 0.67, $r = 0.43$).
 \item \textbf{Wasted training:} both models peaked by step 14,000 of 60,000.
 \item \textbf{Speaker identity in English rests on a guess:} 115 metadata groups for 117 real speakers.
@@ -667,9 +737,11 @@ python core/export.py --lang Telugu --runs scratch:work/Telugu/logs \
                       --ckpt_dirs scratch:Telugu/checkpoints
 \end{verbatim}
 The Kaggle notebooks in \code{kaggle/} run the same commands, and \code{kaggle/build\_notebooks.py} rebuilds them
-with the current code embedded. The evaluations in Sections~\ref{sec:asr} and~\ref{sec:var} come from
-\code{tools/asr\_eval.py}, \code{tools/asr\_rescore.py} and \code{tools/variance\_eval.py}; each script's header
-gives its arguments. They need \code{transformers} and \code{jiwer} on top of \code{requirements.txt}.
+with the current code embedded. The scripts in \code{tools/} produce every evaluation in Sections~\ref{sec:asr}
+and~\ref{sec:var}: \code{asr\_eval.py} and \code{asr\_rescore.py} the recogniser check, \code{variance\_eval.py}
+Table~\ref{tab:var}, and \code{ablation\_eval.py} with \code{ablation\_ci.py} Table~\ref{tab:ablation} and its
+intervals. Each script's header gives its arguments. They need \code{transformers} and \code{jiwer} on top of
+\code{requirements.txt}.
 
 \paragraph{Checks.} \code{tools/sanity\_checks.py} tests four things that could go wrong without any error
 message; all four passed.
