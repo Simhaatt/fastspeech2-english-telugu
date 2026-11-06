@@ -433,7 +433,7 @@ analysed in neuropharmacological research.'') The long loanword became 22 phones
 T2a & \tel{తాడుపై అతని పట్టు చాలా బలంగా ఉంది.} (``His grip on the rope is very strong.'') & 2.03\,s \\
 T2b & \tel{ఆమె పట్టు చీరను ధరించి వేడుకకు వచ్చింది.} (``She came to the ceremony in a silk sari.'')
 \tel{పట్టు} means ``grip'' in T2a and ``silk'' in T2b, but Telugu pronounces both the same way, so the identical
-phones (\code{p a tt tt u}) are correct. & 2.37\,s \\
+phones (\code{p a tt tt u}) are correct. & 2.38\,s \\
 T3 & \tel{పులి అడ విలో నిశ్శబ్దంగా నడిచింది.} (``The tiger walked silently in the forest.'') The input splits
 \tel{అడవిలో} into \tel{అడ} + \tel{విలో}, and the repair merges it again. The merge changes nothing: the G2P maps each
 akshara on its own and adds no pause between words, so both versions give the phones \code{a dd a v i l oo} and
@@ -714,7 +714,11 @@ unprivileged user \code{mfa}. MFA 3.4 has no \code{--beam} flag, so the beams go
 the results: selection thresholds, feature settings, model size, optimiser and steps. The prepared data keeps the
 copies actually used (\code{config\_used.yaml}). \code{split.tsv} fixes the data split, and seed 1234 fixes
 selection and training. GPU training still differs slightly between runs, because some CUDA kernels are
-non-deterministic and fp16 rounds differently.
+non-deterministic and fp16 rounds differently. Inference does reproduce: I cloned the public repository into
+an empty folder, followed the README, and ran every inference command on CPU. The English test audio came out
+identical to the released files byte for byte (I made those on CPU too). The Telugu files came from the Kaggle GPU,
+and the CPU rerun matched their predicted pitch within 0.11\,Hz and their durations exactly, except for one phone of
+T2b that lost a single frame (12\,ms).
 
 \paragraph{Commands.} From the repository root:
 \begin{verbatim}
