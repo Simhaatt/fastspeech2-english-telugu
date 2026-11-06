@@ -19,3 +19,4 @@ tqdm>=4.60
 huggingface_hub>=0.20
 # forced alignment: Montreal Forced Aligner 3.4.3 (conda-forge), installed by core/prep/mfa.sh setup
 # evaluation scripts in tools/ only (speech-recognition check): pip install transformers jiwer
+# rebuilding the Kaggle notebooks (kaggle/build_notebooks.py) only: pip install nbformat

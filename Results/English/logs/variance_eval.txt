@@ -1,0 +1,11 @@
+== English | English\checkpoints\best_model_fp16.pth.tar | 80 validation clips
+   pitch_sd   mean  0.724  median  0.674  [p10  0.395, p90  1.009]
+   energy_sd  mean  1.035  median  0.960  [p10  0.749, p90  1.385]
+   pitch_r    mean  0.419  median  0.429  [p10  0.104, p90  0.772]
+   energy_r   mean  0.816  median  0.820  [p10  0.689, p90  0.930]
+   logdur_r   mean  0.594  median  0.609  [p10  0.369, p90  0.801]
+   length     mean  0.946  median  0.961  [p10  0.819, p90  1.091]
+   gv_all     mean  0.850  median  0.847  [p10  0.567, p90  1.075]
+   gv_0_20    mean  0.822  median  0.799  [p10  0.555, p90  1.084]
+   gv_40_80   mean  0.872  median  0.839  [p10  0.585, p90  1.126]
+   flux       mean  0.625  median  0.627  [p10  0.521, p90  0.728]

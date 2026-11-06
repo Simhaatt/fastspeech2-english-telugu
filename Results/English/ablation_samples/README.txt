@@ -1,4 +1,4 @@
-Same three validation clips, five versions each (Technical_Report.pdf, section 8.2):
+Same three validation clips, five versions each (Technical_Report.pdf, section 9.2):
   real_vocoded  the real mel spectrogram through HiFi-GAN (the ceiling)
   pred          the normal system: duration, pitch and energy all predicted
   real_dur      real durations, predicted pitch and energy

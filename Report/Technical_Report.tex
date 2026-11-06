@@ -5,6 +5,8 @@
 \usepackage{fontspec}
 \usepackage[margin=2.0cm]{geometry}
 \usepackage{graphicx,booktabs,xcolor,caption,subcaption,enumitem,tabularx,float,array,longtable,multirow}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta,decorations.pathreplacing}
 \usepackage[hidelinks]{hyperref}
 \setmainfont{Cambria}
 \setmonofont{Consolas}[Scale=0.86]
@@ -27,103 +29,169 @@
 
 % =====================================================================
 \section{Summary}
-I trained two FastSpeech 2 models from scratch with the same architecture and recipe. The English model learnt
-from 4.6\,h of the Svarah corpus, which holds Indian-accented English from 99 speakers. The Telugu model learnt
-from 4.1\,h of one male voice in IndicTTS Telugu. Each language kept about 1\,h of validation audio that shares no
-clip with training. As an ablation, I also fine-tuned a second English model from the public LJSpeech checkpoint.
-The code starts from the ming024 implementation, and Section~\ref{sec:changes} lists every change.
+A text-to-speech (TTS) model turns written text into speech. I trained two FastSpeech 2 TTS models from scratch
+with the same architecture and recipe, one for English and one for Telugu. The English model learnt from 4.6\,h
+of the Svarah corpus of Indian-accented English, using 99 of its 117 speakers. The Telugu model learnt from 4.1\,h
+of one male voice in the IndicTTS Telugu corpus. Each language also kept about 1\,h of separate validation audio
+(0.82\,h for Telugu after trimming silence) that shares no clip with training. As an extra experiment, I
+fine-tuned a second English model from a public model trained on LJSpeech, an American English corpus. The code
+starts from the open-source ming024 implementation of FastSpeech 2, and Section~\ref{sec:changes} lists every
+change. Section~\ref{sec:background} explains how the system works for readers new to speech synthesis.
 
 The English model speaks all five of its test sentences understandably. I do not speak Telugu, so a Telugu speech
-recogniser judged that audio: it made 4.7\% character errors on synthesised Telugu against 3.4\% on real Telugu
-speech, while the English recogniser made 10.0\% against 6.4\%. The Telugu model comes out closer to real speech
-on every measure I took. On 80 validation sentences, the Telugu model's predicted durations correlate with the real
-ones at $r = 0.85$ (English: 0.61) and its pitch at $r = 0.75$ (English: 0.43). The English spectrograms change
-only 63\% as fast from frame to frame as real speech, against 88\% for Telugu. This over-smoothing matches what
-the English audio sounds like: the words come out mumbled, as if swallowed. Giving the models the real pitch and
-energy brought their spectrograms 9\% (English) and 20\% (Telugu) closer to real speech, while the real durations
-changed almost nothing. With all prosody taken from the recording, English still stays further from real speech
-than Telugu, so the mumbling comes from the decoder, not from the timing. Validation loss stopped improving early
-in both languages, at step 14,000 for English and 12,000 for Telugu out of 60,000. Fine-tuning from LJSpeech gave
-slightly better English spectrograms but worse pitch and energy, and no gain overall.
+recogniser (an automatic transcription model) judged that audio: it got 4.7\% of the characters wrong on
+synthesised Telugu against 3.4\% on real Telugu speech, while the English recogniser got 10.0\% wrong against
+6.4\%. The Telugu model comes out closer to real speech on every measure I took. On 80 validation sentences, the
+Telugu model's predicted phone durations correlate with the real ones at $r = 0.85$ (English: 0.61), and its pitch
+at $r = 0.75$ (English: 0.43). The English spectrograms (the model's picture of the sound) change only 63\% as
+much from one 11.6\,ms frame to the next as real speech does, against 88\% for Telugu. This over-smoothing matches
+what the English audio sounds like: the words come out mumbled, as if swallowed. Replacing the model's predicted
+pitch and loudness with the real values brought the spectrograms 9\% (English) and 20\% (Telugu) closer to real
+speech, while the real phone durations changed almost nothing. Even with timing, pitch and loudness all taken
+from the recording, English stays further from real speech than Telugu, so the mumbling comes from the decoder,
+the part of the model that draws the spectrogram, not from the timing. Validation loss stopped improving early in
+both languages, at step 14,000 for English and 12,000 for Telugu out of 60,000. Fine-tuning from LJSpeech gave
+slightly better English spectrograms but worse pitch and loudness, and no gain overall.
+
+% =====================================================================
+\section{How the system works}
+\label{sec:background}
+This section explains the parts of a text-to-speech (TTS) system for readers new to speech. Figure~\ref{fig:pipeline}
+shows the whole path from text to audio, and Table~\ref{tab:terms} defines the measures the later sections use.
+
+\begin{figure}[H]\centering
+\begin{tikzpicture}[
+  box/.style={draw, rounded corners=2pt, align=center, font=\small, inner sep=4pt, minimum height=9mm},
+  model/.style={box, fill=black!6},
+  lab/.style={font=\scriptsize, align=center},
+  arr/.style={-{Stealth[length=2mm]}}]
+\node[box] (text) {text};
+\node[box, right=4mm of text] (fe) {front-end\\[-1pt]{\scriptsize normalise, G2P}};
+\node[model, right=4mm of fe] (enc) {encoder};
+\node[model, right=4mm of enc] (va) {variance adaptor\\[-1pt]{\scriptsize duration, pitch, energy}};
+\node[model, right=4mm of va] (dec) {decoder};
+\node[box, right=4mm of dec] (voc) {vocoder\\[-1pt]{\scriptsize HiFi-GAN}};
+\node[box, right=4mm of voc] (wav) {audio};
+\draw[arr] (text) -- (fe);
+\draw[arr] (fe) -- (enc);
+\draw[arr] (enc) -- (va);
+\draw[arr] (va) -- (dec);
+\draw[arr] (dec) -- (voc);
+\draw[arr] (voc) -- (wav);
+\draw[decorate, decoration={brace, mirror, amplitude=4pt}] ([yshift=-2mm]enc.south west) -- ([yshift=-2mm]dec.south east)
+  node[midway, below=2mm, font=\scriptsize] {FastSpeech 2 (the part I trained)};
+\end{tikzpicture}
+\caption{From text to audio. The front-end turns text into phones; the encoder gives one vector per phone; the
+variance adaptor predicts each phone's duration, pitch and energy and stretches the sequence to one vector per
+frame; the decoder turns the frames into a mel spectrogram; the vocoder turns that into a waveform. The shaded
+blocks form FastSpeech 2. The front-end is rules and dictionaries, and the vocoder a separate pretrained network.}
+\label{fig:pipeline}
+\end{figure}
+
+\paragraph{Text to phones.} The front-end first writes the text out as it is spoken: numbers, dates and times
+become words. A grapheme-to-phoneme (G2P) step then turns each word into \emph{phones}, the individual sounds of
+the language (also called phonemes). English phones use ARPAbet, the symbol set of the CMU pronouncing dictionary,
+where a digit after a vowel marks stress (1 primary, 2 secondary, 0 none): ``conduct'' as a noun is
+\code{K AA1 N D AH0 K T}. Telugu uses its own phone set (Section~\ref{sec:te-frontend}).
+
+\paragraph{What the model outputs.} FastSpeech 2 does not output audio. It outputs a \emph{mel spectrogram}: a grid
+with time on one axis and 80 frequency bands on the other, each cell holding the loudness of that band, on a log
+scale. Each column, called a \emph{frame}, covers 11.6\,ms. The bands follow the mel scale, which spaces them the way
+human hearing does: narrow at low frequencies and wide at high ones. A second network, the \emph{vocoder}, turns the
+mel spectrogram into a waveform. I used a pretrained HiFi-GAN vocoder and did not train it.
+
+\paragraph{Inside FastSpeech 2.} The \emph{encoder} reads the phone sequence and gives one vector per phone. The
+\emph{variance adaptor} then predicts three things for each phone: its \emph{duration} (how many frames it lasts),
+its \emph{pitch} (the fundamental frequency F0 in Hz, heard as how high the voice is) and its \emph{energy} (how
+loud it is). Together, timing, pitch and loudness are called \emph{prosody}. The \emph{length regulator} repeats each
+phone's vector once per frame of its duration, and the \emph{decoder} turns that frame sequence into the mel
+spectrogram. Because every phone gets an explicit duration, the model cannot skip or repeat words, and it produces
+all frames at once instead of one after another, which makes it fast.
+
+\paragraph{What training needs.} To learn durations, the model needs the true duration of every phone in every
+training clip. A \emph{forced aligner} finds them: given the audio and its transcript, it marks where each phone
+starts and ends. I used the Montreal Forced Aligner (MFA), which writes these boundaries to TextGrid files. The
+true pitch and energy come from the recordings. In training the model receives the true durations, pitch and
+energy and learns to predict them; when it synthesises new text, it uses its own predictions.
+
+\paragraph{Starting point.} I built on \code{ming024/FastSpeech2}, a widely used open-source PyTorch version of
+FastSpeech 2 by the GitHub user ming024. It comes with a model trained on LJSpeech, 24\,h of one American woman
+reading books. Besides training from random weights, I ran one \emph{ablation}, an extra experiment that changes one
+thing to measure its effect: an English model that starts from the LJSpeech weights instead (\emph{fine-tuning}).
+
+\begin{table}[t]\centering\small
+\caption{Measures used in this report.}
+\label{tab:terms}
+\begin{tabularx}{\linewidth}{@{}lX@{}}
+\toprule
+Validation loss & The training objective on held-out clips the model never trains on: mean absolute error (L1)
+between generated and real mel spectrograms, plus mean squared error (MSE) between predicted and true log
+duration, standardised pitch and standardised energy. Lower is better. \\
+CER, WER & Character and word error rate: a speech recogniser transcribes the audio, and the rate counts the
+inserted, deleted and substituted characters (or words) against the true text, as a percentage of its length.
+Lower means more intelligible. \\
+Correlation $r$ & Pearson correlation between predicted and real values within an utterance: 1 means they rise and
+fall together, 0 means no relation. \\
+Spread ratio & The standard deviation of the predictions within an utterance divided by that of the real values;
+below 1 means flatter than real speech. \\
+Flux, global variance & How much a mel spectrogram changes from one frame to the next (flux) and how much each band
+varies over the utterance (global variance), each as generated / real. Below 1 means a smoother, more blurred
+spectrogram than real speech. \\
+MCD & Mel-cepstral distortion: the distance in dB between a generated and a real spectrogram of the same sentence.
+Lower is closer. \\
+F0 error (cents) & Pitch error on a musical scale: 100 cents make one semitone and 1,200 an octave. \\
+DTW & Dynamic time warping: matches the frames of two versions of a sentence spoken at different speeds, so they
+can be compared frame by frame. \\
+95\% interval & From a paired bootstrap: I resample the evaluation clips 5,000 times and recompute the difference. If
+the interval excludes zero, the difference is unlikely to be chance. \\
+\bottomrule
+\end{tabularx}
+\end{table}
 
 % =====================================================================
 \section{Model}
 \label{sec:model}
-Both languages use FastSpeech 2 as implemented in \code{ming024/FastSpeech2}: 35.2\,M parameters, 22.05\,kHz
-audio, 80 mel bins, a 1024-point FFT and a hop of 256 samples (11.6\,ms per frame).
+Both languages use FastSpeech 2 as implemented in \code{ming024/FastSpeech2}, with 35.2\,M parameters.
+Table~\ref{tab:arch} gives the exact settings. All audio is resampled to 22.05\,kHz. The mel spectrogram has 80
+bands and comes from a short-time Fourier transform (STFT) over windows of 1,024 samples, one every 256 samples,
+which gives one frame per 11.6\,ms.
 
 \begin{table}[H]\centering\small
 \caption{Architecture. Both languages share it; only English has a speaker table.}
 \label{tab:arch}
 \begin{tabularx}{\linewidth}{@{}lX@{}}
 \toprule
-Encoder & phoneme embedding (256) + sinusoidal positions; 4 FFT blocks: 2-head self-attention, conv feed-forward
-(1024 filters, kernels 9 and 1), dropout 0.2 \\
-Speaker embedding & English only: a 256-d table with 99 entries, added to the encoder output \\
+Encoder & phone embedding (256-d) + sinusoidal position encoding; 4 feed-forward Transformer (FFT) blocks, each
+2-head self-attention followed by a convolutional feed-forward layer (1024 filters, kernels 9 and 1), dropout 0.2 \\
+Speaker embedding & English only: one learned 256-d vector per speaker (99), added to the encoder output, so one
+model can speak in each voice \\
 Variance adaptor & duration, pitch and energy predictors, each 2 conv layers (256 filters, kernel 3) with ReLU,
 LayerNorm, dropout 0.5 and a linear output. Pitch and energy take one value per phoneme, standardised per corpus,
-quantised into 256 linear bins and embedded (256-d) back into the hidden sequence. The length regulator uses the
-MFA durations in training and the rounded predicted durations at inference. \\
+quantised into 256 bins and embedded (256-d) back into the hidden sequence. The length regulator uses the true
+durations from the aligner (MFA) in training and the rounded predicted durations at synthesis. \\
 Decoder & 6 FFT blocks (same settings as the encoder), a linear layer to 80 mel bins, then a 5-layer
-convolutional PostNet \\
+convolutional PostNet that refines the mel spectrogram \\
 Vocoder & pretrained universal HiFi-GAN from the ming024 release; I did not train or fine-tune it \\
-Loss & L1 on the mel before and after the PostNet + MSE on log duration, pitch and energy (all weight 1) \\
+Loss & L1 on the mel spectrogram before and after the PostNet + MSE on log duration, pitch and energy (all weight 1) \\
 \bottomrule
 \end{tabularx}
 \end{table}
 
 \paragraph{Differences from the FastSpeech 2 paper.} I kept three choices of the reference implementation.
-(1)~Pitch is one F0 value per phoneme (pyworld DIO + StoneMask, unvoiced frames linearly interpolated, then
-averaged over the phone), not a frame-level continuous-wavelet pitch spectrogram. (2)~Energy is also averaged per
-phoneme. (3)~A PostNet follows the decoder, which the paper does not have. Per-phoneme targets carry less noise and
-line up with the duration predictor; the cost is that the model cannot move pitch inside a phone.
+(1)~Pitch is one F0 value per phone, where the paper predicts a pitch contour for every frame. To get it, the
+DIO and StoneMask algorithms of the \code{pyworld} library estimate F0 for every frame. Unvoiced frames, which
+have no pitch (silence, and sounds made without the vocal folds vibrating, such as /s/ and /t/), are filled in by
+linear interpolation, and the values are then averaged over each phone. (2)~Energy, the length of each STFT frame
+seen as a vector (its L2 norm), is also averaged per phone. (3)~A PostNet follows the decoder, which the paper does
+not have. Per-phone targets carry less noise and line up with the duration predictor; the cost is that the model
+cannot move pitch inside a phone.
 
 % =====================================================================
-\section{Changes to the reference code}
-\label{sec:changes}
-The repository keeps the ming024 file layout under \code{core/}.
-
-\subsection*{Bug fixes and updates}
-\begin{enumerate}
-\item \textbf{Silences in MFA 2/3 TextGrids.} MFA 2 and 3 write silences as empty intervals, and \code{tgt} drops
-empty intervals by default. The phone durations then no longer added up to the mel length, which shifted every
-phone after a pause. The reader now keeps empty intervals and turns them into \code{sp}
-(\code{include\_empty\_intervals=True}); it skips utterances that contain \code{spn} (unknown word).
-\item \textbf{Energy control.} The pitch control (\code{p\_control}) scaled the energy predictor; the energy control
-(\code{e\_control}) now does.
-\item \textbf{Energy targets in float64.} ming024's \code{to\_device} converts every target to float32 except
-energy, and the energy files hold float64. Plain fp32 training on a CPU tolerates this. Under CUDA mixed precision
-the backward pass fails (\code{Found dtype Double but expected Float}); both first Kaggle runs crashed on it. Energy
-now goes through \code{.float()}, and the loss casts every target to the prediction's type.
-\item \textbf{CPU and worker processes.} The STFT called \code{.cuda()} unconditionally, which broke CPU runs and
-forked feature-extraction workers. It now runs on the input's device.
-\item \textbf{librosa $\geq$ 0.10.} \code{pad\_center} and \code{mel} need keyword arguments.
-\item \textbf{Length regulator} vectorised with \code{torch.repeat\_interleave}: same output, faster on GPU.
-\item \textbf{All-zero predicted durations} now still produce one frame.
-\item \textbf{Checkpoints} store the learning rate as a plain float, so
-\code{torch.load(weights\_only=True)} can read them.
-\end{enumerate}
-
-\subsection*{Additions}
-\begin{enumerate}[resume]
-\item \code{lr\_scale} in the scheduler and \code{--init\_from} in training, for fine-tuning. Every tensor with a
-matching shape is copied; the phone embedding copies its overlapping rows; the pitch and energy bins come from the
-new data; new tensors such as the speaker table keep their random start.
-\item A split file written at data selection fixes the train/validation lists, instead of a random shuffle.
-\item Feature extraction runs in parallel, and each language and voice sets its own F0 search range.
-\item Training: mixed precision (fp16 autocast), a full validation pass every 1,000 steps, all losses in a CSV
-file, best (lowest validation loss) and last checkpoints, \code{--resume}, and a wall-clock budget for Kaggle.
-\item Inference: language-specific text front-ends. Each sentence gets a JSON file with the predicted duration
-(frames and ms), F0 (Hz) and energy per phone, de-normalised with the corpus statistics, and four plots.
-\item \textbf{Telugu support}, which the reference code lacks: a text normaliser and a rule-based G2P
-(Section~\ref{sec:te-frontend}), and a Telugu MFA acoustic model trained on the selected corpus, because MFA has no
-pretrained one. The 49 Telugu phones go at the \emph{end} of the symbol table, so the original symbols keep their
-indices and the LJSpeech checkpoint still loads.
-\item \textbf{English front-end}: number, date and time normalisation and a split-word repair
-(Section~\ref{sec:en-frontend}).
-\item Data preparation scripts for both corpora (selection, quality filters, split), and a script that builds
-self-contained Kaggle notebooks.
-\end{enumerate}
+\section{Text front-ends}
+\label{sec:frontends}
+The front-end turns raw text into the phone sequence the model reads, in two steps: a normaliser writes
+numbers, dates and times out as words, and a grapheme-to-phoneme (G2P) step finds each word's phones. The model
+only ever sees phones, so a front-end error goes straight into the audio.
 
 \subsection{English front-end}
 \label{sec:en-frontend}
@@ -132,19 +200,26 @@ self-contained Kaggle notebooks.
 dates (\emph{12 November 2026} $\to$ \emph{twelfth November twenty twenty six}), ordinals, years and plain numbers.
 \item \textbf{Split-word repair:} two neighbouring tokens merge when the left piece is not a lexicon word and the
 merged form is (\emph{rhyth m} $\to$ \emph{rhythm}). \code{--no\_repair} switches it off.
-\item \textbf{G2P order:} (1) heteronyms from the g2p\_en homograph table, chosen by the NLTK part-of-speech tag
-(\emph{conduct} as noun or verb); (2) acronyms of up to 4 capitals, spelled out; (3) the LibriSpeech lexicon used by
-ming024; (4) CMUdict; (5) the g2p\_en neural model for anything left.
+\item \textbf{G2P order:} the first source that knows a word wins. (1)~Heteronyms, words spelled alike but
+pronounced by grammatical role, come from the table of the \code{g2p\_en} package; the part-of-speech tag from the
+NLTK tagger picks the reading (\emph{conduct} as noun or verb). (2)~Acronyms of up to 4 capitals are spelled out.
+(3)~The LibriSpeech lexicon, the word-to-phones dictionary that ming024 uses. (4)~CMUdict, the CMU pronouncing
+dictionary. (5)~The \code{g2p\_en} neural model guesses the phones of anything left.
 \end{itemize}
 
 \subsection{Telugu front-end}
 \label{sec:te-frontend}
-Telugu script is close to phonemic, so the G2P applies rules to each akshara. A consonant with a vowel sign gives
-C\,V; a consonant with virama (\tel{్}) gives C, which covers conjuncts and geminates; a bare consonant keeps the
-inherent \emph{a}, because Telugu does not drop it at the end of a word. The anusvara (\tel{ం}) becomes the nasal
-that matches the next consonant (\emph{ng, ny, nn, n, m}), or \emph{m} at the end of a word. The visarga (\tel{ః})
-becomes \emph{h}, and \tel{ఋ}/\tel{ృ} become \emph{r u}. Aspirated stops (\emph{kh, gh, ph, bh}, \ldots), retroflex
-stops (\emph{tt, dd, nn}) and long vowels (\emph{aa, ii, uu, ee, oo}) are separate phones. The same G2P writes the
+Telugu is written in \emph{aksharas}, syllable-sized units made of a consonant (or a cluster) plus a vowel sign,
+or of a vowel alone. The spelling is close to phonemic: each letter stands for nearly one sound, so rules can
+replace a dictionary. The G2P applies them to each akshara. A consonant with a vowel sign gives consonant + vowel. A
+consonant with a virama (\tel{్}, a mark that removes the vowel) gives the consonant alone, which covers
+consonant clusters and doubled (geminate) consonants. A bare consonant keeps its built-in vowel \emph{a}, because
+Telugu does not drop it at the end of a word. The anusvara (\tel{ం}, a nasal mark) becomes the nasal that matches
+the next consonant (\emph{ng, ny, nn, n, m}), or \emph{m} at the end of a word. The visarga (\tel{ః}) becomes
+\emph{h}, and \tel{ఋ}/\tel{ృ} become \emph{r u}. Aspirated stops (consonants that briefly block the air, like
+\emph{p, t, k}) spoken with a puff of air (\emph{kh, gh, ph, bh},
+\ldots), retroflex consonants, spoken with the tongue curled back (\emph{tt, dd, nn}), and long vowels
+(\emph{aa, ii, uu, ee, oo}) are separate phones, 49 in all. The same G2P writes the
 MFA pronunciation dictionary and produces the phones at inference, so training and synthesis always agree.
 
 The normaliser writes numbers out as Telugu words (2026 $\to$ \tel{రెండు వేల ఇరవై ఆరు}), ordinals with \tel{వ}
@@ -156,15 +231,17 @@ tokens when the merged form occurs in the training transcripts and the left piec
 \section{Data}
 \label{sec:data}
 \subsection{English: Svarah}
-Svarah is an ASR test set of Indian-accented English with 117 speakers and both read and spontaneous speech. It
-was not built for TTS, so my selection mostly removed noisy clips and clips that would align badly. The Hugging Face
-copy holds 6,656 clips (9.61\,h) and no speaker column. Its file-name prefix marks the recording, not the speaker
+Svarah is a test set for automatic speech recognition (ASR) of Indian-accented English, with 117 speakers and
+both read and spontaneous speech. It was not built for TTS, so my selection mostly removed noisy clips and clips the
+aligner would struggle with. A multi-speaker model learns one vector per speaker (its speaker embedding), so it
+needs to know who speaks each clip. The Hugging Face copy holds 6,656 clips (9.61\,h) but no speaker column. Its file-name prefix marks the recording, not the speaker
 (2,938 distinct values). I recovered speakers from the full metadata tuple: gender, age group, first language,
 state, district, education, job and domain. That gives 115 groups for 117 published speakers, so two pairs of
 speakers probably share a group.
 
 \begin{table}[H]\centering\small
-\caption{English selection funnel.}
+\caption{English selection funnel: each step keeps the clips that pass it. SNR (signal-to-noise ratio) is a rough
+estimate of how much louder the speech is than the background.}
 \label{tab:en-funnel}
 \begin{tabular}{@{}lrr@{}}
 \toprule
@@ -182,7 +259,9 @@ After alignment and feature extraction (silence-trimmed) & 3,464 / 742 & 4.64 / 
 \end{tabular}
 \end{table}
 
-I drew the validation set per speaker, about one sixth of each speaker's selected audio. All 99 speakers therefore
+The filtered pool held 6.26\,h, more than the 6\,h target (5\,h training + 1\,h validation), so the split kept the first 96\% of each speaker's
+shuffled clips and left the other 147 (0.20\,h) unused. I drew the validation set per speaker, about one sixth of
+each speaker's selected audio. All 99 speakers therefore
 appear in both sets, but no clip does. The model needs this: it learns one embedding per speaker, and a speaker
 seen only in validation would have an untrained one. The SNR in Table~\ref{tab:en-funnel} is a cheap estimate (the
 ratio of the 90th to the 10th percentile of 25\,ms frame energies), not a measurement.
@@ -214,11 +293,12 @@ The female voice has almost twice the audio, but most of it sits in clips longer
 of GPU memory in FastSpeech 2, because attention grows with the square of the length and a batch pads to its
 longest clip; they also align less reliably. I therefore kept the 1--11\,s window used for English. Inside it, the
 female voice has 1.89\,h, too little for 5\,h of training, and the male voice has 6.22\,h. I chose the male voice
-and set its F0 search range to 60--350\,Hz. The sample rates differ (48 and 16\,kHz), but both voices are resampled
+and set its F0 search range to 60--350\,Hz. The pitch tracker only searches inside this range; one that fits the
+voice avoids octave errors, where the tracker reports half or double the true pitch. The sample rates differ (48 and 16\,kHz), but both voices are resampled
 to 22.05\,kHz and the mel filterbank stops at 8\,kHz, so the rate did not decide anything.
 
 \begin{table}[H]\centering\small
-\caption{Telugu selection funnel (male voice).}
+\caption{Telugu selection funnel (male voice), read like Table~\ref{tab:en-funnel}.}
 \label{tab:te-funnel}
 \begin{tabular}{@{}lrr@{}}
 \toprule
@@ -241,15 +321,17 @@ Removing duplicate transcripts before the split keeps every sentence on one side
 The mean clip lasts 6.85\,s in training and 6.82\,s in validation.
 
 \subsection{Alignment and features}
+Alignment gives the training targets for duration: the start and end of every phone in every clip.
 \begin{itemize}
-\item \textbf{English:} MFA 3.4.3 aligned the clips with its pretrained \code{english\_us\_arpa} acoustic model.
-The dictionary combines the LibriSpeech lexicon with g2p\_en pronunciations for unknown words. I widened the beams
-to 100/400 (defaults 10/40) because the speech is accented and partly spontaneous. All 4,207 selected clips
-aligned.
+\item \textbf{English:} MFA 3.4.3 aligned the clips with its pretrained \code{english\_us\_arpa} acoustic model (MFA's model of how
+each phone sounds).
+The dictionary combines the LibriSpeech lexicon with g2p\_en pronunciations for unknown words. I widened the aligner's
+search beams to 100/400 (defaults 10/40) because the speech is accented and partly spontaneous. All 4,207 selected
+clips aligned. Feature extraction then skipped one 1-second training clip (``in the world''), for a reason its log
+did not record, which leaves 3,464.
 \item \textbf{Telugu:} MFA has no pretrained Telugu model, so I trained one on the selected corpus
 (\code{mfa train --single\_speaker}) with the rule-based G2P dictionary of 12,141 words; the same run produced the
-alignments. MFA's default recipe (monophone, triphone, LDA+MLLT, then three rounds of speaker-adapted training)
-took 1.85\,h on 3 CPU jobs and aligned 3,136 of 3,155 clips; I dropped the 19 failures. Trimming silence removed
+alignments. MFA's standard multi-stage training recipe took 1.85\,h on 3 CPU jobs and aligned 3,136 of 3,155 clips; I dropped the 19 failures. Trimming silence removed
 more audio than for English (6.0\,h of clips became 4.96\,h of speech), because IndicTTS clips start and end with
 longer silences.
 \item \textbf{Features:} I cut leading and trailing silence at the alignment boundaries and computed mel
@@ -260,8 +342,8 @@ removing outliers. Pitch averages 176.3\,Hz (s.d.\ 56.8\,Hz) for English and 189
 \item \textbf{The Telugu voice is high for a man.} A wide 50--600\,Hz search on 40 Telugu clips gave a median F0
 of 186\,Hz (10th--90th percentile 136--245\,Hz), so the 60--350\,Hz range cut nothing off. I listened to a clip
 to confirm the label: the speaker is male, with a fairly high voice.
-\item I stored mels as float16 for upload (largest rounding error 0.004 in log-mel units); loading converts them
-back to float32.
+\item I stored the mel spectrograms in 16-bit floating point (float16) for upload, which halves their size; the
+largest rounding error is 0.004 on their log scale. Loading converts them back to 32-bit.
 \end{itemize}
 
 % =====================================================================
@@ -276,11 +358,12 @@ ming024 LJSpeech recipe unless noted.
 \begin{tabularx}{\linewidth}{@{}lX@{}}
 \toprule
 Optimiser & Adam, $\beta = (0.9, 0.98)$, $\epsilon = 10^{-9}$, no weight decay, gradient clipping at norm 1.0 \\
-Learning rate & Noam schedule: linear warm-up over 4,000 steps to $256^{-0.5}\cdot 4000^{-0.5} \approx 9.9\times10^{-4}$,
-then $\propto \mathrm{step}^{-0.5}$; multiplied by 0.3 at 40k, 50k and 55k steps \\
+Learning rate & Noam schedule, the warm-up-then-decay schedule of the original Transformer: linear warm-up over 4,000 steps to $256^{-0.5}\cdot 4000^{-0.5} \approx 9.9\times10^{-4}$,
+then $\propto \mathrm{step}^{-0.5}$ (256 is the model width); multiplied by 0.3 at 40k, 50k and 55k steps \\
 Batch & 16 utterances, drawn from groups of 4$\times$16 utterances sorted by length to limit padding \\
 Steps & up to 60,000, or until the Kaggle session's time budget runs out \\
-Precision & mixed (fp16 autocast with gradient scaling); losses computed in fp32 \\
+Precision & mixed: most arithmetic in 16-bit floating point (fp16), which is faster on the GPU, with gradient
+scaling against underflow; losses computed in 32-bit (fp32) \\
 Validation & the full validation set every 1,000 steps; the checkpoint with the lowest total validation loss is kept \\
 Seed & 1234 (model initialisation, data order); the split file fixes the data split \\
 Fine-tune ablation & English only: starts from the LJSpeech checkpoint (900k steps), learning rate $\times0.5$,
@@ -290,7 +373,8 @@ warm-up 1,000 steps, 30,000 steps; the speaker table and the pitch/energy bins s
 \end{table}
 
 \begin{table}[H]\centering\small
-\caption{What the runs did. Speed counts from step 1,000, because the first minutes include data loading.}
+\caption{What the runs did. Speed counts from step 1,000, because the first minutes include data loading. ``Best
+val.\ total'' is the lowest validation loss, the sum of the five loss terms in Section~\ref{sec:loss}.}
 \label{tab:runs}
 \begin{tabular}{@{}lrrrrr@{}}
 \toprule
@@ -306,8 +390,8 @@ Telugu, from scratch (released) & 60,000 & 224\,min & 279 & 12,000 & 2.048 \\
 \begin{itemize}
 \item The two English runs shared one Kaggle session, one per T4. Telugu ran alone on one T4 in a second session.
 All three runs reached their step limit inside the time budget.
-\item The LJSpeech checkpoint gave the fine-tune 231 tensors unchanged. The phone embedding kept its rows for the
-ARPAbet symbols, whose ids match in both models. I did not copy the pitch and energy bin edges, because they depend
+\item The LJSpeech checkpoint gave the fine-tune 231 of its 234 weight tensors unchanged. The phone embedding kept
+its rows for the ARPAbet symbols, whose ids match in both models. I did not copy the pitch and energy bin edges, because they depend
 on the statistics of the new data.
 \item The fine-tune's learning-rate factor of 0.5 does not lower the peak. With a 1,000-step warm-up the Noam
 schedule peaks twice as high as with 4,000 steps, so the factor only brings the peak back to $9.9\times10^{-4}$,
@@ -342,27 +426,31 @@ drop.}
 \end{figure}
 
 \paragraph{Both models stop generalising early.} English validation loss falls from 2.72 at step 1,000 to its
-minimum of 2.354 at step 14,000. Over the remaining 46,000 steps it stays between 2.35 and 2.39, while the training
-loss keeps falling from 1.14 to 0.82. Telugu follows the same pattern two thousand steps sooner: validation reaches
-2.048 at step 12,000 and then holds between 2.05 and 2.08, while training falls from 0.89 to 0.66. In both languages
-the last 46,000--48,000 steps fitted the training clips without helping on new ones. The released checkpoints come
+minimum of 2.354 at step 14,000. Over the remaining 46,000 steps it stays between 2.36 and 2.38, while the training
+loss keeps falling from 1.13 to 0.82. Telugu follows the same pattern two thousand steps sooner: validation reaches
+2.048 at step 12,000 and then holds between 2.06 and 2.09, while training falls from 0.89 to 0.66. In both languages
+the last 46,000--48,000 steps fitted the training clips without helping on new ones: the model overfitted. The released checkpoints come
 from the best steps, so they do not suffer, but three quarters of the GPU time bought nothing.
 
 \paragraph{The loss terms move differently.} English validation mel L1 bottoms out at step 13,000 (0.724) and then
 creeps up to 0.737: the decoder overfits. Validation pitch MSE keeps improving slowly until about step 46,000
 (0.436 $\rightarrow$ 0.412), and energy flattens after step 16,000 at 0.256. Validation duration MSE reaches its
-best at step 2,000 (0.213) and never improves again, while the training duration loss falls to 0.009. The duration
-predictor learns average phone lengths almost at once and then memorises the training clips. Telugu's terms
-behave the same way, with the mel minimum at step 10,000 (0.568).
+best at step 2,000 (0.212) and never improves again, while the training duration loss falls to 0.009. The duration
+predictor learns average phone lengths almost at once and then memorises the training clips. Telugu's mel L1 also
+bottoms out early (step 10,000, 0.568), but its duration and pitch keep learning longer: their validation losses
+reach their minimum at steps 11,000 (0.061) and 12,000 (0.567) and then get worse, pitch up to 0.588 by the end.
+Only Telugu energy improves slowly until step 38,000.
 
-\paragraph{The gap between training and validation is large}, above all for English duration (0.009 vs 0.224)
-and pitch (0.016 vs 0.413). Three causes are likely. The data is small: 4.6\,h, split over 99 speakers, about
-3\,min each. Part of Svarah is spontaneous speech, whose timing and intonation vary in ways the phonemes cannot
+\paragraph{The gap between training and validation is large.} It is largest for English duration (0.009 vs
+0.224) and pitch (0.016 vs 0.413). Three causes are likely. The data is small: 4.6\,h, split over 99 speakers, about
+3\,min each. Part of Svarah is spontaneous speech, whose timing and intonation vary in ways the phones cannot
 predict. Unseen voices are not the cause: validation uses the same 99 speakers as training.
 
 \paragraph{Telugu learns duration far better, and pitch only looks worse.} Duration loss is not standardised, so
-the two languages compare directly: Telugu reaches 0.06 and English 0.21, which means a typical duration error of
-$e^{0.25}\approx1.28\times$ against $e^{0.47}\approx1.60\times$. One voice reading prepared text times its speech
+the two languages compare directly: Telugu reaches 0.061 and English 0.212. The loss is a squared error on log
+durations, so its square root is a typical error on the log scale, $\sqrt{0.061}\approx0.25$ and
+$\sqrt{0.212}\approx0.46$: a predicted duration is typically off by a factor of $e^{0.25}\approx1.28$ in Telugu
+against $e^{0.46}\approx1.59$ in English. One voice reading prepared text times its speech
 far more regularly than 99 speakers partly talking freely. Telugu's validation pitch MSE (0.567) exceeds English's
 (0.418), but each corpus standardises pitch with its own spread. The English spread of 56.8\,Hz includes the
 differences between 99 voices, which the speaker embedding explains for free. In Hz the root-mean-square error is
@@ -371,8 +459,8 @@ $\sqrt{0.567}\times42.7\approx32$\,Hz for Telugu and $\sqrt{0.418}\times56.8\app
 \paragraph{Fine-tuning from LJSpeech helps the decoder only.} The fine-tuned model starts much lower (validation
 total 2.54 vs 2.72 at step 1,000) and reaches a slightly lower mel loss (best 0.715 vs 0.724). Its pitch and energy
 losses stay higher, though: 0.440 vs 0.418 and 0.267 vs 0.259 at each run's best step. Its best total, 2.369, does
-not beat training from scratch (2.354). The LJSpeech start gives the decoder spectral detail, but the variance
-predictors gain nothing. Their bins restart from zero, and one American woman reading books does not prosodically
+not beat training from scratch (2.354). The LJSpeech start gives the decoder spectral detail, but the duration, pitch and
+energy predictors gain nothing. Their bins restart from zero, and one American woman reading books does not prosodically
 resemble 99 Indian speakers.
 
 % =====================================================================
@@ -384,15 +472,15 @@ records the phones the model received and the duration, F0 and energy it predict
 \paragraph{English} (released model, speaker \code{en\_s073}, male).
 
 \begin{table}[H]\centering\small
-\caption{English test sentences and what the front-end did with the hard part. Phones come from the saved JSON
-files.}
+\caption{English test sentences and what the front-end did with the hard part. Phones are in ARPAbet and come
+from the saved JSON files; the digit after a vowel marks stress (1 primary, 2 secondary, 0 none).}
 \label{tab:en-test}
-\begin{tabularx}{\linewidth}{@{}lXr@{}}
+\begin{tabularx}{\linewidth}{@{}l>{\raggedright\arraybackslash}Xr@{}}
 \toprule
 Id & Sentence and front-end output & Length \\
 \midrule
 E1 & The antidisestablishmentarianism movement gained considerable momentum during the parliamentary proceedings.
-Neither dictionary has the long word, so g2p\_en produced 26 phones
+The LibriSpeech lexicon lacks the long word, but CMUdict has it: 28 phones
 (\code{AE2 N T AY0 D IH0 S AH0 S T AE2 B L IH0 SH M AH0 N T EH1 R IY0 AH0 N IH0 Z AH0 M}), spoken in 1.75\,s. & 5.34\,s \\
 E2a & The orchestra's conduct during the ceremony was praised by the audience. Noun: \code{K AA1 N D AH0 K T},
 stress on the first syllable. & 3.41\,s \\
@@ -411,10 +499,11 @@ produced ``ten forty five AM on twelfth November twenty twenty six'' and spelled
 
 \paragraph{The English audio sounds mumbled.} The speech is understandable and the sentences come out whole, but
 the speaker seems to swallow the words: consonants are soft and syllables run into each other. FastSpeech 2 cannot
-skip or repeat words the way attention-based models can, because its durations are explicit. In the whole test set
-only one phone received zero frames, the schwa of ``-able'' in ``considerable'' (\code{B AH0 L}), which speakers
+skip or repeat words, because its durations are explicit. Attention-based models such as Tacotron 2 learn the
+timing implicitly and sometimes do skip or repeat. In the whole test set
+only one phone received zero frames, the schwa (the weak ``uh'' vowel) of ``-able'' in ``considerable'' (\code{B AH0 L}), which speakers
 often drop as well because the /l/ carries the syllable. Section~\ref{sec:var} measures the mumbling and traces it
-to over-smoothed spectrograms.
+to over-smoothed spectrograms from the decoder.
 
 \paragraph{Telugu} (released model, one male voice). The phones use the front-end's romanisation: doubled vowels
 are long, and \code{tt}, \code{dd}, \code{nn} are retroflex.
@@ -422,12 +511,12 @@ are long, and \code{tt}, \code{dd}, \code{nn} are retroflex.
 \begin{table}[H]\centering\small
 \caption{Telugu test sentences and what the front-end did with the hard part.}
 \label{tab:te-test}
-\begin{tabularx}{\linewidth}{@{}lXr@{}}
+\begin{tabularx}{\linewidth}{@{}l>{\raggedright\arraybackslash}Xr@{}}
 \toprule
 Id & Sentence, meaning and front-end output & Length \\
 \midrule
 T1 & \tel{న్యూరోఫార్మకోలాజికల్ పరిశోధనలో నూతన ఔషధాల ప్రభావాన్ని విశ్లేషించారు.} (``The effect of new drugs was
-analysed in neuropharmacological research.'') The long loanword became 22 phones
+analysed in neuropharmacological research.'') The long loanword became 19 phones
 (\code{n y uu r oo ph aa r m a k oo l aa j i k a l}), spoken in 1.49\,s. The G2P reads \tel{ఫ} as aspirated
 \code{ph}, its textbook value, although many speakers say /f/ in English loanwords. & 4.42\,s \\
 T2a & \tel{తాడుపై అతని పట్టు చాలా బలంగా ఉంది.} (``His grip on the rope is very strong.'') & 2.03\,s \\
@@ -450,8 +539,8 @@ speech: \code{u n d i} (\tel{ఉంది}), \code{b a l a ng g aa} (\tel{బల
 \tel{విశ్లేషించారు}.
 
 \paragraph{I could not judge the Telugu audio by ear,} because I do not speak Telugu. Speech recognisers listened
-instead (Section~\ref{sec:asr}), and the measurements in Section~\ref{sec:var} compare the predictions with real
-recordings of the same sentences.
+instead (Section~\ref{sec:asr}), and the measurements in Section~\ref{sec:var} compare the model's predictions with real
+recordings of validation sentences.
 
 \subsection{Speech recognition check}
 \label{sec:asr}
@@ -459,7 +548,7 @@ Whisper base (74\,M parameters) transcribed the audio. English used \code{openai
 \code{vasista22/whisper-telugu-base}, a Whisper base model that IIT Madras fine-tuned on Telugu. A recogniser
 makes its own errors, so I measured a ceiling first. I took 30 random validation clips per language and turned
 their \emph{real} mel spectrograms into audio with the same HiFi-GAN vocoder. The released models then synthesised
-the same 30 sentences from their phones, and the difference between the two error rates is what the acoustic model
+the same 30 sentences from their phones, and the difference between the two error rates is what FastSpeech 2
 adds. Character error rate (CER) is the main measure. Telugu words are long, so one wrong letter fails a whole
 word and inflates the word error rate (WER) even for real speech.
 
@@ -473,29 +562,30 @@ word and inflates the word error rate (WER) even for real speech.
 \midrule
 Real, vocoded (30 validation clips) & 6.4 & 14.4 & 3.4 & 21.8 \\
 Synthesised, same 30 sentences & 10.0 & 21.0 & 4.7 & 23.6 \\
-Test sentences (6 English, 5 Telugu) & 26.4 & 56.9 & 3.1 & 20.0 \\
+Test sentences (English 5 + E3\_no\_repair, Telugu 5) & 26.4 & 56.9 & 3.1 & 20.0 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \paragraph{Synthesised Telugu is almost as intelligible as real speech:} 4.7\% CER against 3.4\%, a gap of
 1.3 points. T1, T2a and T2b came back with every letter right; in T1 the recogniser only split the loanword into
-two words (\tel{న్యూరో ఫార్మకోలాజికల్}). T4's numbers came back intact (\tel{రెండు వేల ఇరవై ఆరు}, \tel{పది నలభై ఐదు}),
-and its remaining differences are spellings that sound the same (\tel{ప్రారంభం అవుతుంది} for
-\tel{ప్రారంభమవుతుంది}). T3 holds the one real error: \tel{అడవిలో నిశ్శబ్దంగా} (``silently in the forest'') came
+two words (\tel{న్యూరో ఫార్మకోలాజికల్}). In T4 the year and the time came back word for word (\tel{రెండు వేల ఇరవై ఆరు}, \tel{పది నలభై ఐదు}), and its
+remaining differences are word splits that sound the same: \tel{పన్నెండు వ} for \tel{పన్నెండవ} (12th) and
+\tel{ప్రారంభం అవుతుంది} for \tel{ప్రారంభమవుతుంది}. T3 holds the one real error: \tel{అడవిలో నిశ్శబ్దంగా} (``silently in the forest'') came
 back as \tel{అడవిలోని శబ్దంగా}. The recogniser heard one \emph{ś} where the text has two and attached the syllable
 \tel{ని} to the previous word. The duration predictor did not shorten the doubled consonant: it gave the two
 \emph{ś} phones 105 and 93\,ms, the longest consonant in the sentence. Either the vocoded audio blurs the double
 \emph{ś}, or the recogniser preferred a more common word split; the data here cannot tell which.
 
 \paragraph{Synthesised English loses more:} 10.0\% CER against 6.4\% for real speech, 3.6 points, and 21.0\%
-against 14.4\% WER. On 30 clips this gap only approaches significance (Section~\ref{sec:ablation}). The larger gap matches the flux measurement in Section~\ref{sec:var} and the mumbled sound.
+against 14.4\% WER. On 30 clips this gap only approaches significance (Section~\ref{sec:ablation}). The larger
+gap matches the flux measurement in Table~\ref{tab:var} and the mumbled sound.
 The test sentences fare far worse (26.4\% CER), because they are built from rare words that a 74\,M recogniser
 struggles with even when spoken clearly. I have no real recordings of them, so the table cannot separate the two
 causes. E2a came back almost perfectly, with only ``audience'' heard as ``Indians''. E1 became ``the untetish
 establishment, the Zionism movement'', and ``momentum'' became ``movement''. In E2b the opening ``The researchers
-will conduct an'' became ``Please suggest welcome the pen''. E4 lost the time, the date and ``so andaroo''. In
-E3 the recogniser heard ``I don't know if'' for ``The rhythm of'' and scored the repaired version (37.5\% CER)
+will conduct an'' became ``Please suggest welcome the pen''. E4 kept the time (``10.45'') but lost ``AM'', the date and ``so andaroo''. In
+E3 the recogniser heard ``I don't know if'' for ``The rhythm of'' and scored the repaired version (39.6\% CER)
 worse than the unrepaired one (16.7\%). One sentence through one recogniser cannot show whether the repair helps;
 the phones in Table~\ref{tab:en-test} show that it gives the model the right input.
 
@@ -509,19 +599,23 @@ transcript, and \code{tools/} holds the scripts.
 % =====================================================================
 \section{Variance adaptor predictions}
 \label{sec:var}
-Every test sentence has four plots in \code{Results/<Language>/variance\_adaptor\_plots/}: predicted duration per
+The variance adaptor predicts each phone's duration, pitch and energy (Section~\ref{sec:background}). Every test
+sentence has four plots of its predictions in \code{Results/<Language>/variance\_adaptor\_plots/}: predicted duration per
 phone, F0 per phone in Hz, energy per phone, and an overview that stacks the generated mel spectrogram over F0 and
 energy on one time axis (Figures~\ref{fig:en-ov} and~\ref{fig:te-ov}).
 
 \begin{figure}[H]\centering
 \includegraphics[width=0.92\linewidth]{English/variance_adaptor_plots/overview/E1.png}
-\caption{English E1: generated mel spectrogram with the predicted F0 and energy per phone.}
+\caption{English E1. Top: the generated mel spectrogram (bright means loud; low bands at the bottom), with the
+words above. Middle and bottom: the predicted F0 and energy of each phone; thin vertical lines mark phone
+boundaries. Energy is the STFT frame norm, in arbitrary units.}
 \label{fig:en-ov}
 \end{figure}
 
 \begin{figure}[H]\centering
 \includegraphics[width=0.92\linewidth]{Telugu/variance_adaptor_plots/overview/T1.png}
-\caption{Telugu T1. Matplotlib cannot shape Telugu script, so the word labels show the romanised phones.}
+\caption{Telugu T1, laid out like Figure~\ref{fig:en-ov}. The plotting library cannot draw Telugu script, so the
+word labels show the romanised phones.}
 \label{fig:te-ov}
 \end{figure}
 
@@ -533,8 +627,9 @@ differ, so I compare utterance-level statistics, not frames.
 
 \begin{table}[H]\centering\small
 \caption{Predictions on 80 validation clips per language against the real features of the same clips (medians).
-A spread ratio is predicted SD / real SD within an utterance, so 1.0 means the same spread. Global variance is the
-per-mel-bin variance over time; flux is the mean absolute change between neighbouring frames.}
+For every row, 1.0 means a perfect match. A spread ratio is predicted / real standard deviation within an
+utterance. Global variance is each mel band's variance over the utterance; flux is the mean absolute change between
+neighbouring frames (Table~\ref{tab:terms}).}
 \label{tab:var}
 \begin{tabular}{@{}lccc@{}}
 \toprule
@@ -553,8 +648,8 @@ Mel flux, predicted / real & 0.63 & 0.61 & 0.88 \\
 \end{table}
 
 \paragraph{Flux measures the mumbling.} A real English spectrogram changes from one frame to the next 1.6 times as
-much as the predicted one (flux ratio 0.63). Transitions between sounds therefore blur: a stop's burst, the jump
-from consonant to vowel, the movement of a formant. That is what ``swallowed'' words sound like. The L1 mel loss
+much as the predicted one (flux ratio 0.63). Transitions between sounds therefore blur: the burst of a /t/ or /k/, the jump
+from consonant to vowel, the movement of a formant (a resonance of the mouth that identifies a vowel). That is what ``swallowed'' words sound like. The L1 mel loss
 causes it. When several spectrograms fit the same phones, the loss rewards their middle, and the middle of several
 sharp transitions is one soft one. Telugu loses much less (0.88), because one speaker's read speech leaves fewer
 plausible spectrograms to average. The fine-tune keeps more overall variance (0.88) but not sharper transitions
@@ -577,24 +672,26 @@ that, I gave the released models the real values from the recording in place of 
 at a time, on the same 30 validation clips as Section~\ref{sec:asr}. Every version went through the same HiFi-GAN
 and the same recogniser. Two further measures compare each version with the real recording: mel-cepstral
 distortion (MCD), the distance between the generated and the real spectrogram, and the root-mean-square F0 error
-in cents (100 cents make a semitone).
+in cents (100 cents make a semitone). Lower is better for both (Table~\ref{tab:terms}).
 
 \begin{table}[H]\centering\small
-\caption{Real values in place of predictions, on 30 validation clips per language (means). ``Real, vocoded'' is
-the recording's own spectrogram through the vocoder; MCD and F0 error use it as the reference.}
+\caption{Real values in place of predictions, on 30 validation clips per language (means; lower is better in
+every column). Each row names what the model was given from the recording instead of predicting it. ``Real
+recording, vocoded'' is the recording's own spectrogram through the vocoder; MCD and F0 error use it as the
+reference.}
 \label{tab:ablation}
 \begin{tabular}{@{}lrrrrrr@{}}
 \toprule
  & \multicolumn{3}{c}{English} & \multicolumn{3}{c}{Telugu} \\
 \cmidrule(lr){2-4}\cmidrule(l){5-7}
-Duration / pitch and energy & CER \% & MCD dB & F0 cents & CER \% & MCD dB & F0 cents \\
+Taken from the recording & CER \% & MCD dB & F0 cents & CER \% & MCD dB & F0 cents \\
 \midrule
-Predicted / predicted (normal) & 10.0 & 3.05 & 310 & 4.7 & 2.55 & 316 \\
-Real / predicted & 12.3 & 3.05 & 302 & 3.8 & 2.50 & 298 \\
-Predicted / real & 10.0 & 2.78 & 202 & 3.7 & 2.04 & 119 \\
-Real / real & 11.5 & 2.81 & 180 & 4.2 & 1.98 & 116 \\
+Nothing (the normal system) & 10.0 & 3.05 & 310 & 4.7 & 2.55 & 316 \\
+Durations & 12.3 & 3.05 & 302 & 3.8 & 2.50 & 298 \\
+Pitch and energy & 10.0 & 2.78 & 202 & 3.7 & 2.04 & 119 \\
+Durations, pitch and energy & 11.5 & 2.81 & 180 & 4.2 & 1.98 & 116 \\
 \midrule
-Real, vocoded & 6.4 & -- & -- & 3.4 & -- & -- \\
+Real recording, vocoded & 6.4 & -- & -- & 3.4 & -- & -- \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -625,7 +722,7 @@ more than the noise: every 95\% interval spans zero and covers 6 to 7 points. In
 lowered CER by 1.1 points (interval 0.2 to 2.0), but with real durations added the gain shrank to 0.5 and lost
 significance, so I read no pattern into it. Thirty clips can resolve a difference of about 1 point in Telugu and
 only about 3 in English. The same caution applies to Table~\ref{tab:asr}. Telugu's 1.3-point gap between real and
-synthesised speech holds (interval 0.3 to 2.5), but English's 3.5-point gap does not quite (interval $-0.4$ to 7.3).
+synthesised speech holds (interval 0.3 to 2.5), but English's 3.6-point gap does not quite (interval $-0.4$ to 7.3).
 
 \paragraph{Method details.} MCD uses cepstral coefficients 1 to 24 of the 80-band log-mel spectrogram, averaged
 over DTW-aligned frames, silences included. It compares the model's spectrogram before the vocoder. Other papers
@@ -639,13 +736,13 @@ for listening, and \code{logs/ablation.json} holds every number and transcript.
 \subsection{In the test sentences}
 \begin{itemize}
 \item \textbf{Declination.} F0 falls through every sentence, as it does in natural statements. The mean F0 of the
-last third of the vowels lies below that of the first third in all ten sentences: by 15--24\,Hz in English
-(for example 145 $\to$ 122\,Hz in E2a) and by 16--73\,Hz in Telugu (236 $\to$ 163\,Hz in T1).
+last third of the vowels lies below that of the first third in all ten sentences: by 15--25\,Hz in English
+(for example 145 $\to$ 123\,Hz in E2a) and by 16--74\,Hz in Telugu (236 $\to$ 163\,Hz in T1).
 \item \textbf{Pauses at commas.} E4 and T4 each contain a comma, and the front-end turns it into a pause token.
 The duration predictor gave those pauses 360\,ms (E4) and 314\,ms (T4), a natural length for a clause break. The
 other eight sentences have no internal punctuation and got no pauses.
 \item \textbf{Stress in ``conduct'' (E2a vs E2b).} The model marks the first syllable as the heteronym table
-intends. Stressed in the noun, its vowel lasts 58\,ms at 140\,Hz with energy 73; unstressed in the verb, it lasts
+intends. Stressed in the noun, its vowel lasts 58\,ms at 139\,Hz with energy 73; unstressed in the verb, it lasts
 35\,ms at 133\,Hz with energy 56. The second syllable follows only in loudness: the verb's stressed \code{AH1} is
 louder than the noun's unstressed \code{AH0} (76 vs 68), but shorter (46 vs 93\,ms) and lower (120 vs 130\,Hz).
 The model has learnt the stress contrast on the first syllable and only part of it on the second.
@@ -678,18 +775,19 @@ front-end mispronounces Telugu words such as ``andaroo''.
 \item \textbf{One pitch value per phone} cannot express a rise or fall inside a long vowel.
 \item \textbf{No listening test:} English quality rests on my own listening, and Telugu quality on a speech
 recogniser and the measures in Table~\ref{tab:var}, because I do not speak Telugu. A recogniser measures whether
-words survive, not whether speech sounds natural. A mean opinion score from several native listeners of each
-language would settle both.
+words survive, not whether speech sounds natural. A mean opinion score (MOS), in which several native listeners of each language
+rate naturalness from 1 to 5, would settle both.
 \end{itemize}
 
 \paragraph{Improvements, in the order I would try them.}
 \begin{enumerate}
 \item \textbf{Fine-tune HiFi-GAN on this model's outputs.} Running the trained FastSpeech 2 with the real durations
 gives predicted mels aligned to real audio; training the vocoder on those pairs teaches it to restore the detail
-the acoustic model smooths away. The HiFi-GAN authors fine-tune on Tacotron 2 outputs in the same way. This attacks
+FastSpeech 2 smooths away. The HiFi-GAN authors fine-tune their vocoder on the outputs of Tacotron 2 in the
+same way. This attacks
 the mumbling directly and needs no new data.
-\item \textbf{Add an adversarial loss on the mel spectrogram.} A discriminator penalises the averaged, blurred
-spectrograms that L1 rewards; this targets the flux deficit in Table~\ref{tab:var}.
+\item \textbf{Add an adversarial loss on the mel spectrogram.} A second network, a discriminator, learns to tell generated from real spectrograms and so penalises the
+averaged, blurred spectrograms that L1 rewards; this targets the flux deficit in Table~\ref{tab:var}.
 \item \textbf{Give English fewer speakers with more audio each}, for example the 20 speakers with the most clean
 read speech. Three minutes per voice is too little to learn a voice's timing and intonation.
 \item \textbf{Stop early.} Ending a run once validation loss has not improved for 10,000 steps would have cut
@@ -698,6 +796,55 @@ training to about 24,000 steps, 40\% of the GPU time.
 pretrained decoder keeps what it knows.
 \item \textbf{Add loanword rules}: \tel{ఫ} $\to$ /f/ in recognised English loanwords, and a Telugu-to-ARPAbet
 mapping for Telugu words in English text.
+\end{enumerate}
+
+% =====================================================================
+\section{Changes to the reference code}
+\label{sec:changes}
+This section lists every change to \code{ming024/FastSpeech2}, as the assignment asks. The repository keeps the
+ming024 file layout under \code{core/}.
+
+\subsection*{Bug fixes and updates}
+\begin{enumerate}
+\item \textbf{Silences in MFA 2/3 TextGrids.} MFA 2 and 3 write silences as empty intervals, and \code{tgt}, the library
+that reads TextGrid files, drops empty intervals by default. The phone durations then no longer added up to the mel length, which shifted every
+phone after a pause. The reader now keeps empty intervals and turns them into the pause phone \code{sp}
+(\code{include\_empty\_intervals=True}); it skips utterances that contain \code{spn}, MFA's mark for a word it
+could not align.
+\item \textbf{Energy control.} The pitch control (\code{p\_control}) scaled the energy predictor; the energy control
+(\code{e\_control}) now does.
+\item \textbf{Energy targets in float64.} ming024's \code{to\_device} converts every target to 32-bit floats
+(float32) except energy, and the energy files hold 64-bit floats (float64). Plain fp32 training on a CPU tolerates this. Under mixed precision on
+the GPU the backward pass fails (\code{Found dtype Double but expected Float}); both first Kaggle runs crashed on it. Energy
+now goes through \code{.float()}, and the loss casts every target to the prediction's type.
+\item \textbf{CPU and worker processes.} The STFT called \code{.cuda()} unconditionally, which broke CPU runs and
+forked feature-extraction workers. It now runs on the input's device.
+\item \textbf{librosa $\geq$ 0.10.} \code{pad\_center} and \code{mel} need keyword arguments.
+\item \textbf{Length regulator} vectorised with \code{torch.repeat\_interleave}: same output, faster on GPU.
+\item \textbf{All-zero predicted durations} now still produce one frame.
+\item \textbf{Checkpoints} store the learning rate as a plain float, so
+\code{torch.load(weights\_only=True)} can read them.
+\end{enumerate}
+
+\subsection*{Additions}
+\begin{enumerate}[resume]
+\item \code{lr\_scale} in the scheduler and \code{--init\_from} in training, for fine-tuning. Every tensor with a
+matching shape is copied; the phone embedding copies its overlapping rows; the pitch and energy bins come from the
+new data; new tensors such as the speaker table keep their random start.
+\item A split file written at data selection fixes the train/validation lists, instead of a random shuffle.
+\item Feature extraction runs in parallel, and each language and voice sets its own F0 search range.
+\item Training: mixed precision (fp16 autocast), a full validation pass every 1,000 steps, all losses in a CSV
+file, best (lowest validation loss) and last checkpoints, \code{--resume}, and a wall-clock budget for Kaggle.
+\item Inference: language-specific text front-ends (Section~\ref{sec:frontends}). Each sentence gets a JSON file with the predicted duration
+(frames and ms), F0 (Hz) and energy per phone, de-normalised with the corpus statistics, and four plots.
+\item \textbf{Telugu support}, which the reference code lacks: a text normaliser and a rule-based G2P
+(Section~\ref{sec:te-frontend}), and a Telugu MFA acoustic model trained on the selected corpus, because MFA has no
+pretrained one. The 49 Telugu phones go at the \emph{end} of the symbol table, the list that maps each phone to the
+number the model reads, so the original symbols keep their numbers and the LJSpeech checkpoint still loads.
+\item \textbf{English front-end}: number, date and time normalisation and a split-word repair
+(Section~\ref{sec:en-frontend}).
+\item Data preparation scripts for both corpora (selection, quality filters, split), and a script that builds
+self-contained Kaggle notebooks.
 \end{enumerate}
 
 % =====================================================================
@@ -711,8 +858,8 @@ and a CPU build for data preparation; librosa 0.11; pyworld; soundfile; soxr; tg
 unprivileged user \code{mfa}. MFA 3.4 has no \code{--beam} flag, so the beams go through a YAML file.
 
 \paragraph{Configuration.} \code{English/config.yaml} and \code{Telugu/config.yaml} hold everything that affects
-the results: selection thresholds, feature settings, model size, optimiser and steps. The prepared data keeps the
-copies actually used (\code{config\_used.yaml}). \code{split.tsv} fixes the data split, and seed 1234 fixes
+the results: selection thresholds, feature settings, model size, optimiser and steps. The Kaggle preparation step also saves the
+copy it used (\code{config\_used.yaml}) next to the prepared data. \code{split.tsv} fixes the data split, and seed 1234 fixes
 selection and training. GPU training still differs slightly between runs, because some CUDA kernels are
 non-deterministic and fp16 rounds differently. Inference does reproduce: I cloned the public repository into
 an empty folder, followed the README, and ran every inference command on CPU. The English test audio came out
@@ -720,29 +867,43 @@ identical to the released files byte for byte (I made those on CPU too). The Tel
 and the CPU rerun matched their predicted pitch within 0.11\,Hz and their durations exactly, except for one phone of
 T2b that lost a single frame (12\,ms).
 
-\paragraph{Commands.} From the repository root:
+\paragraph{Commands.} From the repository root (\code{README.md} has the same commands with comments). The
+data preparation steps run as root, because of MFA's \code{mfa} user:
 \begin{verbatim}
 pip install -r requirements.txt
-sudo bash core/prep/mfa.sh setup                       # MFA 3.4.3 (+ user "mfa")
-# data selection -> MFA alignment -> features
-sudo python English/preprocess.py --stage all --hf_dir <svarah parquet dir>
-sudo python Telugu/preprocess.py  --stage all --hf_dir <indictts parquet dir> --gender male
+python -c "import nltk; [nltk.download(r) for r in ['averaged_perceptron_tagger',
+           'averaged_perceptron_tagger_eng', 'cmudict']]"
+curl -L -o core/hifigan/generator_universal.pth.tar.zip \
+ https://github.com/ming024/FastSpeech2/raw/master/hifigan/generator_universal.pth.tar.zip
+bash core/prep/mfa.sh setup                  # MFA 3.4.3 (+ user "mfa")
+# data selection -> MFA alignment -> features (as root)
+python English/preprocess.py --stage all --hf_dir <svarah parquet dir>
+python Telugu/preprocess.py  --stage all --hf_dir <indictts parquet dir> --gender male
 # training (best + last checkpoints, CSV losses in work/<Lang>/logs)
 python English/train.py
+python English/train.py --config English/config_finetune.yaml --tag finetune \
+       --init_from <LJSpeech_900000.pth.tar> --total_step 30000
 python Telugu/train.py
 # test sentences -> Results/<Lang>/{test_generated_audios, variance_adaptor_plots}
 python English/inference.py --speaker en_s073
+python English/inference.py --speaker en_s073 --no_repair --suffix _no_repair --only E3
+python English/inference.py --speaker en_s034 \
+       --out_dir Results/English/other_speakers/en_s034
+python English/inference.py --config English/config_finetune.yaml --speaker en_s073 \
+       --ckpt English/checkpoints/finetune/best_model_fp16.pth.tar \
+       --out_dir Results/English/finetune_ablation
 python Telugu/inference.py
 python Telugu/inference.py --no_repair --suffix _no_repair --only T3
 # loss plots + fp16 release checkpoints
-python core/export.py --lang English --runs scratch:work/English/logs \
-                      --ckpt_dirs scratch:English/checkpoints
+python core/export.py --lang English \
+       --runs scratch:work/English/logs finetune:work/English/logs/finetune \
+       --ckpt_dirs scratch:English/checkpoints finetune:English/checkpoints/finetune
 python core/export.py --lang Telugu --runs scratch:work/Telugu/logs \
-                      --ckpt_dirs scratch:Telugu/checkpoints
+       --ckpt_dirs scratch:Telugu/checkpoints
 \end{verbatim}
 The Kaggle notebooks in \code{kaggle/} run the same commands, and \code{kaggle/build\_notebooks.py} rebuilds them
 with the current code embedded. The scripts in \code{tools/} produce every evaluation in Sections~\ref{sec:asr}
-and~\ref{sec:var}: \code{asr\_eval.py} and \code{asr\_rescore.py} the recogniser check, \code{variance\_eval.py}
+and~\ref{sec:var}, and \code{Results/<Language>/logs/} keeps their outputs: \code{asr\_eval.py} and \code{asr\_rescore.py} the recogniser check, \code{variance\_eval.py}
 Table~\ref{tab:var}, and \code{ablation\_eval.py} with \code{ablation\_ci.py} Table~\ref{tab:ablation} and its
 intervals. Each script's header gives its arguments. They need \code{transformers} and \code{jiwer} on top of
 \code{requirements.txt}.

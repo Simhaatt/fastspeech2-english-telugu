@@ -2,7 +2,7 @@
 noise from having only N clips? Resamples clips with replacement (same clips for both conditions) and
 reports the 95% interval of CER(condition) - CER(pred), with CER pooled over the resampled clips.
 
-    python ablation_ci.py <ablation json> [B]
+    python tools/ablation_ci.py <ablation json from ablation_eval.py> [B]
 """
 import json
 import re

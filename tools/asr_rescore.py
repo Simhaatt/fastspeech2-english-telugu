@@ -4,6 +4,8 @@ Whisper's BasicTextNormalizer drops Unicode combining marks, which in Telugu are
 virama, so it would compare consonant skeletons only. This keeps every letter and mark and removes only
 punctuation and symbols. CER is reported with and without spaces (word-splitting differences such as
 'న్యూరో ఫార్మకో...' vs one word should not count as letter errors).
+
+    python tools/asr_rescore.py <json from asr_eval.py>
 """
 import json
 import re

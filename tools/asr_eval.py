@@ -4,7 +4,7 @@ For N random validation clips: (a) the real mel through HiFi-GAN ("real, vocoded
 FastSpeech 2 model's mel from the same phones through HiFi-GAN ("synthesized"). Both go through the same
 Whisper model; CER/WER against the transcript. Also transcribes the test-sentence WAVs.
 
-    python asr_eval.py <project> <lang> <ckpt> <config> <preprocessed dir or zip::prefix> <asr model>
+    python tools/asr_eval.py <project> <en|te> <ckpt> <config> <preprocessed dir or zip::prefix> <asr model>
                        <test wav dir> <test refs tsv> <out json> [N]
 """
 import csv

@@ -5,7 +5,7 @@ phone-level correlations, log-duration correlation, total-length ratio, and two 
 measures: global variance (per-bin variance over time) and spectral flux (mean |frame-to-frame change|),
 each as predicted / real. Prints means and medians over N random validation clips.
 
-    python variance_eval.py <project> <lang> <ckpt> <config> <preprocessed dir or zip::prefix> [N]
+    python tools/variance_eval.py <project> <English|Telugu> <ckpt> <config> <preprocessed dir or zip::prefix> [N]
 """
 import io
 import json

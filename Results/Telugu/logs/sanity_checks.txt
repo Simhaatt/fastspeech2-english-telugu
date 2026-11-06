@@ -1,0 +1,3 @@
+[Telugu] 1. clips 3136: duration sum != mel frames in 0, per-phone count mismatch in 0 [] []
+[Telugu] 2. validation loss of best_model_fp16.pth.tar: total 2.0482 mel 0.5701 mel_postnet 0.5699 pitch 0.5673 energy 0.2784 duration 0.0625 | logged best total 2.0481
+[Telugu] 4. learning rate: 600 logged steps, largest relative difference from the schedule 2.1e-04 (the log keeps 4 significant digits)

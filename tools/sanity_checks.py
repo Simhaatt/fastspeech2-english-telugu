@@ -4,8 +4,9 @@
 2. Re-computes the validation loss of the released fp16 checkpoint on the full validation set with the training
    code's own evaluate() (fp32, CPU), to compare with the logged best value.
 3. English: the speaker embedding changes the voice (per-speaker real F0 vs predicted F0 for two speakers).
+4. The learning rate logged during training follows the Noam schedule with the configured drops.
 
-    python sanity_checks.py <project> <lang> <config> <ckpt> <preprocessed dir> <logged best val>
+    python tools/sanity_checks.py <project> <English|Telugu> <config> <ckpt> <preprocessed dir> <logged best val>
 """
 import json
 import os
@@ -72,3 +73,19 @@ if lang == "English":
                                for t in ("E1", "E2a", "E2b", "E3", "E4")])
         print(f"[{lang}] 3. {spk}: real training F0 median {np.median(real):.0f} Hz | predicted on test "
               f"sentences median {np.median(pred):.0f} Hz")
+
+# 4. logged learning rate vs the schedule in core/model/optimizer.py (same formula, recomputed from the config)
+import csv  # noqa: E402
+
+o = tc["optimizer"]
+peak = mc["transformer"]["encoder_hidden"] ** -0.5 * o.get("lr_scale", 1.0)
+worst, rows = 0.0, 0
+for r in csv.DictReader(open(os.path.join(proj, "Results", lang, "logs", "losses_scratch.csv"))):
+    if r["split"] != "train":
+        continue
+    st = int(r["step"])
+    lr = peak * min(st ** -0.5, o["warm_up_step"] ** -1.5 * st) * o["anneal_rate"] ** sum(st > a for a in o["anneal_steps"])
+    worst = max(worst, abs(float(r["lr"]) - lr) / lr)
+    rows += 1
+print(f"[{lang}] 4. learning rate: {rows} logged steps, largest relative difference from the schedule {worst:.1e} "
+      f"(the log keeps 4 significant digits)")

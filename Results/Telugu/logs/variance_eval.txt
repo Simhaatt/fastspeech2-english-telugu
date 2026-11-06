@@ -1,0 +1,11 @@
+== Telugu | Telugu\checkpoints\best_model_fp16.pth.tar | 80 validation clips
+   pitch_sd   mean  0.859  median  0.848  [p10  0.718, p90  1.009]
+   energy_sd  mean  1.076  median  0.942  [p10  0.721, p90  1.747]
+   pitch_r    mean  0.742  median  0.747  [p10  0.601, p90  0.895]
+   energy_r   mean  0.904  median  0.918  [p10  0.856, p90  0.944]
+   logdur_r   mean  0.834  median  0.851  [p10  0.767, p90  0.896]
+   length     mean  0.974  median  0.966  [p10  0.902, p90  1.052]
+   gv_all     mean  0.977  median  0.967  [p10  0.794, p90  1.188]
+   gv_0_20    mean  0.957  median  0.930  [p10  0.769, p90  1.216]
+   gv_40_80   mean  0.983  median  0.985  [p10  0.770, p90  1.174]
+   flux       mean  0.881  median  0.882  [p10  0.815, p90  0.931]

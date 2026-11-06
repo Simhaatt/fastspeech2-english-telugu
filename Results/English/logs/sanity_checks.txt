@@ -1,0 +1,5 @@
+[English] 1. clips 4206: duration sum != mel frames in 0, per-phone count mismatch in 0 [] []
+[English] 2. validation loss of best_model_fp16.pth.tar: total 2.3540 mel 0.7265 mel_postnet 0.7263 pitch 0.4181 energy 0.2587 duration 0.2244 | logged best total 2.3540
+[English] 3. en_s073: real training F0 median 127 Hz | predicted on test sentences median 131 Hz
+[English] 3. en_s034: real training F0 median 209 Hz | predicted on test sentences median 209 Hz
+[English] 4. learning rate: 600 logged steps, largest relative difference from the schedule 2.1e-04 (the log keeps 4 significant digits)

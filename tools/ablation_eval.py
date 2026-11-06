@@ -14,7 +14,7 @@ Measures against the real recording, per condition:
           F0 of the vocoded audio, with the vocoded real mel as the reference so the vocoder cancels out.
   CER/WER from Whisper (English normaliser for English; letters and marks kept for Telugu).
 
-    python ablation_eval.py <project> <lang> <ckpt> <config> <preprocessed dir> <asr model> <out json>
+    python tools/ablation_eval.py <project> <en|te> <ckpt> <config> <preprocessed dir> <asr model> <out json>
                             [N] [sample wav dir]
 
 With the default seed and N=30 these are the same clips as asr_eval.py, so 'pred' and 'real_vocoded' repeat it.
